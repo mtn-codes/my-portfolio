@@ -15,6 +15,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 import ChatHeader from "./ChatHeader";
 import ChatMessage from "./ChatMessage";
@@ -31,6 +32,7 @@ import { useBreakpoint } from "../../../shared/hooks/useBreakpoint";
  * @param {() => void} props.onClose
  */
 export function ChatWindow({ open, onClose }) {
+  const { t } = useTranslation();
   const { state, sendMessage, clear, close, isSending } = useChat();
   const { isMobile } = useBreakpoint();
   const [draft, setDraft] = useState("");
@@ -136,8 +138,8 @@ export function ChatWindow({ open, onClose }) {
             disabled={isSending}
             placeholder={
               state.messages.length === 0
-                ? "Ask anything about Shahajalal…"
-                : "Send a message…"
+                ? t("assistant.inputPlaceholder", "Ask anything about Taha…")
+                : t("assistant.inputActivePlaceholder", "Send a message…")
             }
           />
         </motion.div>

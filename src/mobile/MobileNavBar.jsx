@@ -2,23 +2,24 @@
 // Designed to feel like a modern Android bottom nav: tonal surface,
 // pill-shaped active indicator behind each icon, prominent center FAB.
 
-import { FaHome, FaCode, FaUserGraduate, FaBriefcase } from "react-icons/fa";
+import { FaHome, FaCode, FaUserGraduate, FaBriefcase, FaEnvelope } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import M3NavigationBar from "./components/M3NavigationBar";
 import M3NavigationBarItem from "./components/M3NavigationBarItem";
-import { FaEnvelope } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import M3FAB from "./components/M3FAB";
 
 export default function MobileNavBar() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const left = (
     <>
-      <M3NavigationBarItem to="/" end icon={<FaHome />} label="Home" />
+      <M3NavigationBarItem to="/" end icon={<FaHome />} label={t("nav.home", "Home")} />
       <M3NavigationBarItem
-        to="/skills-projects"
-        icon={<FaCode />}
-        label="Skills"
+        to="/skills-projects#projects"
+        icon={<FaBriefcase />}
+        label={t("nav.projects", "Projects")}
       />
     </>
   );
@@ -28,12 +29,12 @@ export default function MobileNavBar() {
       <M3NavigationBarItem
         to="/education-experience"
         icon={<FaUserGraduate />}
-        label="Journey"
+        label={t("mobile.journey", "Journey")}
       />
       <M3NavigationBarItem
-        to="/skills-projects#projects"
-        icon={<FaBriefcase />}
-        label="Projects"
+        to="/skills-projects#skills"
+        icon={<FaCode />}
+        label={t("nav.skills", "Skills")}
       />
     </>
   );
@@ -44,7 +45,7 @@ export default function MobileNavBar() {
         variant="filled"
         size="default"
         icon={<FaEnvelope className="text-xl" />}
-        ariaLabel="Contact"
+        ariaLabel={t("mobile.contact", "Contact")}
         onClick={() => navigate("/contact")}
       />
     </div>

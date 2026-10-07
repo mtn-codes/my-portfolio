@@ -1,68 +1,63 @@
-# Professional Experience
+# Work Experience
 
-## Founder & Lead Engineer — Appriyo
-
-📅 October 2025 — Present
-📍 Khulna, Bangladesh
-🔗 https://appriyo.com
-
-Appriyo is a software product company where Shahajalal architects, builds, deploys, and maintains production-grade software systems end-to-end as a solo technical founder.
-
-### Core Responsibilities
-
-- Mobile application engineering
-- Backend architecture & API development
-- Multi-tenant SaaS system design
-- Infrastructure & deployment
-- Product engineering
-- Technical decision making
-- Client communication
-- System maintenance & debugging
-
-### Key Engineering Achievements
-
-- Architected and shipped production SaaS products from zero to live users
-- Built Android systems achieving 99.9% crash-free production performance
-- Designed secure multi-tenant backend systems with strict tenant isolation
-- Implemented JWT authentication and RBAC authorization systems
-- Rebuilt production systems after real-world architecture failures
-- Enforced Clean Architecture principles to reduce technical debt
-- Conducted code reviews emphasizing Kotlin idioms, coroutines, and maintainability
-- Managed the end-to-end product lifecycle independently
-
-### Engineering Lessons Learned
-
-Rebuilding systems that initially failed under production complexity significantly improved his understanding of architecture trade-offs, maintainability, debugging, technical debt, scalability, and production reliability.
+## 1. Founder & Manager — Tirazh Advertising Agency
+**Tirazh Advertising Agency**
+📅 2020 — Present (Active)
+📍 Nationwide, Iran
+💼 Agency Leadership / Full-time
+**Key Scope & Responsibilities:**
+- Leading an end-to-end advertising agency operating nationwide across Iran.
+- Spearheading high-production video advertising campaigns from concept and scripting to filming, editing, and distribution.
+- Managing specialized design and print production services for commercial and enterprise clients.
+- Directing custom software and website development projects tailored to client business needs.
 
 ---
 
-## Freelance Software Developer
-
-📅 2024 — Present
-📍 Remote
-
-Worked with real clients delivering full-stack systems, deployments, and production-ready web solutions.
-
-### Projects Delivered
-
-**One Stop Liquor** — https://onestopliquorandwholemart.info
-
-- Developed the full business website for a Los Angeles–based wholesale business
-- Managed deployment & hosting
-- Configured production domain infrastructure
-
-**Portfolio Nag Sir** — https://anindyanag.netlify.app/
-
-- Built a full-stack academic portfolio & CMS
-- Developed an admin dashboard
-- Implemented Firebase + Firestore backend workflows
+## 2. Executive Manager — CStudio Advertising Agency
+**CStudio Advertising Agency**
+📅 2022 — 2024 (Completed)
+📍 Iran · Contract
+💼 Executive Management
+**Key Scope & Responsibilities:**
+- Directed and executed cinematic videography, advanced editing, and color grading for commercial productions.
+- Managed visual project design, camera crews, and on-set execution.
+- Oversaw website design and implementation combined with AI-driven content generation pipelines.
 
 ---
 
-## Career Timeline Summary
+## 3. Industrial & Construction Collaborations
+**Major Enterprise & Industrial Clients**
+📅 2023 — Present (Ongoing)
+📍 Iran
+💼 Industrial Documentary & Media Contracts
+**Key Scope & Collaborations:**
+- Executing high-end industrial documentaries, factory introductions, aerial videography, and technical media.
+- **Saina Textile Factory:** Cinematic introduction of glass fiber production lines and industrial textiles via specialized ground and aerial drone filming.
+- **Simfam Aluminum Factory:** Comprehensive visual documentation of aluminum extrusion and powder coating processes.
+- **Black Tiara Stone Factory:** Heavy stone extraction and processing documentary filming at quarry sites.
+- **Favania Construction Project:** Architectural marketing and visual presentation for export luxury slabs and construction milestones.
 
-| Period               | Role                         | Organization                 |
-| -------------------- | ---------------------------- | ---------------------------- |
-| Oct 2025 — Present   | Founder & Lead Engineer      | Appriyo                      |
-| 2024 — Present       | Freelance Software Developer | Remote (independent clients) |
-| 2023 — Expected 2027 | CSE Undergraduate            | NUBTK                        |
+---
+
+## 4. Retail & Service Collaborations
+**Commercial & Retail Clients**
+📅 2023 — Present (Ongoing)
+📍 Iran
+💼 Commercial Advertising & Media Solutions
+**Key Scope & Collaborations:**
+- Delivering elevated branding media, vertical commercials, and promotional digital assets.
+- **Plaque 8 Groom Salon:** Modeling, styling commercials, and classic barber grooming featurettes with cinematic lighting.
+- **Ebrahimi Watch Gallery:** Cinematic flagship luxury commercial showcasing prestigious watch collections.
+- **Masirino:** Production of specialized studio interview reels on nutrition, health, and lifestyle.
+- **Enzo Furniture:** Commercial promotional media and interior design showcases.
+
+---
+
+## 5. Cultural Affairs Collaboration
+**Ministry of Culture & Islamic Guidance (Ershad)**
+📅 2023 — Present (Ongoing)
+📍 Iran
+💼 Cultural & Public Affairs Media
+**Key Scope & Collaborations:**
+- Producing cultural real-motion video productions, collection introduction videos, and artistic media projects.
+- Creating broadcast-ready visual materials and cultural documentary reels for national cultural initiatives.

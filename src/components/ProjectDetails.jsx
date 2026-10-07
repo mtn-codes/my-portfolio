@@ -1,10 +1,14 @@
 // src/pages/ProjectDetails.jsx
 import { useParams, Link } from "react-router-dom";
-import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight,
+  FaYoutube, FaPlay, FaFilm
+} from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useCallback, useEffect, useRef } from "react";
-import projects from "../components/ProjectsData";
+import { useTranslation } from "react-i18next";
+import { getProjectBySlug, getAdjacentProjects, projects, contentProjects, getLocalizedProject } from "../shared/data/projects";
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -90,6 +94,7 @@ const GalleryStrip = ({ images }) => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [paused, setPaused] = useState(false);
   const [animating, setAnimating] = useState(false);
+  const { t } = useTranslation();
 
   const go = useCallback((dir) => {
     if (animating) return;
@@ -132,7 +137,7 @@ const GalleryStrip = ({ images }) => {
           {/* Expand hint */}
           <div className="absolute inset-0 flex items-end justify-end p-4 opacity-0 hover:opacity-100 transition-opacity duration-200 pointer-events-none">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold tracking-wide border border-white/10">
-              <MdArrowOutward className="text-xs" /> Expand
+              <MdArrowOutward className="text-xs" /> {t("projectDetails.expand", "Expand")}
             </div>
           </div>
 
@@ -217,13 +222,17 @@ const FeatureRow = ({ text, i }) => (
 // ─── TECH CATEGORY BLOCK ──────────────────────────────────────────────────────
 const categoryColors = {
   frontend: "text-info", backend: "text-success", ai_ml: "text-warning",
-  ai: "text-warning", camera: "text-error", hardware: "text-secondary",
+  ai: "text-warning", camera: "text-error", cameras: "text-error", hardware: "text-secondary",
   image_processing: "text-accent", logic: "text-primary",
   utilities: "text-base-content/40", networking: "text-info",
+  lighting: "text-amber-500", post_production: "text-purple-500", audio: "text-sky-500",
+  software: "text-blue-500", ai_tools: "text-fuchsia-500", compositing: "text-indigo-500",
+  gear: "text-rose-500", tools: "text-emerald-500",
 };
 
 const TechCategoryBlock = ({ category, techs, i }) => {
   const color = categoryColors[category] || "text-primary";
+  const techList = Array.isArray(techs) ? techs : [techs];
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -236,7 +245,7 @@ const TechCategoryBlock = ({ category, techs, i }) => {
         {category.replace(/_/g, " ")}
       </p>
       <div className="flex flex-wrap gap-1.5">
-        {techs.map((t, j) => (
+        {techList.map((t, j) => (
           <span
             key={j}
             className="px-2.5 py-1 rounded-lg bg-base-300/40 border border-base-300/35 text-[10.5px] font-semibold text-base-content/65 hover:border-primary/25 hover:text-base-content/90 transition-all duration-150 cursor-default"
@@ -256,8 +265,11 @@ const accentMap = {
   success: { dot: "bg-success", border: "border-success/18", bg: "bg-success/[0.04]", label: "text-success/70" },
 };
 
-const InsightCard = ({ title, items, icon, accent }) => {
-  const s = accentMap[accent];
+const InsightCard = ({ title, items = [], icon, accent }) => {
+  const s = accentMap[accent] || accentMap.success;
+  const itemList = Array.isArray(items) ? items : [items].filter(Boolean);
+  if (!itemList.length) return null;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -271,7 +283,7 @@ const InsightCard = ({ title, items, icon, accent }) => {
         <p className={`text-[8.5px] uppercase tracking-[0.2em] font-black ${s.label}`}>{title}</p>
       </div>
       <ul className="flex flex-col gap-2.5">
-        {items.map((item, i) => (
+        {itemList.map((item, i) => (
           <li key={i} className="flex items-start gap-2.5">
             <div className={`w-1 h-1 rounded-full ${s.dot} mt-[7px] flex-shrink-0`} />
             <p className="text-[12px] text-base-content/62 leading-relaxed">{item}</p>
@@ -302,417 +314,716 @@ const MetricCard = ({ metric, i }) => (
 // ─── PROJECT DETAILS ─────────────────────────────────────────────────────────
 const ProjectDetails = () => {
   const { slug } = useParams();
-  const project = projects.find((p) => p.slug === slug);
-  const projectIndex = projects.findIndex((p) => p.slug === slug);
-  const prevProject = projects[projectIndex - 1];
-  const nextProject = projects[projectIndex + 1];
+  const { t, i18n } = useTranslation();
+
+  const allProjects = [...projects, ...contentProjects];
+  const rawProject = allProjects.find((p) => p.slug === slug);
+  const project = rawProject ? getLocalizedProject(rawProject, i18n.language) : null;
+  const projectIndex = allProjects.findIndex((p) => p.slug === slug);
+  const { prev: prevProject, next: nextProject } = getAdjacentProjects(slug, i18n.language);
 
   const heroRef = useRef(null);
+  const videoPlayerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+
+  const handlePlayVideo = () => {
+    if (videoPlayerRef.current) {
+      videoPlayerRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      videoPlayerRef.current.play().catch(() => {});
+    }
+  };
 
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 gap-4">
-        <p className="text-2xl font-extrabold text-error">Project not found.</p>
-        <Link to="/skills-projects" className="btn btn-primary btn-sm gap-2">← Projects</Link>
+        <p className="text-2xl font-extrabold text-error">
+          {t("projectDetails.projectNotFound", "Project not found.")}
+        </p>
+        <Link to="/skills-projects" className="btn btn-primary btn-sm gap-2">
+          ← {t("projectDetails.allProjects", "All Projects")}
+        </Link>
       </div>
     );
   }
 
+  const isContent = project.category === "content" || Boolean(project.youtube);
   const techEntries = project.techStack ? Object.entries(project.techStack) : null;
   const allTechs = project.techStack ? Object.values(project.techStack).flat() : project.skills;
 
   return (
     <div className="relative min-h-screen bg-base-100 text-base-content">
-
       {/* ── FIXED AMBIENT BACKGROUND ──────────────────────────────────── */}
       <div className="pointer-events-none select-none fixed inset-0 overflow-hidden z-0">
         <div className="absolute -top-64 -left-48 w-[650px] h-[650px] rounded-full bg-primary/[0.055] blur-[150px]" />
         <div className="absolute top-1/2 -right-48 w-[550px] h-[550px] rounded-full bg-secondary/[0.04] blur-[130px]" />
         <svg className="absolute inset-0 w-full h-full opacity-[0.02]">
           <defs>
-            <pattern id="bg-dot-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+            <pattern id="bg-dot-grid-details" width="28" height="28" patternUnits="userSpaceOnUse">
               <circle cx="1.2" cy="1.2" r="1.2" fill="currentColor" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#bg-dot-grid)" />
+          <rect width="100%" height="100%" fill="url(#bg-dot-grid-details)" />
         </svg>
       </div>
 
-      {/* ── HERO SECTION ───────────────────────────────────────────────── */}
-      <div ref={heroRef} className="relative overflow-hidden">
-        <motion.div style={{ y: heroY }} className="relative">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-          <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-14 pt-20 pb-12 lg:pb-16">
-
-            {/* Breadcrumb */}
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease }}
-              className="flex items-center gap-2 mb-12"
-            >
-              <Link
-                to="/skills-projects"
-                className="inline-flex items-center gap-1.5 text-[11px] font-bold text-base-content/30 hover:text-primary transition-colors duration-200 group"
-              >
-                <span className="group-hover:-translate-x-0.5 transition-transform duration-200">←</span>
-                All Projects
-              </Link>
-              <span className="text-base-content/15 text-[11px]">/</span>
-              <span className="text-[11px] font-semibold text-base-content/50 truncate max-w-xs">{project.name}</span>
-            </motion.div>
-
-            {/* Hero grid */}
-            <div className="flex flex-col lg:flex-row gap-10 xl:gap-20 items-center lg:items-start">
-
-              {/* Text side */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, ease, delay: 0.07 }}
-                className="flex-1 flex flex-col gap-5 text-center lg:text-left items-center lg:items-start"
-              >
-                {/* Project label */}
-                <div className="flex items-center gap-2.5 justify-center lg:justify-start">
-                  <span className="text-[9px] font-black text-primary/45 uppercase tracking-[0.32em]">
-                    Project {String(projectIndex + 1).padStart(2, "0")}
-                  </span>
-                  <div className="h-px w-5 bg-base-300" />
-                  <span className="inline-flex items-center gap-1.5 text-[9px] font-black text-success uppercase tracking-wider">
-                    <span className="w-1.5 h-1.5 rounded-full bg-success" />
-                    Live
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h1 className="font-black tracking-[-0.025em] leading-[1.05] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.3rem]">
-                  {project.name}
-                </h1>
-
-                {/* Description */}
-                <p className="text-[14px] sm:text-[15px] text-base-content/55 leading-[1.8] max-w-lg">
-                  {project.description}
-                </p>
-
-                {/* Skill pills */}
-                <div className="flex flex-wrap gap-1.5 justify-center lg:justify-start">
-                  {project.skills.map((s, i) => <Pill key={i} label={s} variant="primary" />)}
-                  {project.extras?.map((e, i) => <Pill key={`e-${i}`} label={e} variant="default" />)}
-                </div>
-
-                {/* CTA buttons */}
-                <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                  {project.github && (
-                    <a
-                      href={project.github} target="_blank" rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-base-content text-base-100 text-[12px] font-bold hover:bg-primary hover:text-primary-content hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-base-content/10"
-                    >
-                      <FaGithub /> View Source
-                      <MdArrowOutward className="text-[10px] opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
-                    </a>
-                  )}
-                  {project.live && (
-                    <a
-                      href={project.live} target="_blank" rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-base-300/60 bg-base-200/40 text-[12px] font-bold text-base-content/65 hover:border-primary/40 hover:bg-primary/8 hover:text-primary hover:-translate-y-0.5 transition-all duration-200"
-                    >
-                      <FaExternalLinkAlt className="text-[10px]" /> Live Demo
-                      <MdArrowOutward className="text-[10px] opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-
-              {/* Logo/Image side */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.88, x: 24 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                transition={{ duration: 0.72, ease, delay: 0.14 }}
-                className="flex-shrink-0 flex justify-center"
-              >
-                <div className="relative">
-                  {/* Outer glow */}
-                  <div className="absolute inset-[-28px] rounded-[40px] bg-primary/[0.09] blur-3xl" />
-                  {/* Slow spin ring */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                    className="absolute rounded-[32px]"
-                    style={{
-                      inset: "-14px",
-                      background: "conic-gradient(from 0deg, transparent 70%, oklch(var(--p)/0.4) 100%)",
-                      borderRadius: "36px",
-                    }}
-                  />
-                  {/* Card */}
-                  <div className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-[220px] lg:h-[220px] rounded-3xl bg-base-200/70 border border-base-300/60 flex items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.2)] overflow-hidden">
-                    {/* Corner brackets */}
-                    {[["top-3 left-3", "M0 8 L0 0 L8 0"], ["top-3 right-3", "M20 8 L20 0 L12 0"], ["bottom-3 left-3", "M0 12 L0 20 L8 20"], ["bottom-3 right-3", "M20 12 L20 20 L12 20"]].map(([pos, d], i) => (
-                      <svg key={i} className={`absolute ${pos} w-5 h-5 opacity-20`} viewBox="0 0 20 20" fill="none">
-                        <path d={d} stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                    ))}
-                    <img src={project.image} alt={project.name} className="w-3/4 h-3/4 object-contain" />
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-        {/* Fade out bottom */}
-        <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-base-100 to-transparent pointer-events-none" />
-      </div>
-
-      {/* ── BODY ───────────────────────────────────────────────────────── */}
-      <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-14 pb-24">
-
-        {/* GALLERY */}
-        {project.media?.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease }}
-            className="mb-16"
-          >
-            <div className="flex items-center gap-3 mb-5">
-              <SectionLabel text="Gallery" />
-              <span className="text-[8px] text-base-content/20 font-bold ml-1">— {project.media.length} screenshots · click to expand</span>
-            </div>
-            <GalleryStrip images={project.media} />
-          </motion.div>
-        )}
-
-        {/* TWO-COLUMN BODY */}
-        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
-
-          {/* ─ LEFT: Main content ─────────────────────────────────────── */}
-          <div className="flex-1 min-w-0 flex flex-col gap-12">
-
-            {/* STORY */}
-            <motion.section
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease }}
-            >
-              <SectionLabel text="Origin Story" />
-              <div className="mt-5 relative pl-5">
-                <div className="absolute left-0 top-0 bottom-0 w-[2px] rounded-full bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
-                <p className="text-[14px] sm:text-[15px] leading-[1.92] text-base-content/62 italic">
-                  "{project.story}"
-                </p>
-              </div>
-            </motion.section>
-
-            {/* FEATURES */}
-            <motion.section
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease }}
-            >
-              <SectionLabel text="Key Features" />
-              <div className="mt-5 rounded-2xl border border-base-300/35 bg-base-200/20 overflow-hidden">
-                {project.features.map((f, i) => <FeatureRow key={i} text={f} i={i} />)}
-              </div>
-            </motion.section>
-
-            {/* PROBLEM / SOLUTION */}
-            <motion.section
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease }}
-            >
-              <SectionLabel text="Challenge & Solution" />
-              <div className="mt-5 grid sm:grid-cols-2 gap-4">
-                <div className="rounded-2xl p-5 bg-error/[0.04] border border-error/15">
-                  <p className="text-[8.5px] font-black text-error/65 uppercase tracking-[0.22em] mb-3">The Problem</p>
-                  <p className="text-[13px] text-base-content/65 leading-relaxed">{project.problem}</p>
-                </div>
-                <div className="rounded-2xl p-5 bg-success/[0.04] border border-success/15">
-                  <p className="text-[8.5px] font-black text-success/65 uppercase tracking-[0.22em] mb-3">Our Solution</p>
-                  <p className="text-[13px] text-base-content/65 leading-relaxed">{project.objective}</p>
-                </div>
-              </div>
-            </motion.section>
-
-            {/* DEV INSIGHTS */}
-            <motion.section
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease }}
-            >
-              <SectionLabel text="Development Insights" />
-              <div className="mt-5 grid sm:grid-cols-3 gap-4">
-                <InsightCard title="Challenges" accent="error" icon="⚠" items={project.challenges} />
-                <InsightCard title="Limitations" accent="warning" icon="⛔" items={project.limitations} />
-                <InsightCard title="Future Plans" accent="success" icon="🚀" items={project.future} />
-              </div>
-            </motion.section>
-
-            {/* CONCLUSION */}
-            <motion.section
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease }}
-            >
-              <SectionLabel text="Conclusion" />
-              <div className="mt-5 relative rounded-2xl p-6 overflow-hidden border border-primary/15 bg-gradient-to-br from-primary/[0.06] via-base-200/25 to-secondary/[0.04]">
-                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-                <svg className="absolute bottom-4 right-4 w-8 h-8 opacity-[0.08]" viewBox="0 0 48 48" fill="none">
-                  <path d="M48 32 L48 48 L32 48" stroke="currentColor" strokeWidth="2" />
-                </svg>
-                <p className="text-[14px] leading-[1.85] text-base-content/68">{project.conclusion}</p>
-              </div>
-            </motion.section>
-
-            {/* BOTTOM CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease }}
-              className="flex flex-wrap gap-3 pt-2"
-            >
-              {project.github && (
-                <a href={project.github} target="_blank" rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-base-content text-base-100 text-[12px] font-bold hover:bg-primary hover:text-primary-content hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-base-content/8">
-                  <FaGithub /> View Full Code
-                  <MdArrowOutward className="text-[10px] opacity-50 group-hover:opacity-100 transition-opacity" />
-                </a>
-              )}
-              {project.live && (
-                <a href={project.live} target="_blank" rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl border border-base-300/55 bg-base-200/30 text-[12px] font-bold text-base-content/65 hover:border-primary/40 hover:text-primary hover:-translate-y-0.5 transition-all duration-200">
-                  <FaExternalLinkAlt className="text-[10px]" /> Try Live Demo
-                </a>
-              )}
-            </motion.div>
-          </div>
-
-          {/* ─ RIGHT: Sidebar ─────────────────────────────────────────── */}
-          <div className="w-full lg:w-60 xl:w-[270px] flex-shrink-0 flex flex-col gap-7 lg:sticky lg:top-24 lg:self-start">
-
-            {/* METRICS */}
-            {project.metrics && (
-              <motion.div
-                initial={{ opacity: 0, x: 18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease }}
-              >
-                <SectionLabel text="Impact" />
-                <div className="mt-4 grid grid-cols-2 lg:grid-cols-1 gap-2.5">
-                  {project.metrics.map((m, i) => <MetricCard key={i} metric={m} i={i} />)}
-                </div>
-              </motion.div>
-            )}
-
-            {/* TECH STACK */}
-            {techEntries && (
-              <motion.div
-                initial={{ opacity: 0, x: 18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease, delay: 0.07 }}
-              >
-                <SectionLabel text="Tech Stack" />
-                <div className="mt-4 rounded-2xl border border-base-300/35 bg-base-200/20 p-4 flex flex-col gap-4">
-                  {techEntries.map(([cat, techs], i) => (
-                    <TechCategoryBlock key={cat} category={cat} techs={techs} i={i} />
-                  ))}
-                  <div className="pt-3 border-t border-base-300/25">
-                    <p className="text-[9px] text-base-content/22 font-black uppercase tracking-wider">
-                      {allTechs.length} total technologies
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* QUICK LINKS */}
-            <motion.div
-              initial={{ opacity: 0, x: 18 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease, delay: 0.13 }}
-              className="flex flex-col gap-2"
-            >
-              <SectionLabel text="Links" />
-              <div className="mt-3 flex flex-col gap-2">
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-between px-4 py-3 rounded-xl bg-base-200/40 border border-base-300/35 hover:border-primary/28 hover:bg-base-200/70 transition-all duration-200 group">
-                    <span className="flex items-center gap-2.5 text-[12px] font-bold text-base-content/60 group-hover:text-base-content transition-colors duration-200">
-                      <FaGithub className="text-sm" /> GitHub
-                    </span>
-                    <MdArrowOutward className="text-[11px] text-base-content/25 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
-                  </a>
-                )}
-                {project.live && (
-                  <a href={project.live} target="_blank" rel="noopener noreferrer"
-                    className="flex items-center justify-between px-4 py-3 rounded-xl bg-primary/8 border border-primary/18 hover:bg-primary/14 hover:border-primary/32 transition-all duration-200 group">
-                    <span className="flex items-center gap-2.5 text-[12px] font-bold text-primary">
-                      <FaExternalLinkAlt className="text-[10px]" /> Live Demo
-                    </span>
-                    <MdArrowOutward className="text-[11px] text-primary/40 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* ── PROJECT NAVIGATION ───────────────────────────────────────── */}
+      {/* ── LOCALIZED CONTENT WRAPPER WITH ANIMATE PRESENCE ──────────── */}
+      <AnimatePresence mode="wait">
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, ease }}
-          className="mt-20"
+          key={i18n.language}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.35, ease }}
+          className="relative z-10"
         >
-          <div className="flex items-center gap-4 mb-6">
-            <div className="h-px flex-1 bg-base-300/35" />
-            <span className="text-[8.5px] font-black text-base-content/18 uppercase tracking-[0.32em]">More Projects</span>
-            <div className="h-px flex-1 bg-base-300/35" />
+          {/* ── HERO SECTION ───────────────────────────────────────────────── */}
+          <div ref={heroRef} className="relative overflow-hidden">
+            <motion.div style={{ y: heroY }} className="relative">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+
+              <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-14 pt-20 pb-12 lg:pb-16">
+                {/* Breadcrumb */}
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease }}
+                  className="flex items-center gap-2 mb-12"
+                >
+                  <Link
+                    to="/skills-projects"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-bold text-base-content/30 hover:text-primary transition-colors duration-200 group"
+                  >
+                    <span className="group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5 transition-transform duration-200">
+                      ←
+                    </span>
+                    {t("projectDetails.allProjects", "All Projects")}
+                  </Link>
+                  <span className="text-base-content/15 text-[11px]">/</span>
+                  <span className="text-[11px] font-semibold text-base-content/50 truncate max-w-xs">
+                    {project.name}
+                  </span>
+                </motion.div>
+
+                {/* Hero grid */}
+                <div className="flex flex-col lg:flex-row gap-10 xl:gap-20 items-center lg:items-start">
+                  {/* Text side */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.65, ease, delay: 0.07 }}
+                    className="flex-1 flex flex-col gap-5 text-center lg:text-left rtl:lg:text-right items-center lg:items-start rtl:lg:items-start"
+                  >
+                    {/* Project label */}
+                    <div className="flex items-center gap-2.5 justify-center lg:justify-start rtl:lg:justify-start">
+                      <span className="text-[9px] font-black text-primary/45 uppercase tracking-[0.32em]">
+                        Project {String(projectIndex + 1).padStart(2, "0")}
+                      </span>
+                      <div className="h-px w-5 bg-base-300" />
+                      {isContent ? (
+                        <span className="inline-flex items-center gap-1.5 text-[9px] font-black text-rose-500 uppercase tracking-wider">
+                          <FaFilm className="text-[8px]" />
+                          {t("projectDetails.videoProduction", "Video Production")}
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1.5 text-[9px] font-black text-success uppercase tracking-wider">
+                          <span className="w-1.5 h-1.5 rounded-full bg-success" />
+                          {t("projectDetails.liveProject", "Live Project")}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Title */}
+                    <h1 className="font-black tracking-[-0.025em] leading-[1.05] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.3rem]">
+                      {project.name}
+                    </h1>
+
+                    {/* Description */}
+                    <p className="text-[14px] sm:text-[15px] text-base-content/55 leading-[1.8] max-w-lg">
+                      {project.description}
+                    </p>
+
+                    {/* Skill pills */}
+                    <div className="flex flex-wrap gap-1.5 justify-center lg:justify-start rtl:lg:justify-start">
+                      {project.skills?.map((s, i) => (
+                        <Pill key={i} label={s} variant="primary" />
+                      ))}
+                      {project.extras?.map((e, i) => (
+                        <Pill key={`e-${i}`} label={e} variant="default" />
+                      ))}
+                    </div>
+
+                    {/* CTA buttons */}
+                    <div className="flex flex-wrap gap-3 justify-center lg:justify-start rtl:lg:justify-start">
+                      {isContent ? (
+                        <>
+                          {project.video && (
+                            <button
+                              type="button"
+                              onClick={handlePlayVideo}
+                              className="group inline-flex items-center gap-2.5 px-6 py-2.5 rounded-xl bg-rose-500 text-white text-[12px] font-bold hover:bg-rose-600 hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-rose-500/25 cursor-pointer"
+                            >
+                              <FaPlay className="text-xs" />
+                              {t("projects.actions.watch", "Watch Video")}
+                            </button>
+                          )}
+                          {project.youtube && (
+                            <a
+                              href={project.youtube}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-rose-500/30 bg-rose-500/10 text-[12px] font-bold text-rose-500 hover:bg-rose-500 hover:text-white hover:-translate-y-0.5 transition-all duration-200"
+                            >
+                              <FaYoutube className="text-sm" />
+                              {t("projectDetails.watchOnYoutube", "Watch on YouTube")}
+                              <MdArrowOutward className="text-[10px] opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                            </a>
+                          )}
+                        </>
+                      ) : (
+                        /* Web Hero CTA: GitHub */
+                        project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-base-content text-base-100 text-[12px] font-bold hover:bg-primary hover:text-primary-content hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-base-content/10"
+                          >
+                            <FaGithub /> {t("projectDetails.viewSource", "View Source")}
+                            <MdArrowOutward className="text-[10px] opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                          </a>
+                        )
+                      )}
+
+                      {!isContent && project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl border border-base-300/60 bg-base-200/40 text-[12px] font-bold text-base-content/65 hover:border-primary/40 hover:bg-primary/8 hover:text-primary hover:-translate-y-0.5 transition-all duration-200"
+                        >
+                          <FaExternalLinkAlt className="text-[10px]" />
+                          {t("projectDetails.liveDemo", "Live Demo")}
+                          <MdArrowOutward className="text-[10px] opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                        </a>
+                      )}
+                    </div>
+                  </motion.div>
+
+                  {/* Logo/Image side with Play overlay */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.88, x: 24 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    transition={{ duration: 0.72, ease, delay: 0.14 }}
+                    className="flex-shrink-0 flex justify-center"
+                  >
+                    <div className="relative">
+                      {/* Outer glow */}
+                      <div className="absolute inset-[-28px] rounded-[40px] bg-primary/[0.09] blur-3xl" />
+                      {/* Slow spin ring */}
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                        className="absolute rounded-[32px]"
+                        style={{
+                          inset: "-14px",
+                          background:
+                            "conic-gradient(from 0deg, transparent 70%, oklch(var(--p)/0.4) 100%)",
+                          borderRadius: "36px",
+                        }}
+                      />
+                      {/* Card */}
+                      <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-[240px] lg:h-[240px] rounded-3xl bg-base-200/70 border border-base-300/60 flex items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.2)] overflow-hidden">
+                        {/* Corner brackets */}
+                        {[
+                          ["top-3 left-3", "M0 8 L0 0 L8 0"],
+                          ["top-3 right-3", "M20 8 L20 0 L12 0"],
+                          ["bottom-3 left-3", "M0 12 L0 20 L8 20"],
+                          ["bottom-3 right-3", "M20 12 L20 20 L12 20"],
+                        ].map(([pos, d], i) => (
+                          <svg
+                            key={i}
+                            className={`absolute ${pos} w-5 h-5 opacity-20`}
+                            viewBox="0 0 20 20"
+                            fill="none"
+                          >
+                            <path d={d} stroke="currentColor" strokeWidth="1.5" />
+                          </svg>
+                        ))}
+                        <img
+                          src={project.image}
+                          alt={project.name}
+                          className="w-full h-full object-cover p-2"
+                          onError={(e) => {
+                            e.currentTarget.src = "/img/about_photo.jpg";
+                          }}
+                        />
+
+                        {/* Play button overlay for content item */}
+                        {isContent && (
+                          project.video ? (
+                            <button
+                              type="button"
+                              onClick={handlePlayVideo}
+                              className="absolute inset-0 flex items-center justify-center bg-black/25 hover:bg-black/35 transition-colors group/play cursor-pointer"
+                              aria-label={t("projects.actions.watch", "Watch")}
+                            >
+                              <div className="w-14 h-14 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-xl shadow-rose-500/40 group-hover/play:scale-110 transition-transform">
+                                <FaPlay className="text-base ltr:ml-0.5 rtl:mr-0.5" />
+                              </div>
+                            </button>
+                          ) : (
+                            <a
+                              href={project.youtube || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="absolute inset-0 flex items-center justify-center bg-black/25 hover:bg-black/35 transition-colors group/play"
+                              aria-label="Play on YouTube"
+                            >
+                              <div className="w-14 h-14 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-xl shadow-rose-500/40 group-hover/play:scale-110 transition-transform">
+                                <FaPlay className="text-base ltr:ml-0.5 rtl:mr-0.5" />
+                              </div>
+                            </a>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+            <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-base-100 to-transparent pointer-events-none" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {prevProject ? (
-              <Link to={`/projects/${prevProject.slug}`}
-                className="group flex items-center gap-4 p-5 rounded-2xl border border-base-300/35 bg-base-200/15 hover:border-primary/22 hover:bg-base-200/40 transition-all duration-200">
-                <div className="w-8 h-8 rounded-xl border border-base-300/45 flex items-center justify-center text-base-content/25 group-hover:text-primary group-hover:border-primary/25 group-hover:-translate-x-0.5 transition-all duration-200 flex-shrink-0">
-                  <FaChevronLeft className="text-[9px]" />
+          {/* ── BODY ───────────────────────────────────────────────────────── */}
+          <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 lg:px-14 pb-24">
+            {/* FEATURED CINEMATIC VIDEO PLAYER */}
+            {project.video && (
+              <motion.div
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease }}
+                className="mb-16"
+              >
+                <div className="flex items-center justify-between gap-3 mb-5">
+                  <div className="flex items-center gap-3">
+                    <SectionLabel text={t("projectDetails.videoPlayer", "Official Video")} />
+                    {project.duration && (
+                      <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-500 font-bold border border-rose-500/25 flex items-center gap-1.5">
+                        <FaPlay className="text-[8px]" />
+                        {project.duration}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[11px] text-base-content/40 font-mono tracking-wider">
+                    {project.aspectRatio === "9:16" ? "9:16 Vertical Reel" : "16:9 Cinematic Widescreen"}
+                  </span>
                 </div>
-                <div className="min-w-0">
-                  <p className="text-[8px] font-black text-base-content/25 uppercase tracking-wider mb-1">Previous</p>
-                  <p className="text-[12.5px] font-bold text-base-content/60 group-hover:text-primary transition-colors duration-200 truncate">{prevProject.name}</p>
-                </div>
-              </Link>
-            ) : <div />}
 
-            {nextProject ? (
-              <Link to={`/projects/${nextProject.slug}`}
-                className="group flex items-center justify-end gap-4 p-5 rounded-2xl border border-base-300/35 bg-base-200/15 hover:border-primary/22 hover:bg-base-200/40 transition-all duration-200 text-right">
-                <div className="min-w-0">
-                  <p className="text-[8px] font-black text-base-content/25 uppercase tracking-wider mb-1">Next</p>
-                  <p className="text-[12.5px] font-bold text-base-content/60 group-hover:text-primary transition-colors duration-200 truncate">{nextProject.name}</p>
+                <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-base-200/90 to-base-300/60 border border-base-300/80 shadow-2xl flex items-center justify-center p-3 sm:p-6 backdrop-blur-xl">
+                  {/* Outer subtle glow */}
+                  <div className="absolute inset-0 bg-primary/[0.03] pointer-events-none" />
+
+                  {/* Video player box */}
+                  <div
+                    className={`relative w-full rounded-2xl overflow-hidden shadow-2xl bg-black ${
+                      project.aspectRatio === "9:16"
+                        ? "max-w-[400px] aspect-[9/16]"
+                        : "max-w-4xl aspect-video"
+                    }`}
+                  >
+                    <video
+                      ref={videoPlayerRef}
+                      src={project.video}
+                      poster={project.image}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 </div>
-                <div className="w-8 h-8 rounded-xl border border-base-300/45 flex items-center justify-center text-base-content/25 group-hover:text-primary group-hover:border-primary/25 group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0">
-                  <FaChevronRight className="text-[9px]" />
+              </motion.div>
+            )}
+
+            {/* GALLERY */}
+            {project.media?.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease }}
+                className="mb-16"
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <SectionLabel text={t("projectDetails.mediaGallery", "Media Gallery")} />
+                  <span className="text-[8px] text-base-content/20 font-bold ml-1">
+                    {t("projectDetails.itemsClickToExpand", { count: project.media.length })}
+                  </span>
                 </div>
-              </Link>
-            ) : <div />}
+                <GalleryStrip images={project.media} />
+              </motion.div>
+            )}
+
+            {/* TWO-COLUMN BODY */}
+            <div className="flex flex-col lg:flex-row gap-10 lg:gap-14">
+              {/* ─ LEFT: Main content ─────────────────────────────────────── */}
+              <div className="flex-1 min-w-0 flex flex-col gap-12">
+                {/* STORY */}
+                {project.story && (
+                  <motion.section
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease }}
+                  >
+                    <SectionLabel text={t("projectDetails.originStory", "Origin Story")} />
+                    <div className="mt-5 relative pl-5 rtl:pr-5 rtl:pl-0">
+                      <div className="absolute ltr:left-0 rtl:right-0 top-0 bottom-0 w-[2px] rounded-full bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
+                      <p className="text-[14px] sm:text-[15px] leading-[1.92] text-base-content/62 italic">
+                        "{project.story}"
+                      </p>
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* FEATURES */}
+                {project.features?.length > 0 && (
+                  <motion.section
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease }}
+                  >
+                    <SectionLabel
+                      text={t("projectDetails.keyHighlights", "Key Highlights & Features")}
+                    />
+                    <div className="mt-5 rounded-2xl border border-base-300/35 bg-base-200/20 overflow-hidden">
+                      {project.features.map((f, i) => (
+                        <FeatureRow key={i} text={f} i={i} />
+                      ))}
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* PROBLEM / SOLUTION */}
+                {(project.problem || project.objective) && (
+                  <motion.section
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease }}
+                  >
+                    <SectionLabel
+                      text={t("projectDetails.challengeApproach", "Challenge & Creative Approach")}
+                    />
+                    <div className="mt-5 grid sm:grid-cols-2 gap-4">
+                      {project.problem && (
+                        <div className="rounded-2xl p-5 bg-error/[0.04] border border-error/15">
+                          <p className="text-[8.5px] font-black text-error/65 uppercase tracking-[0.22em] mb-3">
+                            {t("projectDetails.theChallenge", "The Challenge")}
+                          </p>
+                          <p className="text-[13px] text-base-content/65 leading-relaxed">
+                            {project.problem}
+                          </p>
+                        </div>
+                      )}
+                      {project.objective && (
+                        <div className="rounded-2xl p-5 bg-success/[0.04] border border-success/15">
+                          <p className="text-[8.5px] font-black text-success/65 uppercase tracking-[0.22em] mb-3">
+                            {t("projectDetails.theApproach", "The Approach")}
+                          </p>
+                          <p className="text-[13px] text-base-content/65 leading-relaxed">
+                            {project.objective}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* DEV INSIGHTS */}
+                {(project.challenges?.length > 0 ||
+                  project.limitations?.length > 0 ||
+                  project.future?.length > 0) && (
+                  <motion.section
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease }}
+                  >
+                    <SectionLabel
+                      text={t("projectDetails.insightsMilestones", "Insights & Milestones")}
+                    />
+                    <div className="mt-5 grid sm:grid-cols-3 gap-4">
+                      <InsightCard
+                        title={t("projectDetails.challenges", "Challenges")}
+                        accent="error"
+                        icon="⚠"
+                        items={project.challenges}
+                      />
+                      <InsightCard
+                        title={t("projectDetails.considerations", "Considerations")}
+                        accent="warning"
+                        icon="⛔"
+                        items={project.limitations}
+                      />
+                      <InsightCard
+                        title={t("projectDetails.nextSteps", "Next Steps")}
+                        accent="success"
+                        icon="🚀"
+                        items={project.future}
+                      />
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* CONCLUSION */}
+                {project.conclusion && (
+                  <motion.section
+                    initial={{ opacity: 0, y: 18 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease }}
+                  >
+                    <SectionLabel
+                      text={t("projectDetails.summaryImpact", "Summary & Impact")}
+                    />
+                    <div className="mt-5 relative rounded-2xl p-6 overflow-hidden border border-primary/15 bg-gradient-to-br from-primary/[0.06] via-base-200/25 to-secondary/[0.04]">
+                      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+                      <svg
+                        className="absolute bottom-4 right-4 w-8 h-8 opacity-[0.08]"
+                        viewBox="0 0 48 48"
+                        fill="none"
+                      >
+                        <path d="M48 32 L48 48 L32 48" stroke="currentColor" strokeWidth="2" />
+                      </svg>
+                      <p className="text-[14px] leading-[1.85] text-base-content/68">
+                        {project.conclusion}
+                      </p>
+                    </div>
+                  </motion.section>
+                )}
+
+                {/* BOTTOM CTAs */}
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease }}
+                  className="flex flex-wrap gap-3 pt-2"
+                >
+                  {isContent ? (
+                    <a
+                      href={project.youtube || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-rose-500 text-white text-[12px] font-bold hover:bg-rose-600 hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-rose-500/20"
+                    >
+                      <FaYoutube className="text-base" />
+                      {t("projectDetails.watchOnYoutube", "Watch on YouTube")}
+                      <MdArrowOutward className="text-[10px] opacity-70 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  ) : (
+                    project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-base-content text-base-100 text-[12px] font-bold hover:bg-primary hover:text-primary-content hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-base-content/8"
+                      >
+                        <FaGithub /> {t("projectDetails.viewFullCode", "View Full Code")}
+                        <MdArrowOutward className="text-[10px] opacity-50 group-hover:opacity-100 transition-opacity" />
+                      </a>
+                    )
+                  )}
+
+                  {!isContent && project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl border border-base-300/55 bg-base-200/30 text-[12px] font-bold text-base-content/65 hover:border-primary/40 hover:text-primary hover:-translate-y-0.5 transition-all duration-200"
+                    >
+                      <FaExternalLinkAlt className="text-[10px]" />
+                      {t("projectDetails.tryLiveDemo", "Try Live Demo")}
+                    </a>
+                  )}
+                </motion.div>
+              </div>
+
+              {/* ─ RIGHT: Sidebar ─────────────────────────────────────────── */}
+              <div className="w-full lg:w-60 xl:w-[270px] flex-shrink-0 flex flex-col gap-7 lg:sticky lg:top-24 lg:self-start">
+                {/* METRICS */}
+                {project.metrics?.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 18 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease }}
+                  >
+                    <SectionLabel
+                      text={t("projectDetails.impactMetrics", "Impact & Metrics")}
+                    />
+                    <div className="mt-4 grid grid-cols-2 lg:grid-cols-1 gap-2.5">
+                      {project.metrics.map((m, i) => (
+                        <MetricCard key={i} metric={m} i={i} />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* TECH STACK */}
+                {techEntries && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 18 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease, delay: 0.07 }}
+                  >
+                    <SectionLabel
+                      text={
+                        isContent
+                          ? t("projectDetails.productionArsenal", "Production Arsenal")
+                          : t("projectDetails.techStack", "Tech Stack")
+                      }
+                    />
+                    <div className="mt-4 rounded-2xl border border-base-300/35 bg-base-200/20 p-4 flex flex-col gap-4">
+                      {techEntries.map(([cat, techs], i) => (
+                        <TechCategoryBlock key={cat} category={cat} techs={techs} i={i} />
+                      ))}
+                      <div className="pt-3 border-t border-base-300/25">
+                        <p className="text-[9px] text-base-content/25 font-black uppercase tracking-wider">
+                          {t("projectDetails.totalToolsSkills", { count: allTechs.length })}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* QUICK LINKS */}
+                <motion.div
+                  initial={{ opacity: 0, x: 18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease, delay: 0.13 }}
+                  className="flex flex-col gap-2"
+                >
+                  <SectionLabel text={t("projectDetails.links", "Links")} />
+                  <div className="mt-3 flex flex-col gap-2">
+                    {isContent ? (
+                      <a
+                        href={project.youtube || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between px-4 py-3 rounded-xl bg-rose-500/10 border border-rose-500/20 hover:bg-rose-500/20 transition-all duration-200 group"
+                      >
+                        <span className="flex items-center gap-2.5 text-[12px] font-bold text-rose-500">
+                          <FaYoutube className="text-sm" />
+                          {t("projectDetails.youtubeVideo", "YouTube Video")}
+                        </span>
+                        <MdArrowOutward className="text-[11px] text-rose-500/50 group-hover:text-rose-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                      </a>
+                    ) : (
+                      project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between px-4 py-3 rounded-xl bg-base-200/40 border border-base-300/35 hover:border-primary/28 hover:bg-base-200/70 transition-all duration-200 group"
+                        >
+                          <span className="flex items-center gap-2.5 text-[12px] font-bold text-base-content/60 group-hover:text-base-content transition-colors duration-200">
+                            <FaGithub className="text-sm" />
+                            {t("projectDetails.github", "GitHub")}
+                          </span>
+                          <MdArrowOutward className="text-[11px] text-base-content/25 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                        </a>
+                      )
+                    )}
+
+                    {!isContent && project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between px-4 py-3 rounded-xl bg-primary/8 border border-primary/18 hover:bg-primary/14 hover:border-primary/32 transition-all duration-200 group"
+                      >
+                        <span className="flex items-center gap-2.5 text-[12px] font-bold text-primary">
+                          <FaExternalLinkAlt className="text-[10px]" />
+                          {t("projectDetails.liveDemo", "Live Demo")}
+                        </span>
+                        <MdArrowOutward className="text-[11px] text-primary/40 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* ── PROJECT NAVIGATION ───────────────────────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease }}
+              className="mt-20"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px flex-1 bg-base-300/35" />
+                <span className="text-[8.5px] font-black text-base-content/20 uppercase tracking-[0.32em]">
+                  {t("projectDetails.moreProjects", "More Projects")}
+                </span>
+                <div className="h-px flex-1 bg-base-300/35" />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {prevProject ? (
+                  <Link
+                    to={`/projects/${prevProject.slug}`}
+                    className="group flex items-center gap-4 p-5 rounded-2xl border border-base-300/35 bg-base-200/15 hover:border-primary/22 hover:bg-base-200/40 transition-all duration-200"
+                  >
+                    <div className="w-8 h-8 rounded-xl border border-base-300/45 flex items-center justify-center text-base-content/25 group-hover:text-primary group-hover:border-primary/25 group-hover:-translate-x-0.5 rtl:group-hover:translate-x-0.5 transition-all duration-200 flex-shrink-0">
+                      <FaChevronLeft className="text-[9px]" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-[8px] font-black text-base-content/25 uppercase tracking-wider mb-1">
+                        {t("projectDetails.previous", "Previous")}
+                      </p>
+                      <p className="text-[12.5px] font-bold text-base-content/60 group-hover:text-primary transition-colors duration-200 truncate">
+                        {prevProject.name}
+                      </p>
+                    </div>
+                  </Link>
+                ) : (
+                  <div />
+                )}
+
+                {nextProject ? (
+                  <Link
+                    to={`/projects/${nextProject.slug}`}
+                    className="group flex items-center justify-end gap-4 p-5 rounded-2xl border border-base-300/35 bg-base-200/15 hover:border-primary/22 hover:bg-base-200/40 transition-all duration-200 text-right rtl:text-left"
+                  >
+                    <div className="min-w-0">
+                      <p className="text-[8px] font-black text-base-content/25 uppercase tracking-wider mb-1">
+                        {t("projectDetails.next", "Next")}
+                      </p>
+                      <p className="text-[12.5px] font-bold text-base-content/60 group-hover:text-primary transition-colors duration-200 truncate">
+                        {nextProject.name}
+                      </p>
+                    </div>
+                    <div className="w-8 h-8 rounded-xl border border-base-300/45 flex items-center justify-center text-base-content/25 group-hover:text-primary group-hover:border-primary/25 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 transition-all duration-200 flex-shrink-0">
+                      <FaChevronRight className="text-[9px]" />
+                    </div>
+                  </Link>
+                ) : (
+                  <div />
+                )}
+              </div>
+            </motion.div>
           </div>
         </motion.div>
-      </div>
+      </AnimatePresence>
     </div>
   );
 };

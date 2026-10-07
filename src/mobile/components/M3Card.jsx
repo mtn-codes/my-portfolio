@@ -24,7 +24,7 @@ export function M3Card({
       <motion.button
         type="button"
         onClick={onClick}
-        className={`${cls} text-left w-full`}
+        className={`${cls} text-left rtl:text-right w-full`}
         whileTap={{ scale: 0.985 }}
         transition={{ type: "spring", stiffness: 380, damping: 26 }}
         {...rest}

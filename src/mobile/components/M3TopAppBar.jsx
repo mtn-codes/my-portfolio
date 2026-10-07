@@ -44,8 +44,8 @@ export function M3TopAppBar({
       className={`
         fixed top-0 inset-x-0 z-40
         h-14 m3-safe-top
-        bg-base-100/85 backdrop-blur-md
-        border-b border-base-300/40
+        bg-base-100
+        border-b border-base-300/60
         transition-shadow duration-200
         ${scrollElevate && scrolled ? "m3-elev-2" : ""}
         ${className}
@@ -58,9 +58,9 @@ export function M3TopAppBar({
             <button
               onClick={() => navigate(-1)}
               aria-label="Back"
-              className="m3-tap w-10 h-10 rounded-full flex items-center justify-center text-primary m3-state-hover active:scale-95 transition-transform"
+              className="m3-tap w-11 h-11 rounded-full flex items-center justify-center text-primary m3-state-hover active:scale-95 transition-transform"
             >
-              <FaArrowLeft className="text-lg" />
+              <FaArrowLeft className="text-lg rtl:rotate-180" />
             </button>
           )}
         </div>
@@ -70,7 +70,7 @@ export function M3TopAppBar({
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
-          className="flex-1 min-w-0 px-1 leading-tight"
+          className="flex-1 min-w-0 px-1 leading-tight text-left rtl:text-right"
         >
           <h1
             className={`text-[1.05rem] font-semibold text-base-content truncate ${titleClassName}`}
@@ -85,7 +85,7 @@ export function M3TopAppBar({
         </motion.div>
 
         {/* Trailing */}
-        <div className="flex items-center justify-end gap-0.5 min-w-12 pr-1">
+        <div className="flex items-center justify-end gap-0.5 min-w-12 ltr:pr-1 rtl:pl-1">
           {trailing}
         </div>
       </div>

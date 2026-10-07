@@ -1,186 +1,49 @@
-# Technical Skills
+# Skills & Technical Arsenal
 
-For each skill: proficiency level, practical experience, and the projects it was used in.
+Taha Naghdi's expertise is structured into 5 core categories, combining cinematic filmmaking, artificial intelligence, industrial automation, and modern full-stack development.
 
----
+## 1. Film & Video Production
 
-## Programming Languages
+- **Cinematography & Directing (فیلم‌برداری و کارگردانی):** High-end digital cinema cameras, prime lenses, multi-camera set direction, composition, framing, and dynamic camera movement.
+- **Advanced Video Editing (تدوین پیشرفته):** Non-linear editing in DaVinci Resolve Studio and Premiere Pro, rhythmic pacing, narrative structure, and audio-visual synchronization.
+- **Cinematic Lighting (نورپردازی سینمایی):** Three-point lighting, dramatic contrast, high-key/low-key setups, Kelvin temperature control, and atmospheric diffusion for portraits and industrial sets.
+- **Motion Graphics (موشن گرافیک):** Dynamic title design, kinetic typography, 2D motion design, and visual transitions using After Effects.
+- **Color Grading (اصلاح و تنظیم رنگ):** DaVinci Resolve Studio color grading, ACES and Log color workflows, skin tone isolation, LUT development, and cinematic look creation.
+- **Sound Design & Foley (طراحی صدا و صداگذاری):** Sound staging, cinematic foley, voice leveling, sound effects layering, and audio mastering for commercials.
 
-### Kotlin — Advanced
-Primary language for Android development, coroutines, Jetpack Compose, and backend exploration (Kotlin + Spring Boot).
-**Used in:** Amar Repair, Amar Batch, Amar Savings, Amar Card, Prodorshok, CashGuard AI, FinPaySDK, MobiFixer (legacy)
+## 2. AI & Content Creation
 
-### Java — Proficient
-Used for Android legacy systems and Spring Boot backend work.
-**Used in:** MobiFixer, JPMorgan Chase Midas Simulation
+- **AI Video Generation (تولید ویدیو با هوش مصنوعی):** Generative video models (Runway, Sora, Kling, Luma) for concept visualization, commercial b-roll, and digital ideation.
+- **Prompt Engineering (مهندسی پرامپت):** Precision multi-modal prompt craft for complex image, video, and text generation tasks.
+- **AI Agents & LLMs (ایجنت‌های هوش مصنوعی):** Designing autonomous AI workflows, RAG systems, function-calling agents, and task-automation bots.
+- **AI Image Generation (تولید تصاویر با هوش مصنوعی):** Midjourney, Stable Diffusion, Flux, and ComfyUI for commercial concepts, storyboards, and digital art.
+- **Digital Content Strategy (استراتژی محتوای دیجیتال):** Social media storytelling, vertical short-form formats (Instagram Reels, YouTube Shorts), audience analytics, and retention-focused structuring.
+- **AI Voice Cloning & Audio (شبیه‌سازی صدا و صوت با هوش مصنوعی):** Voice cloning, neural speech synthesis (ElevenLabs), and AI audio enhancement.
+- **Scriptwriting & Ideation (فیلم‌نامه‌نویسی و ایده‌پردازی):** Creative commercial storytelling, narrative scripting, hook creation, and visual treatments.
+- **Digital Branding (برندینگ دیجیتال):** Cohesive visual identity, digital campaign architecture, and commercial brand positioning.
 
-### TypeScript — Proficient
-Used across React frontend systems and developer tooling.
-**Used in:** AlgoViz, general web/frontend tooling
+## 3. Industrial Automation & Gadgets
 
-### JavaScript — Proficient
-Used for web apps, APIs, and frontend systems.
-**Used in:** Appriyo website, APRA Form, Hangug Deulama, GitHub Insights, Cover Page Generator
+- **Industrial Automation (اتوماسیون صنعتی):** Process monitoring, sensor workflows, relay controllers, and industrial process optimization.
+- **Smart Gadget Prototyping (ساخت گجت‌های هوشمند):** Rapid physical prototyping, customized retail gadgets, and embedded hardware devices.
+- **IoT & Sensors (اینترنت اشیاء و سنسورها):** IoT telemetry, environmental and optical sensors, Wi-Fi/Bluetooth hardware integration.
+- **Python Hardware Automation (اتوماسیون با پایتون):** Python scripting for hardware control, serial communication, telemetry logging, and automation routines.
+- **Microcontrollers (میکروکنترلرها):** Arduino, ESP32, Raspberry Pi, and circuit board design for interactive and automated hardware.
 
-### SQL — Proficient
-Applied to PostgreSQL, SQLite, and Room DB schema design and queries.
-**Used in:** Amar Repair, Amar Batch, MobiFixer, JPMorgan Chase Midas Simulation
+## 4. Web Design & Frontend
 
-### C++ — Intermediate
-Used for data structures & algorithms, systems simulations, and competitive programming.
-**Used in:** CPU Scheduler, Deadlock Detective, Numerical Methods (C++), Data Structures from Scratch, CodeForces Practice
+- **React Ecosystem:** Modern single-page applications, component architectures, hooks, state management, and high-performance user interfaces.
+- **Full-Stack Web Development:** End-to-end web engineering, client-server integration, REST API architectures, and cloud deployments.
+- **Tailwind CSS & DaisyUI:** Utility-first responsive design, modern design systems, clean animations, and Material Design 3 tokens.
+- **Framer Motion:** Micro-animations, page transitions, spring physics, and dynamic interactive elements.
+- **Node.js Backends:** Scalable asynchronous servers, API controllers, authentication, and background services.
+- **PostgreSQL Databases:** Relational schema design, querying, migrations, data integrity, and indexing.
+- **Firebase & Cloud Services:** Real-time databases, authentication, cloud storage, and serverless hosting.
+- **Web Security:** Input sanitization, CORS configuration, JWT authentication, and secure API endpoints.
 
-### Assembly (x86) — Basic
-Applied to low-level computing concepts.
-**Used in:** Assembly Programming (x86) repository
+## 5. Core Computer Science
 
----
-
-## Android Engineering
-
-### Kotlin & Jetpack Compose — Advanced
-Primary Android development stack for building modern, declarative UI.
-**Used in:** Amar Repair, Amar Batch, Amar Savings, Amar Card, CashGuard AI, Prodorshok
-
-### MVVM & Clean Architecture — Advanced
-Core architectural pattern for maintainable, testable Android systems, informed directly by lessons learned rebuilding failed production systems.
-**Used in:** Amar Repair, Amar Batch
-
-### Room Database — Advanced
-Used for offline-first local data persistence and optimized query design.
-**Used in:** Amar Batch (offline-first architecture with sync support), Amar Savings, MobiFixer (SQLite)
-
-### Coroutines & Flow — Advanced
-Used for asynchronous and reactive state management in Android apps.
-**Used in:** Amar Repair, Amar Batch
-
-### Offline-First Architecture — Advanced
-Designed local-first systems that work without internet connectivity, reducing administrative workload by ~80% in Amar Batch.
-**Used in:** Amar Batch, Amar Savings
-
-### Android Security (Keystore, AES-256 Encryption) — Proficient
-Implemented secure encryption workflows and modular SDK architecture.
-**Used in:** FinPaySDK
-
-### TensorFlow Lite (On-device ML) — Proficient
-Built real-time, fully offline on-device inference achieving 98.7% model accuracy.
-**Used in:** CashGuard AI
-
-### WorkManager, State Management, Debugging & Crash Analysis — Proficient
-Applied across production Android apps to achieve 99.9% crash-free performance.
-**Used in:** Amar Repair, Amar Batch
-
-### RecyclerView (Legacy) — Proficient
-**Used in:** MobiFixer
-
----
-
-## Backend Engineering
-
-### PostgreSQL — Proficient
-Primary relational database for production backend systems.
-**Used in:** Amar Repair backend
-
-### REST API Design — Proficient
-Designed secure, transaction-safe REST APIs.
-**Used in:** Amar Repair, APRA Form, Prodorshok
-
-### JWT Authentication & RBAC — Proficient
-Implemented authentication and role-based authorization for multi-tenant systems.
-**Used in:** Amar Repair
-
-### Spring Boot — Proficient (fundamentals to intermediate)
-Backend framework of choice for enterprise-style architecture, layered systems, and dependency injection.
-**Used in:** JPMorgan Chase Midas Simulation; ongoing focus area for Amar Repair backend rebuild
-
-### Apache Kafka — Proficient
-Built event-driven transaction processing with a Kafka streaming pipeline.
-**Used in:** JPMorgan Chase Midas Simulation
-
-### JPA / Hibernate, H2 Database — Proficient
-**Used in:** JPMorgan Chase Midas Simulation
-
-### Prisma ORM — Proficient
-Listed as part of the backend/database toolkit.
-
-### Multi-Tenant Architecture — Advanced (applied)
-Designed systems with strict per-tenant data isolation.
-**Used in:** Amar Repair
-
-### Transaction-Safe Systems — Proficient
-Built transaction-safe workflows for payments, repairs, and inventory.
-**Used in:** Amar Repair, JPMorgan Chase Midas Simulation
-
----
-
-## Frontend / Web
-
-### React, Vite, Tailwind CSS — Proficient
-Used for high-performance, responsive web applications.
-**Used in:** Personal Portfolio, Appriyo website, APRA Form, Hangug Deulama, Portfolio Nag Sir, GitHub Insights
-
-### HTML/CSS/JavaScript — Proficient
-**Used in:** Cover Page Generator, One Stop Liquor website
-
-### Firebase Hosting, Netlify, Vercel — Proficient
-Deployment platforms used across web projects.
-
----
-
-## Architecture & Engineering Patterns
-
-- MVVM
-- Clean Architecture
-- Repository Pattern
-- Dependency Injection
-- Offline-first Design
-- Multi-tenant SaaS Design
-- Event-driven Architecture
-- Secure API Design
-- Modular System Design
-
-**Practical experience:** Directly applied across Amar Repair (multi-tenant SaaS, secure API design) and Amar Batch (offline-first, repository pattern). Engineering approach was shaped by rebuilding both systems after their original versions failed under real production/user load.
-
----
-
-## Infrastructure & Tools
-
-- Git & GitHub — daily use across all projects
-- Linux CLI & Bash — proficient
-- Android Studio, VS Code — daily development environments
-- Postman — API testing (Amar Repair, APRA Form)
-- Docker — basics
-- Debugging & Profiling — proficient, developed through production crash analysis
-- Technical Documentation — proficient (architecture docs, portfolio content, this knowledge base itself)
-
----
-
-## AI / ML
-
-- TensorFlow Lite — on-device inference (CashGuard AI)
-- GPT API Integration — used for AI-powered features (Prodorshok career guidance platform)
-- Prompt Engineering — applied across AI-assisted development workflow
-- Empirical Complexity Analysis — algorithm complexity detection (AlgoViz)
-
----
-
-## Soft Skills
-
-- Technical Communication
-- Independent Ownership
-- Production Problem Solving
-- System Thinking
-- Code Review & Mentoring
-- Resilience Through Iteration
-- Documentation & Architecture Writing
-- Time Management
-- Product Thinking
-
----
-
-## Languages
-
-| Language | Proficiency |
-|---|---|
-| Bengali | Native |
-| English | Professional Working Proficiency |
+- **Algorithms & Data Structures:** Strong analytical foundation in complexity analysis, sorting/searching algorithms, and data structures.
+- **System Design & Architecture:** Scalable system modeling, modular architecture, and service separation.
+- **Git & Version Control:** Git branch workflows, pull requests, semantic versioning, and collaborative repositories.
+- **Problem Solving & Logic:** Deconstructing complex challenges into scalable, efficient algorithmic solutions.

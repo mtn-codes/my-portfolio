@@ -13,10 +13,13 @@
 # SPA rule, otherwise the catch-all swallows the request and we get a
 # 404 / index.html in place of the function response.
 
-# Same-origin proxy for the Kimchi LLM API. This is the rule the
-# `netlify.toml` redirect was supposed to provide, but on this site the
-# `public/_redirects` file is processed with higher priority at the CDN
-# edge, so we declare it here to be safe.
+# Same-origin proxy for the OpenRouter LLM API (Active).
+/api/openrouter/*  /.netlify/functions/openrouter/:splat  200
+
+# Same-origin proxy for the B.AI LLM API (Fallback).
+/api/bai/*  /.netlify/functions/bai/:splat  200
+
+# Same-origin proxy for the Kimchi LLM API (Inert fallback).
 /api/kimchi/*  /.netlify/functions/kimchi/:splat  200
 
 # Single-page-app fallback. Any request that is not a real static asset

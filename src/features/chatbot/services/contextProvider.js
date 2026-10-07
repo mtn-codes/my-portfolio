@@ -57,25 +57,21 @@ function formatAdditions(chunks) {
 
   out.push("## Portfolio knowledge base");
   out.push(
-    "The following Markdown files are authoritative for every answer you give. " +
-      "Use them as ground truth for facts, but do NOT mention filenames, source " +
-      "names, or '(source: …)' references in your reply — the user only sees the " +
-      "answer. If the answer is not present, say so explicitly rather than guessing."
+    "Use the following knowledge as ground truth for facts. Do not mention filenames in your reply."
   );
-  if (catalog.length > 0) {
-    out.push("");
-    out.push("### File catalogue");
-    for (const f of catalog) {
-      out.push(`- \`${f.file}\` — ${f.description}`);
-    }
-  }
 
   if (chunks.length === 0) {
+    if (catalog.length > 0) {
+      out.push("");
+      out.push("### File catalogue");
+      for (const f of catalog) {
+        out.push(`- \`${f.file}\` — ${f.description}`);
+      }
+    }
     out.push("");
     out.push("### Retrieved context for this question");
     out.push(
-      "_No specific chunks matched the query. Answer from the catalogue above " +
-        "or, if nothing applies, politely say you don't have that information._"
+      "_No specific chunks matched. If nothing applies, politely state that you do not have that information._"
     );
     return out.join("\n");
   }

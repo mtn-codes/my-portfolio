@@ -20,25 +20,26 @@ export function M3NavigationBar({
       aria-label="Primary"
       className={
         "fixed bottom-0 inset-x-0 z-40 " +
-        "bg-base-100/85 backdrop-blur-md " +
-        "border-t border-base-300/50 " +
+        "bg-base-100/95 backdrop-blur-md " +
+        "border-t border-base-300/70 " +
+        "shadow-lg " +
         "m3-safe-bottom " +
         className
       }
     >
-      <div className="relative h-16 flex items-stretch">
+      <div className="relative h-[68px] flex items-stretch px-1.5 sm:px-3">
         {/* Left items */}
-        <div className="flex-1 flex items-stretch">{left}</div>
+        <div className="flex-1 flex items-stretch gap-1">{left}</div>
 
         {/* Center FAB slot (notch) */}
         {fabSlot && (
-          <div className="w-16 flex items-start justify-center pt-0.5">
+          <div className="w-16 flex items-start justify-center pt-0.5 flex-shrink-0">
             {fabSlot}
           </div>
         )}
 
         {/* Right items */}
-        <div className="flex-1 flex items-stretch">{right}</div>
+        <div className="flex-1 flex items-stretch gap-1">{right}</div>
       </div>
     </nav>
   );

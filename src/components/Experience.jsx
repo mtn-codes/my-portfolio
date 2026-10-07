@@ -1,28 +1,35 @@
 import React from "react";
 import {
-  FaBriefcase, FaCode, FaRocket, FaUserTie,
-  FaMapMarkerAlt, FaExternalLinkAlt, FaCheckCircle,
+  FaBriefcase,
+  FaRocket,
+  FaVideo,
+  FaIndustry,
+  FaStore,
+  FaLandmark,
+  FaMapMarkerAlt,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const EXPERIENCES = [
   {
-    title: "Founder & Technical Project Manager",
-    company: "Appriyo",
-    link: "https://appriyo.com",
-    duration: "Jan 2026 – Present",
-    type: "Hybrid",
-    location: "Khulna, BD",
+    title: "Founder & Manager",
+    company: "Tirazh Advertising Agency",
+    link: "#",
+    duration: "2020 — Present",
+    type: "Agency / Full-time",
+    location: "Nationwide, Iran",
     icon: <FaRocket />,
     description:
-      "Leading an agile team of 4 to deliver end-to-end IT solutions. Architecting scalable MVPs and overseeing technical execution from Jetpack Compose to React ecosystems.",
+      "Leading an agency delivering end-to-end video advertising campaigns, specialized design & printing, and bespoke software & web development nationwide.",
     achievements: [
-      "Launched NFC Networking solutions",
-      "Reduced MVP dev time by 30%",
-      "Leading UI/UX & Marketing synergy",
+      "Cinematic Video Advertising Campaigns",
+      "Design & Print Production",
+      "Software & Custom Web Development",
     ],
     status: "Active",
     accentClass: "bg-primary text-primary-content shadow-primary/30",
@@ -32,21 +39,21 @@ const EXPERIENCES = [
     glow: "bg-primary/[0.04]",
   },
   {
-    title: "Android Developer",
-    company: "Independent Product",
-    link: "https://drive.google.com/file/d/1m7_lfMzOZHbpO7EsQEGvl3I9crFPEuTQ/view?usp=sharing",
-    duration: "Jul 2025 – Jan 2026",
-    type: "Active Product",
-    location: "Remote",
-    icon: <FaCode />,
+    title: "Executive Manager",
+    company: "CStudio Advertising Agency",
+    link: "#",
+    duration: "2022 — 2024",
+    type: "Executive Management",
+    location: "Iran · Contract",
+    icon: <FaVideo />,
     description:
-      "Engineered a complete POS & Management system for repair shops. Actively used by 5 owners for stock management and financial reporting.",
+      "Directed and executed cinematic videography, advanced editing, visual project design, website creation, and AI-driven content production.",
     achievements: [
-      "Integrated Bluetooth POS Printing",
-      "Built automated SMS reminders",
-      "Full inventory & Talikhata systems",
+      "Cinematic Videography & Editing",
+      "Project Design & Execution",
+      "Website Design & AI Content Production",
     ],
-    status: "Deployed",
+    status: "Completed",
     accentClass: "bg-secondary text-secondary-content shadow-secondary/30",
     dotClass: "bg-secondary",
     badgeClass: "bg-info/10 border-info/25 text-info",
@@ -54,26 +61,72 @@ const EXPERIENCES = [
     glow: "bg-secondary/[0.04]",
   },
   {
-    title: "Freelance React Developer",
-    company: "University Client",
-    link: "https://anindyanag.netlify.app/",
-    duration: "Jun 2025 – Jul 2025",
-    type: "Client Project",
-    location: "Remote",
-    icon: <FaUserTie />,
+    title: "Industrial & Construction Collaborations",
+    company: "Multi-Industry Clients",
+    link: "#",
+    duration: "2023 — Present",
+    type: "Industrial Contract",
+    location: "Iran",
+    icon: <FaIndustry />,
     description:
-      "Developed a secure, admin-controlled portfolio platform for university faculty to manage academic publications and dynamic CV generation.",
+      "Executing video production, branding, automation workflows, and cinematic documentary for major industrial factories and construction ventures.",
     achievements: [
-      "Real-time CRUD with Firestore",
-      "Responsive UI with modal editing",
-      "Secure image hosting integration",
+      "Saina Textile Factory",
+      "Simfam Aluminum Factory",
+      "Black Tiara Stone Factory",
+      "Favania Construction Project",
     ],
-    status: "Completed",
+    status: "Ongoing",
     accentClass: "bg-accent text-accent-content shadow-accent/30",
     dotClass: "bg-accent",
-    badgeClass: "bg-base-300/70 border-base-300 text-base-content/40",
+    badgeClass: "bg-success/10 border-success/25 text-success",
     hoverBorder: "hover:border-accent/30",
     glow: "bg-accent/[0.04]",
+  },
+  {
+    title: "Retail & Service Collaborations",
+    company: "Retail & Commercial Clients",
+    link: "#",
+    duration: "2023 — Present",
+    type: "Client Solutions",
+    location: "Iran",
+    icon: <FaStore />,
+    description:
+      "Delivering digital infrastructure, targeted advertising media, and elevated visual branding for leading retail and commercial businesses.",
+    achievements: [
+      "Plaque 8 Hall Project",
+      "Ebrahimi Watch Project",
+      "Masirino Project",
+      "Enzo Furniture Project",
+    ],
+    status: "Ongoing",
+    accentClass: "bg-warning text-warning-content shadow-warning/30",
+    dotClass: "bg-warning",
+    badgeClass: "bg-warning/10 border-warning/25 text-warning",
+    hoverBorder: "hover:border-warning/30",
+    glow: "bg-warning/[0.04]",
+  },
+  {
+    title: "Cultural Affairs Collaboration",
+    company: "Ministry of Culture & Islamic Guidance (Ershad)",
+    link: "#",
+    duration: "2022 — Present",
+    type: "Cultural Partnership",
+    location: "Iran",
+    icon: <FaLandmark />,
+    description:
+      "Producing cultural real-motion video productions, artistic event documentation, and promotional showcase series for cultural affairs.",
+    achievements: [
+      "Cultural Real-Motion Productions",
+      "Cultural & Artistic Projects",
+      "Collection Introduction Videos",
+    ],
+    status: "Ongoing",
+    accentClass: "bg-info text-info-content shadow-info/30",
+    dotClass: "bg-info",
+    badgeClass: "bg-info/10 border-info/25 text-info",
+    hoverBorder: "hover:border-info/30",
+    glow: "bg-info/[0.04]",
   },
 ];
 
@@ -81,8 +134,20 @@ const ease = [0.22, 1, 0.36, 1];
 
 // ─── EXPERIENCE CARD ──────────────────────────────────────────────────────────
 const ExperienceCard = ({ item, idx }) => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  const title = t(`work.items.${idx}.title`, item.title);
+  const company = t(`work.items.${idx}.company`, item.company);
+  const location = t(`work.items.${idx}.location`, item.location);
+  const duration = t(`work.items.${idx}.duration`, item.duration);
+  const type = t(`work.items.${idx}.type`, item.type);
+  const status = t(`work.items.${idx}.status`, item.status);
+  const description = t(`work.items.${idx}.description`, item.description);
+
+  const rawAchievements = t(`work.items.${idx}.achievements`, { returnObjects: true });
+  const achievements = Array.isArray(rawAchievements) ? rawAchievements : item.achievements;
 
   return (
     <motion.div
@@ -136,60 +201,62 @@ const ExperienceCard = ({ item, idx }) => {
           <div className="flex items-center flex-wrap gap-2">
             {/* Status badge */}
             <span className={`inline-flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full border ${item.badgeClass}`}>
-              {item.status === "Active" && (
+              {(item.status === "Active" || item.status === "Ongoing") && (
                 <span className="relative inline-flex w-1.5 h-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-65" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-success" />
                 </span>
               )}
-              {item.status}
+              {status}
             </span>
             <span className="inline-flex items-center gap-1 text-[9px] font-semibold text-base-content/30 uppercase tracking-[0.16em]">
               <FaMapMarkerAlt className="text-[8px]" />
-              {item.location}
+              {location}
             </span>
           </div>
           {/* Duration */}
           <span className="text-[9px] text-base-content/30 font-semibold uppercase tracking-[0.14em] shrink-0">
-            {item.duration}
+            {duration}
           </span>
         </div>
 
         {/* Title */}
         <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-base-content leading-tight mb-1.5 group-hover:text-primary transition-colors duration-300">
-          {item.title}
+          {title}
         </h3>
 
         {/* Company */}
         <a
           href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={item.link === "#" ? undefined : "_blank"}
+          rel={item.link === "#" ? undefined : "noopener noreferrer"}
           className="inline-flex items-center gap-1.5 text-[12px] font-bold text-primary/70 hover:text-primary transition-colors duration-200 group/link mb-3"
         >
-          {item.company}
-          <FaExternalLinkAlt className="text-[8px] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
+          {company}
+          {item.link !== "#" && (
+            <FaExternalLinkAlt className="text-[8px] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
+          )}
         </a>
 
         {/* Type badge */}
         <div className="mb-4">
           <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-base-content/35 border border-base-300/60 rounded-lg px-2.5 py-1 bg-base-300/30">
-            {item.type}
+            {type}
           </span>
         </div>
 
         {/* Description */}
         <p className="text-[13px] text-base-content/55 leading-[1.72] mb-4">
-          {item.description}
+          {description}
         </p>
 
         {/* Achievements */}
         <div>
           <p className="text-[9px] uppercase font-bold tracking-[0.2em] text-base-content/30 mb-2.5">
-            Key Contributions
+            {t("work.keyContributions", "Key Contributions")}
           </p>
           <ul className="space-y-1.5">
-            {item.achievements.map((point, i) => (
+            {achievements.map((point, i) => (
               <li key={i} className="flex items-start gap-2 text-[12px] text-base-content/55 group-hover:text-base-content/75 transition-colors duration-200">
                 <span className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${item.dotClass}`} />
                 {point}
@@ -209,6 +276,7 @@ const ExperienceCard = ({ item, idx }) => {
 
 // ─── EXPERIENCE ───────────────────────────────────────────────────────────────
 const Experience = () => {
+  const { t, i18n } = useTranslation();
   const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.08 } },
@@ -261,58 +329,71 @@ const Experience = () => {
 
       {/* ══ CONTENT ══════════════════════════════════════════════════════ */}
       <div className="relative z-10 w-full max-w-5xl mx-auto">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={i18n.language}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.35, ease }}
+            className="w-full"
+          >
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, ease }}
+              className="flex items-center gap-3 mb-8"
+            >
+              <div className="h-px w-8 bg-base-300" />
+              <span className="text-[10px] text-base-content/30 uppercase tracking-[0.24em] font-semibold">
+                {t("work.eyebrow", "Professional Journey")}
+              </span>
+              <div className="h-px w-8 bg-base-300" />
+            </motion.div>
 
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, ease }}
-          className="flex items-center gap-3 mb-8"
-        >
-          <div className="h-px w-8 bg-base-300" />
-          <span className="text-[10px] text-base-content/30 uppercase tracking-[0.24em] font-semibold">Professional Journey</span>
-          <div className="h-px w-8 bg-base-300" />
-        </motion.div>
+            {/* Section heading */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="mb-14"
+            >
+              <motion.div variants={item}>
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.13em] uppercase bg-primary/10 border border-primary/25 text-primary mb-4">
+                  <FaBriefcase className="text-[10px]" />
+                  {t("work.badge", "Experience")}
+                </span>
+              </motion.div>
+              <motion.h2 variants={item} className="font-extrabold tracking-tight leading-[1.07] text-3xl sm:text-4xl xl:text-[2.8rem]">
+                {t("work.title", "Work &")}{" "}
+                <span className="relative inline-block">
+                  <span className="text-primary">{t("work.projects", "Projects")}</span>
+                  <motion.div
+                    key={i18n.language}
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-primary via-secondary to-primary/40 origin-left rtl:origin-right"
+                  />
+                </span>
+              </motion.h2>
+              <motion.p variants={item} className="text-[10px] uppercase tracking-[0.22em] text-base-content/30 font-medium mt-2">
+                {t("work.tagline", "Builder · Founder · Engineer")}
+              </motion.p>
+            </motion.div>
 
-        {/* Section heading */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mb-14"
-        >
-          <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.13em] uppercase bg-primary/10 border border-primary/25 text-primary mb-4">
-              <FaBriefcase className="text-[10px]" />
-              Experience
-            </span>
+            {/* Timeline */}
+            <div className="flex flex-col">
+              {EXPERIENCES.map((exp, idx) => (
+                <ExperienceCard key={idx} item={exp} idx={idx} />
+              ))}
+            </div>
           </motion.div>
-          <motion.h2 variants={item} className="font-extrabold tracking-tight leading-[1.07] text-3xl sm:text-4xl xl:text-[2.8rem]">
-            Work &amp;{" "}
-            <span className="relative inline-block">
-              <span className="text-primary">Projects</span>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-primary via-secondary to-primary/40 origin-left"
-              />
-            </span>
-          </motion.h2>
-          <motion.p variants={item} className="text-[10px] uppercase tracking-[0.22em] text-base-content/30 font-medium mt-2">
-            Builder · Founder · Engineer
-          </motion.p>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="flex flex-col">
-          {EXPERIENCES.map((exp, idx) => (
-            <ExperienceCard key={idx} item={exp} idx={idx} />
-          ))}
-        </div>
+        </AnimatePresence>
       </div>
     </section>
   );

@@ -1,53 +1,118 @@
-import { motion } from "framer-motion";
-import { FaGraduationCap, FaUniversity, FaSchool, FaExternalLinkAlt, FaMedal } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaGraduationCap,
+  FaUniversity,
+  FaLaptopCode,
+  FaFilm,
+  FaMicrochip,
+  FaCertificate,
+  FaBrain,
+  FaBriefcase,
+  FaExternalLinkAlt,
+  FaMedal,
+} from "react-icons/fa";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const EDUCATION_DATA = [
   {
-    title: "BSc in Computer Science & Engineering",
-    year: "2023 — 2027",
-    institution: "Northern University of Business & Technology Khulna",
-    link: "https://nubtkhulna.ac.bd/",
-    result: "CGPA 3.90 / 4.00",
-    grade: "A+",
+    title: "BSc in Computer Engineering",
+    year: "2023 — Present",
+    institution: "Falagh University",
+    link: "#",
+    result: "Undergraduate",
     icon: <FaUniversity />,
     status: "Ongoing",
     highlights: [
-      "Specializing in Software Engineering",
-      "Software Development Focus",
-      "Active in Competitive Programming",
+      "Software Engineering",
+      "System & Web Architecture",
+      "Algorithms & Data Structures",
     ],
   },
   {
-    title: "Higher Secondary Certificate",
-    year: "2019 — 2021",
-    institution: "Govt. Brajalal College, Khulna",
-    link: "https://www.blcollege.edu.bd/",
-    result: "GPA 5.00 / 5.00",
-    grade: "A+",
-    icon: <FaSchool />,
+    title: "CS50 Summer Course",
+    year: "Completed",
+    institution: "Harvard CS50 (Online)",
+    link: "#",
+    result: "Certified",
+    icon: <FaLaptopCode />,
     status: "Completed",
     highlights: [
-      "Science Group",
-      "Mathematics Focus",
-      "Academic Excellence",
+      "Computer Science Fundamentals",
+      "C & Python Programming",
+      "Algorithms & Memory",
     ],
   },
   {
-    title: "Secondary School Certificate",
-    year: "2017 — 2019",
-    institution: "Govt. Jalma Chakrakhali High School",
-    link: "https://jalmachakrakhalisecondaryschool.jessoreboard.gov.bd/",
-    result: "GPA 5.00 / 5.00",
-    grade: "A+",
-    icon: <FaGraduationCap />,
+    title: "Cinematography Certificate",
+    year: "Completed",
+    institution: "Ghermez Cinema Academy",
+    link: "#",
+    result: "Certified",
+    icon: <FaFilm />,
     status: "Completed",
     highlights: [
-      "Science Group",
-      "Top 1% in District",
-      "Science Olympiad",
+      "Cinematic Lighting & Camera",
+      "Advanced Editing & Color",
+      "Visual Storytelling",
+    ],
+  },
+  {
+    title: "IoT, Python & Electrical Circuit Design Certificate",
+    year: "Completed",
+    institution: "Technical & Vocational Training Organization",
+    link: "#",
+    result: "Certified",
+    icon: <FaMicrochip />,
+    status: "Completed",
+    highlights: [
+      "IoT Systems",
+      "Python Programming",
+      "Circuit Design & Hardware",
+    ],
+  },
+  {
+    title: "Social Media Specialist Business License",
+    year: "Licensed",
+    institution: "Guild & Business Licensing Union",
+    link: "#",
+    result: "Licensed",
+    icon: <FaCertificate />,
+    status: "Completed",
+    highlights: [
+      "Digital Marketing Strategy",
+      "Content Management & Strategy",
+      "Brand Development",
+    ],
+  },
+  {
+    title: "Artificial Intelligence Certificate",
+    year: "Completed",
+    institution: "Finland University",
+    link: "#",
+    result: "Certified",
+    icon: <FaBrain />,
+    status: "Completed",
+    highlights: [
+      "Artificial Intelligence",
+      "Machine Learning Foundations",
+      "International Program",
+    ],
+  },
+  {
+    title: "MBA — Business Management",
+    year: "In Progress",
+    institution: "Executive MBA Program",
+    link: "#",
+    result: "In Progress",
+    icon: <FaBriefcase />,
+    status: "Ongoing",
+    highlights: [
+      "Strategic Management",
+      "Business Leadership",
+      "Market & Financial Analysis",
     ],
   },
 ];
@@ -72,8 +137,21 @@ const AnimatedLine = ({ delay = 0 }) => {
 
 // ─── EDUCATION CARD ───────────────────────────────────────────────────────────
 const EducationCard = ({ item, idx }) => {
+  const { t } = useTranslation();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+
+  const title = t(`education.items.${idx}.title`, item.title);
+  const institution = t(`education.items.${idx}.institution`, item.institution);
+  const year = t(`education.items.${idx}.year`, item.year);
+  const result = t(`education.items.${idx}.result`, item.result);
+  const statusText =
+    item.status === "Ongoing"
+      ? t("education.statusOngoing", "Ongoing")
+      : t("education.statusCompleted", "Completed");
+
+  const rawHighlights = t(`education.items.${idx}.highlights`, { returnObjects: true });
+  const highlights = Array.isArray(rawHighlights) ? rawHighlights : item.highlights;
 
   return (
     <motion.div
@@ -134,38 +212,40 @@ const EducationCard = ({ item, idx }) => {
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-success" />
                 </span>
               )}
-              {item.status}
+              {statusText}
             </span>
             <span className="text-[9px] text-base-content/30 font-semibold uppercase tracking-[0.16em]">
-              {item.year}
+              {year}
             </span>
           </div>
-          {/* Grade badge */}
+          {/* Grade/Result badge */}
           <div className="flex items-center gap-1.5 bg-primary/10 border border-primary/20 rounded-xl px-3 py-1.5">
             <FaMedal className="text-primary text-[10px]" />
-            <span className="text-[11px] font-extrabold text-primary">{item.result}</span>
+            <span className="text-[11px] font-extrabold text-primary">{result}</span>
           </div>
         </div>
 
         {/* Title */}
         <h3 className="text-lg sm:text-xl font-extrabold tracking-tight text-base-content leading-tight mb-2 group-hover:text-primary transition-colors duration-300">
-          {item.title}
+          {title}
         </h3>
 
         {/* Institution */}
         <a
           href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
+          target={item.link === "#" ? undefined : "_blank"}
+          rel={item.link === "#" ? undefined : "noopener noreferrer"}
           className="inline-flex items-center gap-1.5 text-[12px] font-bold text-primary/70 hover:text-primary transition-colors duration-200 group/link mb-4"
         >
-          {item.institution}
-          <FaExternalLinkAlt className="text-[8px] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
+          {institution}
+          {item.link !== "#" && (
+            <FaExternalLinkAlt className="text-[8px] group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
+          )}
         </a>
 
         {/* Highlights */}
         <div className="flex flex-wrap gap-2">
-          {item.highlights.map((h, i) => (
+          {highlights.map((h, i) => (
             <span
               key={i}
               className="text-[10px] font-semibold text-base-content/50 bg-base-300/40 border border-base-300/60 rounded-lg px-2.5 py-1 group-hover:text-base-content/70 transition-colors duration-200"
@@ -186,6 +266,7 @@ const EducationCard = ({ item, idx }) => {
 
 // ─── EDUCATION ─────────────────────────────────────────────────────────────────
 const Education = () => {
+  const { t, i18n } = useTranslation();
   const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.08 } },
@@ -238,58 +319,71 @@ const Education = () => {
 
       {/* ══ CONTENT ══════════════════════════════════════════════════════ */}
       <div className="relative z-10 w-full max-w-5xl mx-auto">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={i18n.language}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.35, ease }}
+            className="w-full"
+          >
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, ease }}
+              className="flex items-center gap-3 mb-8"
+            >
+              <div className="h-px w-8 bg-base-300" />
+              <span className="text-[10px] text-base-content/30 uppercase tracking-[0.24em] font-semibold">
+                {t("education.eyebrow", "Academic Background")}
+              </span>
+              <div className="h-px w-8 bg-base-300" />
+            </motion.div>
 
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, ease }}
-          className="flex items-center gap-3 mb-8"
-        >
-          <div className="h-px w-8 bg-base-300" />
-          <span className="text-[10px] text-base-content/30 uppercase tracking-[0.24em] font-semibold">Academic Background</span>
-          <div className="h-px w-8 bg-base-300" />
-        </motion.div>
+            {/* Section heading */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="mb-14"
+            >
+              <motion.div variants={item}>
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.13em] uppercase bg-primary/10 border border-primary/25 text-primary mb-4">
+                  <FaGraduationCap className="text-[10px]" />
+                  {t("education.badge", "Education")}
+                </span>
+              </motion.div>
+              <motion.h2 variants={item} className="font-extrabold tracking-tight leading-[1.07] text-3xl sm:text-4xl xl:text-[2.8rem]">
+                {t("education.title", "Academic")}{" "}
+                <span className="relative inline-block">
+                  <span className="text-primary">{t("education.journey", "Journey")}</span>
+                  <motion.div
+                    key={i18n.language}
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-primary via-secondary to-primary/40 origin-left rtl:origin-right"
+                  />
+                </span>
+              </motion.h2>
+              <motion.p variants={item} className="text-[10px] uppercase tracking-[0.22em] text-base-content/30 font-medium mt-2">
+                {t("education.tagline", "Knowledge · Discipline · Excellence")}
+              </motion.p>
+            </motion.div>
 
-        {/* Section heading */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mb-14"
-        >
-          <motion.div variants={item}>
-            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.13em] uppercase bg-primary/10 border border-primary/25 text-primary mb-4">
-              <FaGraduationCap className="text-[10px]" />
-              Education
-            </span>
+            {/* Timeline */}
+            <div className="flex flex-col">
+              {EDUCATION_DATA.map((item, idx) => (
+                <EducationCard key={idx} item={item} idx={idx} />
+              ))}
+            </div>
           </motion.div>
-          <motion.h2 variants={item} className="font-extrabold tracking-tight leading-[1.07] text-3xl sm:text-4xl xl:text-[2.8rem]">
-            Academic{" "}
-            <span className="relative inline-block">
-              <span className="text-primary">Journey</span>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-primary via-secondary to-primary/40 origin-left"
-              />
-            </span>
-          </motion.h2>
-          <motion.p variants={item} className="text-[10px] uppercase tracking-[0.22em] text-base-content/30 font-medium mt-2">
-            Knowledge · Discipline · Excellence
-          </motion.p>
-        </motion.div>
-
-        {/* Timeline */}
-        <div className="flex flex-col">
-          {EDUCATION_DATA.map((item, idx) => (
-            <EducationCard key={idx} item={item} idx={idx} />
-          ))}
-        </div>
+        </AnimatePresence>
       </div>
     </section>
   );

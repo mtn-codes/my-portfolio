@@ -12,6 +12,7 @@ import tailwindcss from '@tailwindcss/vite'
 // server-side only.
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
+  const baiApiKey = env.BAI_API_KEY
   const kimchiApiKey = env.KIMCHI_API_KEY
 
   return {
@@ -20,11 +21,59 @@ export default defineConfig(({ mode }) => {
       react()
     ],
     server: {
-      // The Kimchi API does not allow browser CORS, so the dev server proxies
-      // `/api/kimchi/*` to `https://llm.kimchi.dev/openai/v1/*` and injects
-      // the API key server-side. The client code is identical between dev
-      // and production (Netlify function in prod, see netlify.toml).
+      host: true,
+      allowedHosts: true,
+      cors: true,
       proxy: {
+        // OpenRouter LLM proxy (Active provider)
+        '/api/openrouter': {
+          target: 'https://openrouter.ai/api/v1',
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/api\/openrouter/, ''),
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq) => {
+              const currentEnv = loadEnv(mode, process.cwd(), '')
+              const key = process.env.OPENROUTER_API_KEY || currentEnv.OPENROUTER_API_KEY
+              if (key) {
+                proxyReq.setHeader('Authorization', `Bearer ${key}`)
+              }
+              proxyReq.setHeader('HTTP-Referer', 'https://tahanaghdi.me')
+              proxyReq.setHeader('X-Title', 'Taha Naghdi Portfolio')
+            })
+            proxy.on('error', (err, _req, res) => {
+              console.error('[vite /api/openrouter proxy error]:', err?.message)
+              if (res && !res.headersSent) {
+                res.writeHead(502, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({ error: err?.message || 'Proxy error' }))
+              }
+            })
+          },
+        },
+        // B.AI LLM proxy (Retained for fallback)
+        '/api/bai': {
+          target: 'https://api.b.ai/v1',
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/api\/bai/, ''),
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq) => {
+              const currentEnv = loadEnv(mode, process.cwd(), '')
+              const key = process.env.BAI_API_KEY || currentEnv.BAI_API_KEY
+              if (key) {
+                proxyReq.setHeader('Authorization', `Bearer ${key}`)
+              }
+            })
+            proxy.on('error', (err, _req, res) => {
+              console.error('[vite /api/bai proxy error]:', err?.message)
+              if (res && !res.headersSent) {
+                res.writeHead(502, { 'Content-Type': 'application/json' })
+                res.end(JSON.stringify({ error: err?.message || 'Proxy error' }))
+              }
+            })
+          },
+        },
+        // Kimchi proxy (Retained for inert fallback)
         '/api/kimchi': {
           target: 'https://llm.kimchi.dev/openai/v1',
           changeOrigin: true,

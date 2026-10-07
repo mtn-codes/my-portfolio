@@ -27,6 +27,7 @@
 
 import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 
+import { useTranslation } from "react-i18next";
 import {
   cancelRequest,
   clearConversation,
@@ -56,6 +57,8 @@ import { getSuggestedQuestions } from "../data/suggestedQuestions";
  * }}
  */
 export function useChat() {
+  const { t, i18n } = useTranslation();
+
   // Hydrate from storage exactly once, otherwise start blank.
   const [state, dispatch] = useReducer(
     chatReducer,
@@ -189,6 +192,7 @@ export function useChat() {
       try {
         const reply = await sendToProvider(trimmed, {
           signal: controller.signal,
+          siteLanguage: i18n.language,
           onChunk: (piece) => {
             // Guard against stale streams — only patch if this is still
             // the active request. Uses APPEND_TO_MESSAGE so the assistant
@@ -234,12 +238,12 @@ export function useChat() {
         }
       }
     },
-    []
+    [i18n.language]
   );
 
   const isSending = state.status === "typing";
 
-  const suggestions = useMemo(() => getSuggestedQuestions(), []);
+  const suggestions = useMemo(() => getSuggestedQuestions(t), [t, i18n.language]);
 
   return {
     state: { ...state, suggestions },

@@ -1,43 +1,34 @@
-# Startup: Appriyo
+# Agency & Venture: Tirazh & CStudio
 
-🔗 https://appriyo.com
-📅 Founded / operating since: October 2025
-📍 Khulna, Bangladesh
+## Tirazh Advertising Agency
+📅 Active
+📍 Nationwide, Iran
+🏢 Role: Founder & Manager
 
-## What Appriyo Is
+### Overview
+Tirazh is a full-service creative and advertising agency founded and managed by Taha Naghdi, delivering nationwide media production, branding, and digital solutions across Iran.
 
-Appriyo is Shahajalal Mahmud's software product company. He operates as Founder and Lead Engineer, architecting, building, deploying, and maintaining production-grade software systems end-to-end as a solo technical founder.
+### Core Agency Services
+- **Video Advertising:** Cinematic promotional commercials, product showcases, and broadcast-ready advertisements.
+- **Design & Print:** Corporate visual identity, catalog design, print media, packaging, and brand guidelines.
+- **Software & Website Development:** High-performance business websites, digital storefronts, and automated workflows.
 
-## Role & Responsibilities
+---
 
-- Mobile application engineering
-- Backend architecture & API development
-- Multi-tenant SaaS system design
-- Infrastructure & deployment
-- Product engineering
-- Technical decision making
-- Client communication
-- System maintenance & debugging
+## CStudio Advertising Agency
+📅 Active
+📍 Iran
+🏢 Role: Executive Manager
 
-## Products Built Under Appriyo
+### Overview
+At CStudio, Taha Naghdi serves as Executive Manager leading high-end production pipelines and modern digital executions.
 
-| Product                               | Type              | Description                                                                               |
-| ------------------------------------- | ----------------- | ----------------------------------------------------------------------------------------- |
-| Amar Repair                           | Private SaaS      | Multi-tenant repair shop management platform (Android + Backend), JWT/RBAC, PostgreSQL    |
-| Amar Batch                            | Private SaaS      | Offline-first tutor & student management system (Room DB, MVVM)                           |
-| Amar Card / NFC Digital Card Platform | Production system | Physical-digital networking product with NFC integration and dynamic profile engine       |
-| Appriyo Website                       | Production        | Official company website — responsive platform for delivering scalable business solutions |
+### Responsibilities & Scope
+- **Cinematic Videography & Editing:** Directing camera operators, cinematic lighting setups, post-production editing, color grading, and visual effects.
+- **Project Design & Execution:** Overseeing client campaign lifecycles from concept brainstorming to final delivery.
+- **Website Design & AI Content Production:** Building web presences and integrating generative AI tools into creative production workflows.
 
-## Key Engineering Achievements at Appriyo
+---
 
-- Architected and shipped production SaaS products from zero to live users
-- Built Android systems achieving 99.9% crash-free production performance
-- Designed secure multi-tenant backend systems with strict tenant isolation
-- Implemented JWT authentication and RBAC authorization systems
-- Rebuilt production systems (Amar Repair, Amar Batch) after real-world architecture failures in their earlier versions
-- Enforced Clean Architecture principles to reduce technical debt
-- Managed the end-to-end product lifecycle independently as a solo technical founder
-
-## Founding Story / Lessons
-
-Appriyo's flagship products grew directly out of earlier failures: the original "Repair Store Manager" app was used by a real shop owner and hit hard limits in data consistency, scaling, and UX under real-world load — it was scrapped and rebuilt into Amar Repair. Similarly, an offline-first "Teacher Batch Management" prototype validated core tutor-management workflows before being rebuilt into Amar Batch. These rebuilds shaped Appriyo's engineering philosophy: "Systems beat features."
+## Creative & Technical Vision
+Taha's agencies bridge the gap between creative visual artistry (cinematography, storytelling, motion graphics) and modern technology (AI automation, software engineering, interactive web applications).

@@ -1,22 +1,22 @@
 # Achievements & Recognition
 
-| Achievement | Details |
-|---|---|
-| 🏆 SOLVIO AI Hackathon Finalist | Top 100 National Finalist (CashGuard AI), Nov 2025 |
-| 🏗️ Founder | Built and shipped production SaaS systems (Appriyo) |
-| 📱 99.9% Crash-free Performance | Achieved on production Android systems |
-| 🔓 Open Source Contributor | Core Contributor on GitHub Insights — high-contrast themes, language analytics optimization |
-| 🏦 JPMorgan Forage Completion | Software Engineering Job Simulation — Midas transaction processing simulation |
-| 🎓 CGPA 3.90 / 4.00 | Strong academic performance at NUBTK |
-| 🐍 Top 10% Python Coder | Credmark badge, issued Jan 2026 |
-| 🏆 Intra-University Project Showcase | CSE Fest-2025 (Sfuron'22), NUBTK, issued Dec 2025 |
+| Milestone / Achievement | Description | Status |
+|---|---|---|
+| 🎬 Agency Leadership | Founder & Manager of Tirazh Advertising Agency, operating nationwide in Iran | Active |
+| 🎓 Harvard CS50 Completion | Completed Harvard CS50 Computer Science program online | Completed |
+| 🎥 Cinematography Credential | Certified Director of Photography & Editor, Ghermez Cinema Academy | Completed |
+| 🤖 AI Credential | Artificial Intelligence Program Certificate, Finland University | Completed |
+| ⚡ Hardware & IoT Credential | IoT, Python & Electrical Circuit Design Certificate, TVTO | Completed |
+| 📜 Business License | Social Media Specialist Business License, Guild Union | Licensed |
+| 🏭 Major Industrial Media | Produced high-production factory documentaries for Saina, Simfam, Black Tiara & Favania | Ongoing |
+| 🏛️ Cultural Productions | Executed real-motion productions for the Ministry of Culture & Islamic Guidance | Ongoing |
+| 💼 Executive Management | Executive Manager at CStudio Advertising Agency | Completed |
 
-## Engineering Milestones
+## Professional & Creative Milestones
 
-- Shipped two production systems to real users, encountered real-world failure, and rebuilt both from scratch (Amar Repair from Repair Store Manager; Amar Batch from Teacher Batch Management)
-- Achieved 98.7% model accuracy in a fully offline, on-device fake currency detection model (CashGuard AI)
-- Reduced administrative workload by ~80% for tutors through Amar Batch's offline-first architecture
-- Designed and delivered secure multi-tenant SaaS architecture with JWT authentication and RBAC (Amar Repair)
-- Delivered freelance production systems including full deployment/hosting/domain setup for a US-based client (One Stop Liquor)
+- Successfully directed and delivered high-production 4K video commercials, industrial documentaries, and vertical fashion media across Iran.
+- Scaled Tirazh Advertising Agency to provide end-to-end commercial video production, specialized branding design/print, and software solutions.
+- Combined modern software engineering (React, Node.js, PostgreSQL) with autonomous AI agent workflows and hardware IoT automation.
+- Maintained a dual-track academic and creative journey, pursuing a BSc in Computer Engineering and an Executive MBA.
 
-See also: `certifications.md` and `awards.md` for formal credentials.
+*Additional quantified competition rankings: details pending.*

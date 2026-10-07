@@ -1,14 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  FaBars, FaTimes, FaChevronDown, FaPalette,
-  FaGithub, FaBriefcase, FaHome, FaUser, FaCode,
+  FaBars,
+  FaTimes,
+  FaChevronDown,
+  FaPalette,
+  FaHome,
+  FaUser,
+  FaCode,
 } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import ThemeSelector from "./ThemeSelector";
+import LanguageSelector from "./LanguageSelector";
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.dir() === "rtl";
   const [isOpen, setIsOpen] = useState(false);
   const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -26,25 +35,26 @@ const Navbar = () => {
 
   // Nav structure
   const navItems = [
-    { name: "Home",    path: "/",       icon: <FaHome className="text-[11px]" /> },
+    { name: t("nav.home", "Home"), path: "/", icon: <FaHome className="text-[11px]" /> },
     {
-      name: "Background",
+      name: t("nav.about", "About"),
+      key: "background",
       icon: <FaUser className="text-[11px]" />,
       items: [
-        { name: "Education",   path: "/education-experience#education"  },
-        { name: "Experience",  path: "/education-experience#experience" },
+        { name: t("nav.education", "Education"), path: "/education-experience#education" },
+        { name: t("nav.experience", "Experience"), path: "/education-experience#experience" },
       ],
     },
     {
-      name: "Portfolio",
+      name: t("nav.portfolio", "Portfolio"),
+      key: "portfolio",
       icon: <FaCode className="text-[11px]" />,
       items: [
-        { name: "Skills",   path: "/skills-projects#skills"   },
-        { name: "Projects", path: "/skills-projects#projects" },
+        { name: t("nav.skills", "Skills"), path: "/skills-projects#skills" },
+        { name: t("nav.projects", "Projects"), path: "/skills-projects#projects" },
       ],
     },
-    // { name: "GitHub",   path: "/github",                          icon: <FaGithub className="text-[11px]" />   },
-    { name: "Services", path: "https://appriyo.com/services",     icon: <MdWork className="text-[11px]" />, external: true },
+    { name: t("contact.eyebrow", "Contact"), path: "/contact", icon: <MdWork className="text-[11px]" /> },
   ];
 
   // Scroll shadow
@@ -60,7 +70,11 @@ const Navbar = () => {
       if (themeMenuRef.current && !themeMenuRef.current.contains(e.target)) {
         setIsThemeMenuOpen(false);
       }
-      if (openDropdown && dropdownRefs[openDropdown]?.current && !dropdownRefs[openDropdown].current.contains(e.target)) {
+      if (
+        openDropdown &&
+        dropdownRefs[openDropdown]?.current &&
+        !dropdownRefs[openDropdown].current.contains(e.target)
+      ) {
         setOpenDropdown(null);
       }
     };
@@ -68,10 +82,19 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, [openDropdown]);
 
+  // Close menus on route navigation
+  useEffect(() => {
+    setIsThemeMenuOpen(false);
+    setIsOpen(false);
+    setOpenDropdown(null);
+  }, [location.pathname]);
+
   // Lock body scroll on mobile menu
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   const handleNavClick = (path, external = false) => {
@@ -120,35 +143,42 @@ const Navbar = () => {
         className={`
           fixed top-0 left-0 w-full z-50
           transition-all duration-300
-          ${scrolled
-            ? "bg-base-100/95 backdrop-blur-md shadow-lg shadow-base-300/20 border-b border-base-300/30"
-            : "bg-base-100/80 backdrop-blur-sm"
+          ${
+            scrolled
+              ? "bg-base-100/95 backdrop-blur-md shadow-lg shadow-base-300/20 border-b border-base-300/30"
+              : "bg-base-100/80 backdrop-blur-sm"
           }
         `}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-
-            {/* ── Logo ────────────────────────────────────────── */}
+            {/* ── Logo with Personal Profile Photo Avatar ────────────────────────────────────────── */}
             <button
               onClick={() => handleNavClick("/")}
               className="flex items-center gap-2.5 group"
             >
-              {/* Logo mark */}
-              <div className="
-                w-8 h-8 rounded-lg bg-primary flex items-center justify-center
-                text-primary-content font-black text-sm
-                shadow-md shadow-primary/30
+              {/* Profile Photo Avatar */}
+              <div
+                className="
+                w-8 h-8 rounded-full overflow-hidden border border-primary/40 ring-2 ring-primary/10 flex items-center justify-center
+                shadow-md shadow-primary/20 flex-shrink-0
                 group-hover:scale-105 transition-transform duration-200
-              ">
-                S
+              "
+              >
+                <img
+                  src="/img/about_photo.jpg"
+                  alt={t("hero.name", "Taha Naghdi")}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
-              <span className="
+              <span
+                className="
                 text-lg font-extrabold tracking-tight
                 text-base-content group-hover:text-primary
                 transition-colors duration-200 hidden sm:block
-              ">
-                Shahajalal
+              "
+              >
+                {t("hero.shortName", "Taha")}
                 <span className="text-primary">.</span>
               </span>
             </button>
@@ -157,7 +187,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center gap-0.5">
               {navItems.map((item, idx) => {
                 if (item.items) {
-                  const key = item.name.toLowerCase();
+                  const key = item.key || item.name.toLowerCase();
                   const active = isDropdownActive(item.items);
                   return (
                     <div key={idx} className="relative" ref={dropdownRefs[key]}>
@@ -166,9 +196,10 @@ const Navbar = () => {
                         className={`
                           flex items-center gap-1.5 px-4 py-2 rounded-lg text-[13px] font-medium
                           transition-all duration-200
-                          ${active
-                            ? "text-primary bg-primary/10"
-                            : "text-base-content/70 hover:text-base-content hover:bg-base-200/70"
+                          ${
+                            active
+                              ? "text-primary bg-primary/10"
+                              : "text-base-content/70 hover:text-base-content hover:bg-base-200/70"
                           }
                         `}
                       >
@@ -190,7 +221,7 @@ const Navbar = () => {
                             exit={{ opacity: 0, y: -6, scale: 0.97 }}
                             transition={{ duration: 0.15 }}
                             className="
-                              absolute top-full left-0 mt-1.5
+                              absolute top-full ltr:left-0 rtl:right-0 mt-1.5
                               min-w-[180px] bg-base-100
                               rounded-xl shadow-xl border border-base-300/50
                               overflow-hidden z-50 p-1
@@ -201,11 +232,12 @@ const Navbar = () => {
                                 key={si}
                                 onClick={() => handleNavClick(sub.path)}
                                 className={`
-                                  w-full text-left px-3.5 py-2.5 text-[13px] rounded-lg
+                                  w-full text-left rtl:text-right px-3.5 py-2.5 text-[13px] rounded-lg
                                   transition-colors duration-150
-                                  ${isActive(sub.path)
-                                    ? "bg-primary text-primary-content font-semibold"
-                                    : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
+                                  ${
+                                    isActive(sub.path)
+                                      ? "bg-primary text-primary-content font-semibold"
+                                      : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
                                   }
                                 `}
                               >
@@ -226,9 +258,10 @@ const Navbar = () => {
                     className={`
                       flex items-center gap-1.5 px-4 py-2 rounded-lg text-[13px] font-medium
                       transition-all duration-200
-                      ${item.external
-                        ? "text-primary border border-primary/30 hover:bg-primary/10 ml-1"
-                        : isActive(item.path)
+                      ${
+                        item.external
+                          ? "text-primary border border-primary/30 hover:bg-primary/10 ml-1 rtl:ml-0 rtl:mr-1"
+                          : isActive(item.path)
                           ? "text-primary bg-primary/10"
                           : "text-base-content/70 hover:text-base-content hover:bg-base-200/70"
                       }
@@ -243,23 +276,27 @@ const Navbar = () => {
             </div>
 
             {/* ── Right Controls ───────────────────────────────── */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              {/* Language selector */}
+              <LanguageSelector />
 
               {/* Theme toggle */}
               <div className="relative" ref={themeMenuRef}>
                 <button
                   onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
                   className={`
-                    flex items-center gap-1.5 px-3 py-2 rounded-lg text-[13px] font-medium
+                    flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-lg text-[13px] font-medium
                     transition-all duration-200
-                    ${isThemeMenuOpen
-                      ? "text-primary bg-primary/10"
-                      : "text-base-content/60 hover:text-base-content hover:bg-base-200/70"
+                    ${
+                      isThemeMenuOpen
+                        ? "text-primary bg-primary/10"
+                        : "text-base-content/60 hover:text-base-content hover:bg-base-200/70"
                     }
                   `}
+                  title={t("nav.theme", "Theme")}
                 >
-                  <FaPalette className="text-base" />
-                  <span className="hidden sm:inline">Theme</span>
+                  <FaPalette className="text-xs sm:text-base" />
+                  <span className="hidden sm:inline">{t("nav.theme", "Theme")}</span>
                   <motion.span
                     animate={{ rotate: isThemeMenuOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
@@ -276,9 +313,9 @@ const Navbar = () => {
                       exit={{ opacity: 0, y: -6, scale: 0.97 }}
                       transition={{ duration: 0.15 }}
                       className="
-                        absolute right-0 top-full mt-1.5
-                        w-80 sm:w-96 bg-base-100
-                        rounded-xl shadow-2xl border border-base-300/50
+                        absolute ltr:right-0 ltr:left-auto rtl:left-0 rtl:right-auto top-full mt-1.5
+                        w-[calc(100vw-2rem)] max-w-sm sm:max-w-md sm:w-96
+                        bg-base-100 rounded-2xl shadow-2xl border border-base-300/60
                         p-4 z-50
                       "
                     >
@@ -345,48 +382,51 @@ const Navbar = () => {
             {/* Drawer */}
             <motion.div
               key="drawer"
-              initial={{ x: "100%" }}
+              initial={{ x: isRtl ? "-100%" : "100%" }}
               animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              exit={{ x: isRtl ? "-100%" : "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="
-                lg:hidden fixed right-0 z-50 w-72
-                bg-base-100 border-l border-base-300/40
+                lg:hidden fixed ltr:right-0 ltr:border-l rtl:left-0 rtl:border-r z-50 w-72
+                bg-base-100 border-base-300/40
                 shadow-2xl overflow-y-auto
               "
               style={{ top: "64px", bottom: 0 }}
             >
               {/* Header */}
-              <div className="px-5 py-4 border-b border-base-300/40">
+              <div className="px-5 py-4 border-b border-base-300/40 flex items-center justify-between">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-base-content/35 font-semibold">
-                  Navigation
+                  {t("nav.navigation", "Navigation")}
                 </p>
+                <LanguageSelector />
               </div>
 
               <nav className="p-3 space-y-1">
                 {navItems.map((item, idx) => {
                   if (item.items) {
-                    const active = isDropdownActive(item.items);
                     return (
                       <div key={idx}>
-                        <div className={`
+                        <div
+                          className="
                           flex items-center gap-2.5 px-4 py-3 rounded-xl text-[13px] font-semibold
                           text-base-content/50 uppercase tracking-wider
-                        `}>
+                        "
+                        >
                           {item.icon}
                           {item.name}
                         </div>
-                        <div className="ml-4 space-y-0.5">
+                        <div className="ltr:ml-4 rtl:mr-4 space-y-0.5">
                           {item.items.map((sub, si) => (
                             <button
                               key={si}
                               onClick={() => handleNavClick(sub.path)}
                               className={`
-                                w-full text-left px-4 py-2.5 rounded-lg text-[13px] font-medium
+                                w-full text-left rtl:text-right px-4 py-2.5 rounded-lg text-[13px] font-medium
                                 transition-colors duration-150
-                                ${isActive(sub.path)
-                                  ? "bg-primary text-primary-content"
-                                  : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
+                                ${
+                                  isActive(sub.path)
+                                    ? "bg-primary text-primary-content font-semibold"
+                                    : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
                                 }
                               `}
                             >
@@ -403,12 +443,13 @@ const Navbar = () => {
                       key={idx}
                       onClick={() => handleNavClick(item.path, item.external)}
                       className={`
-                        w-full text-left flex items-center gap-2.5
+                        w-full text-left rtl:text-right flex items-center gap-2.5
                         px-4 py-3 rounded-xl text-[13px] font-medium
                         transition-colors duration-150
-                        ${item.external
-                          ? "text-primary border border-primary/25 hover:bg-primary/8"
-                          : isActive(item.path)
+                        ${
+                          item.external
+                            ? "text-primary border border-primary/25 hover:bg-primary/8"
+                            : isActive(item.path)
                             ? "bg-primary text-primary-content"
                             : "text-base-content/70 hover:bg-base-200 hover:text-base-content"
                         }
@@ -416,7 +457,7 @@ const Navbar = () => {
                     >
                       {item.icon}
                       {item.name}
-                      {item.external && <span className="ml-auto text-xs opacity-50">↗</span>}
+                      {item.external && <span className="ltr:ml-auto rtl:mr-auto text-xs opacity-50">↗</span>}
                     </button>
                   );
                 })}
@@ -425,11 +466,11 @@ const Navbar = () => {
               {/* Bottom: contact CTA */}
               <div className="p-4 mt-auto border-t border-base-300/40">
                 <a
-                  href="mailto:mahmud.nubtk@gmail.com"
+                  href="mailto:tahanaghdi.dev@gmail.com"
                   className="btn btn-primary btn-sm w-full gap-2"
                 >
                   <MdWork className="text-sm" />
-                  Hire Me
+                  {t("nav.hireMe", "Hire Me")}
                 </a>
               </div>
             </motion.div>

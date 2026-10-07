@@ -31,13 +31,13 @@ export function M3FAB({
 
   return (
     <motion.button
-      whileTap={{ scale: 0.96 }}
-      whileHover={{ scale: 1.04 }}
-      transition={{ type: "spring", stiffness: 380, damping: 24 }}
+      whileTap={{ scale: 0.92 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 450, damping: 25 }}
       onClick={onClick}
       aria-label={ariaLabel || label}
       className={`m3-tap m3-ripple ${shape} ${surface} ${shadow}
-        flex items-center justify-center font-medium
+        flex items-center justify-center font-bold select-none
         ${size === "extended" ? "m3-label-large" : ""}
         ${className}`}
     >

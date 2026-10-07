@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
-const defaultFont = localStorage.getItem("font") || "Arial";
+const defaultFont = localStorage.getItem("font") || "Kalameh";
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "halloween");
@@ -28,14 +28,27 @@ export const ThemeProvider = ({ children }) => {
     const existing = document.getElementById(fontLinkId);
     if (existing) existing.remove();
 
-    const link = document.createElement("link");
-    link.id = fontLinkId;
-    link.rel = "stylesheet";
-    link.href = `https://fonts.googleapis.com/css2?family=${font.replaceAll(
-      " ",
-      "+"
-    )}:wght@400;600;700&display=swap`;
-    document.head.appendChild(link);
+    const localFonts = [
+      "Kalameh",
+      "Chakad",
+      "Peyda",
+      "IRANSansXV",
+      "Kahroba",
+      "Mahoor",
+      "VIP Cartoon",
+      "Yekan Bakh",
+    ];
+
+    if (font && !localFonts.includes(font)) {
+      const link = document.createElement("link");
+      link.id = fontLinkId;
+      link.rel = "stylesheet";
+      link.href = `https://fonts.googleapis.com/css2?family=${font.replaceAll(
+        " ",
+        "+"
+      )}:wght@400;600;700&display=swap`;
+      document.head.appendChild(link);
+    }
 
     document.documentElement.style.setProperty("--user-font", `'${font}', sans-serif`);
     localStorage.setItem("font", font);

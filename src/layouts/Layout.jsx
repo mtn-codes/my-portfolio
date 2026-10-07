@@ -5,16 +5,18 @@ import Contact from "../sections/Contact";
 import OfflineBanner from "../shared/components/OfflineBanner";
 import InstallAppButton from "../shared/components/InstallAppButton";
 import ChatAssistant from "../features/chatbot";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <OfflineBanner />
       <Navbar />
-      <main className="pt-16"> {/* Padding for fixed navbar */}
+      <main className="desktop-page-shell flex-1">
         <Outlet /> {/* Renders child routes */}
-        <Contact />
+        {pathname !== "/contact" && <Contact />}
         <Footer />
       </main>
       {/*

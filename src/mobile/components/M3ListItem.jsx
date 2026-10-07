@@ -20,11 +20,11 @@ export function M3ListItem({
           {leading}
         </span>
       )}
-      <span className="flex-1 min-w-0">
+      <span className="flex-1 min-w-0 text-left rtl:text-right">
         <span className="block m3-body-large text-base-content truncate">{title}</span>
         {subtitle && (
-          <span className="block m3-body-medium text-base-content/65 truncate">
-            {subtitle}
+          <span className="block m3-body-medium text-base-content/65 truncate" dir="auto">
+            <bdi>{subtitle}</bdi>
           </span>
         )}
       </span>
@@ -33,7 +33,7 @@ export function M3ListItem({
           {trailing}
         </span>
       ) : onClick || href ? (
-        <FaChevronRight className="text-base-content/40 text-sm flex-shrink-0" />
+        <FaChevronRight className="text-base-content/40 text-sm flex-shrink-0 rtl:rotate-180" />
       ) : null}
     </>
   );

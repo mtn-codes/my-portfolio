@@ -5,19 +5,15 @@
 
 /**
  * @typedef {Object} AiModelConfig
- * @property {string} provider                  "kimchi" (only supported provider).
- * @property {string} model                     Model identifier on Kimchi (e.g. "kimi-k2.7").
- * @property {number} temperature               Sampling temperature (0..2 for Kimchi-compatible models).
+ * @property {string} provider                  "bai" (primary) or "kimchi" (fallback).
+ * @property {string} model                     Model identifier (e.g. "glm-5.3-flash").
+ * @property {number} temperature               Sampling temperature.
  * @property {number} topP                      Nucleus sampling cutoff.
  * @property {number} maxOutputTokens           Cap on tokens per response.
  * @property {number} timeoutMs                 Per-request timeout.
  * @property {number} retryCount                Auto-retry attempts on transient errors.
  * @property {number} retryBackoffMs            Initial backoff between retries.
  * @property {string} baseUrl                   Same-origin proxy base URL
- *                                           (Vite dev / Netlify fn). The
- *                                           browser never sees the Kimchi
- *                                           host directly because Kimchi
- *                                           does not allow browser CORS.
  */
 
 /**
@@ -32,24 +28,21 @@
  */
 
 /**
- * Kimchi defaults. Swap `model` to any chat-completions model id available
- * on https://kimchi.dev (e.g. "kimi-k2.7").
+ * OpenRouter defaults (Active provider).
+ * Free tier model with high Persian / English / Arabic performance.
  *
  * @type {AiModelConfig}
  */
 export const AI_MODEL = Object.freeze({
-  provider: "kimchi",
-  model: "kimi-k2.7",
-  temperature: 0.7,
-  topP: 0.95,
-  maxOutputTokens: 1024,
+  provider: "openrouter",
+  model: "nvidia/nemotron-3.5-lightning:free",
+  temperature: 0.6,
+  topP: 0.9,
+  maxOutputTokens: 450,
   timeoutMs: 30_000,
-  retryCount: 2,
-  retryBackoffMs: 600,
-  // Same-origin proxy. Resolved by:
-  //   • Vite dev-server proxy (vite.config.js)
-  //   • Netlify redirect → serverless function (netlify.toml + functions/kimchi.js)
-  baseUrl: "/api/kimchi",
+  retryCount: 1,
+  retryBackoffMs: 500,
+  baseUrl: "/api/openrouter",
 });
 
 /**
@@ -58,7 +51,7 @@ export const AI_MODEL = Object.freeze({
  */
 export const CHAT_SURFACE = Object.freeze({
   maxMessages: 50,
-  typingDelayMs: 450,
+  typingDelayMs: 60,
   inputMaxLength: 1000,
   persistToStorage: true,
   storageKey: "portfolio.chat.transcript.v1",
@@ -67,23 +60,22 @@ export const CHAT_SURFACE = Object.freeze({
 });
 
 /**
- * Placeholder suggestions rendered in the empty state.
+ * Default suggestions rendered in the empty state (English fallback; localized via i18n).
  *
  * @type {ReadonlyArray<{ id: string, text: string, category: string }>}
  */
 export const DEFAULT_SUGGESTIONS = Object.freeze([
-  { id: "about",     text: "Tell me about Shahajalal.",          category: "about"    },
-  { id: "projects",  text: "What projects has he built?",       category: "projects" },
-  { id: "skills",    text: "What technologies does he use?",    category: "skills"   },
-  { id: "contact",   text: "How can I contact him?",            category: "contact"  },
+  { id: "filmmaking", text: "His filmmaking projects?", category: "projects" },
+  { id: "code_ai",    text: "What does he build with AI?", category: "skills" },
+  { id: "contact",    text: "How can I contact him?", category: "contact" },
+  { id: "background", text: "What is his background?", category: "about" },
 ]);
 
 /**
- * Friendly metadata surfaced in the chat header. Kept here so the assistant
- * can be rebranded (name / avatar / tagline) without touching components.
+ * Friendly metadata surfaced in the chat header.
  */
 export const ASSISTANT_PROFILE = Object.freeze({
-  name: "Shahajalal AI",
-  shortName: "Shahajalal",
-  tagline: "Ask me anything about Shahajalal.",
+  name: "Taha AI",
+  shortName: "Taha",
+  tagline: "Filmmaker · Developer · Innovator Assistant",
 });

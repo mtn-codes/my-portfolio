@@ -1,46 +1,51 @@
-# Frequently Asked Questions
+# Frequently Asked Questions (FAQ)
 
-**Q: What does Shahajalal do?**
-A: He's a mobile-focused fullstack software engineer specializing in Kotlin/Jetpack Compose Android development and PostgreSQL-backed backend systems. He is the Founder & Lead Engineer of Appriyo, a software product company based in Khulna, Bangladesh.
+### 1. Who is Taha Naghdi?
+Taha Naghdi (طاها نقدی) is an Iranian filmmaker, content producer, and full-stack software engineer. He is the Founder and Manager of Tirazh Advertising Agency, operating nationwide across Iran, and specializes in visual cinematography, AI media generation, web development, and industrial automation.
 
-**Q: What is his current role?**
-A: Founder & Lead Engineer at Appriyo (October 2025 — Present), and a third-year CSE undergraduate at NUBTK (expected graduation 2027).
+### 2. What are Taha's main areas of expertise?
+Taha works in four prioritized domains:
+1. **Filmmaking & Content Production** (cinematography, film editing, lighting, motion graphics)
+2. **AI Content & Digital Ideation** (generative AI visuals, digital content strategy, creative direction)
+3. **Programming & App Development** (full-stack web development, React, Node.js, AI agent engineering)
+4. **Industrial Automation & Smart Gadgets** (microcontroller hardware, IoT circuits, Python automation)
 
-**Q: What is his main tech stack?**
-A: Kotlin + Jetpack Compose for Android; PostgreSQL + Spring Boot for backend; React + Vite + Tailwind CSS for web/frontend; TensorFlow Lite for on-device AI.
+### 3. What notable companies or clients has Taha worked with?
+Through Tirazh Advertising Agency and executive collaborations, Taha has produced media and technical solutions for:
+- **Industrial enterprises:** Saina Textile Complex, Simfam Aluminum Factory, Black Tiara Stone Quarry, Favania Construction.
+- **Commercial & retail brands:** Plaque 8 Groom Salon, Ebrahimi Watch Gallery, Masirino Health, Enzo Furniture.
+- **Public & cultural bodies:** Ministry of Culture & Islamic Guidance (Ershad).
 
-**Q: Does he know Flutter?**
-A: His primary and intentional focus is native Android (Kotlin + Jetpack Compose) rather than Flutter. He made this choice deliberately after evaluating market demand, engineering depth, and long-term specialization value, noting that skilled native Android engineers are rarer than Flutter developers in Bangladesh.
+### 4. What is Taha's educational background?
+Taha is currently pursuing a Bachelor of Science in Computer Engineering at Falagh University and an Executive MBA in Business Management. His credentialed background also includes:
+- Harvard CS50 Summer Course (Completed)
+- Cinematography Certificate from Ghermez Cinema Academy (Completed)
+- IoT, Python & Electrical Circuit Design Certificate from TVTO (Completed)
+- Social Media Specialist Business License (Completed)
+- Artificial Intelligence Certificate from Finland University (Completed)
 
-**Q: What is his flagship project?**
-A: Amar Repair, a multi-tenant SaaS platform for repair shop management, built with Kotlin/Jetpack Compose (Android) and PostgreSQL/JWT/RBAC (backend). It achieves 99.9% crash-free production performance and represents a full architectural rebuild of an earlier failed version.
+### 5. What software development stack does Taha use?
+Taha builds web applications using React, JavaScript, Node.js, PostgreSQL, Tailwind CSS, DaisyUI, and Framer Motion. In hardware automation and data scripting, he utilizes Python, Arduino, and ESP32 microcontrollers.
 
-**Q: Has he built AI-related products?**
-A: Yes — CashGuard AI, a real-time on-device fake currency detection app using TensorFlow Lite (98.7% model accuracy), which was a Top 100 National Finalist at the SOLVIO AI Hackathon 2025. He also built Prodorshok, an AI-powered career guidance platform using the GPT-3.5 API.
+### 6. What video production equipment and software does Taha work with?
+Taha directs cinema cameras and aerial drones, employing specialized lighting setups (softboxes, fresnels, rim lights, and atmospheric diffusion). For post-production, his primary tool is DaVinci Resolve Studio for professional color grading and editing, alongside Premiere Pro and After Effects for motion graphics.
 
-**Q: What awards or recognitions does he have?**
-A: Top 100 National Finalist, SOLVIO AI Hackathon 2025 (CashGuard AI); Intra-University Project Showcase recognition at CSE Fest-2025 (Sfuron'22), NUBTK; Top 10% Python Coder badge from Credmark; completion of a JPMorgan Chase (via Forage) Software Engineering Job Simulation.
+### 7. How much does Taha charge for a project?
+Taha does not use fixed pricing tables because every project differs in scope, equipment requirements, filming days, and technical complexity. To receive a custom proposal and quote, please contact Taha directly with your project requirements.
 
-**Q: What is his education?**
-A: B.Sc. in Computer Science & Engineering at Northern University of Business & Technology Khulna (NUBTK), 2023–expected 2027, CGPA 3.90/4.00. Prior: HSC from Govt. Brajalal College, Khulna (GPA 5.00/5.00) and SSC from Govt. Jalma Chakrakhali High School (GPA 5.00/5.00, Top 1% in district).
+### 8. How can I get in touch with Taha Naghdi?
+You can reach Taha through:
+- **Email:** tahanaghdi.dev@gmail.com
+- **Phone:** +98 991 814 6616
+- **Telegram:** @rull_bazi
+- **LinkedIn:** linkedin.com/in/taha-naghdi-74398a317
+- **GitHub:** github.com/mtn-codes
 
-**Q: Does he do freelance work?**
-A: Yes, since 2024, delivering full-stack systems for real clients — including a full business website, deployment, and domain setup for a Los Angeles–based wholesale business (One Stop Liquor) and a full-stack academic portfolio/CMS with an admin dashboard (Portfolio Nag Sir).
+### 9. Does Taha have a Facebook page?
+Facebook is currently not available (coming soon). Please use email, Telegram, or LinkedIn for verified inquiries.
 
-**Q: What is Appriyo?**
-A: Appriyo is Shahajalal's software product company (founded/active since October 2025), where he independently architects, builds, deploys, and maintains production-grade systems, including Amar Repair, Amar Batch, and the Amar Card NFC digital networking platform.
+### 10. Can Taha manage both the video production and the website/software for a brand?
+Yes. One of Taha's unique strengths is delivering end-to-end media and digital products under one roof—from shooting cinematic promotional commercials and social media reels to developing custom responsive websites and AI automation tools.
 
-**Q: What is his engineering philosophy?**
-A: "Systems beat features." He prioritizes maintainable, scalable, debuggable, reliable, and secure architecture over rapid feature shipping — a philosophy shaped directly by rebuilding two of his own products after they failed under real production load.
-
-**Q: How does he use AI in his development process?**
-A: As an assistant, not a replacement for critical thinking. He aims to understand systems deeply, manually implement important logic, debug independently, and critically review AI-generated code rather than blindly using it.
-
-**Q: What backend framework does he use?**
-A: Spring Boot with PostgreSQL is his chosen backend stack, deliberately selected over the typical MERN/Node.js path to build stronger enterprise architecture and system design fundamentals — reinforced by Kafka + Spring Boot experience from the JPMorgan Chase Forage simulation.
-
-**Q: Where is he located, and is he open to remote work?**
-A: He is based in Khulna, Bangladesh. His freelance work (2024–Present) has been fully remote, including a US-based (Los Angeles) client engagement.
-
-**Q: How can I contact him?**
-A: See `contact.md` for email, phone, LinkedIn, GitHub, and portfolio links.
+### 11. How old is Taha Naghdi?
+Taha Naghdi is 20 years old.

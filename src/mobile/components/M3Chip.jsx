@@ -21,7 +21,7 @@ export function M3Chip({
 
   const cls = `
     m3-shape-sm inline-flex items-center gap-1.5
-    h-8 px-3 m3-label-large border
+    h-8 px-3 m3-label-large border font-body-fa
     ${surface}
     ${isInteractive ? "m3-tap cursor-pointer active:scale-95 transition-all" : ""}
     ${className}`;

@@ -1,34 +1,76 @@
 # Education
 
-## B.Sc. in Computer Science & Engineering
-**Northern University of Business & Technology Khulna (NUBTK)**
-📅 2023 — Expected 2027
-📊 CGPA: 3.90 / 4.00 (Grade: A+)
-🔗 https://nubtkhulna.ac.bd/
-
-**Academic Focus:** Software Engineering, System Design, Mobile Development, Backend Systems, Competitive Programming
-
+## 1. BSc in Computer Engineering
+**Falagh University**
+📅 2023 — Present (Ongoing)
+📊 Status: Undergraduate Degree in Progress
 **Highlights:**
-- Strong academic consistency
-- Active engineering-focused self-learning alongside coursework
-- Practical production software development alongside university studies
+- Software Engineering & System Architecture
+- Algorithms, Data Structures & Core Computer Science
+- Web Engineering and Modern Development Frameworks
 
 ---
 
-## Higher Secondary Certificate (HSC)
-**Govt. Brajalal College, Khulna**
-📅 2019 — 2021
-📊 GPA: 5.00 / 5.00 (Grade: A+)
-🔗 https://www.blcollege.edu.bd/
-
-**Highlights:** Science Group, Mathematics Focus, Academic Excellence
+## 2. CS50 Summer Course
+**Harvard CS50 (Online)**
+📅 Completed
+📊 Result: Certified
+**Highlights:**
+- Rigorous Computer Science Fundamentals
+- C & Python Programming, Memory Management, and Algorithmic Thinking
+- Web Development Foundations (HTML/CSS, JavaScript, SQL)
 
 ---
 
-## Secondary School Certificate (SSC)
-**Govt. Jalma Chakrakhali High School**
-📅 2017 — 2019
-📊 GPA: 5.00 / 5.00 (Grade: A+)
-🔗 https://jalmachakrakhalisecondaryschool.jessoreboard.gov.bd/
+## 3. Cinematography Certificate
+**Ghermez Cinema Academy**
+📅 Completed
+📊 Result: Certified
+**Highlights:**
+- Cinematic Lighting Techniques & Camera Mechanics
+- Visual Storytelling, Directing, and Shot Planning
+- Advanced Film Editing & DaVinci Resolve Color Grading
 
-**Highlights:** Science Group, Top 1% in District, Science Olympiad Participation
+---
+
+## 4. IoT, Python & Electrical Circuit Design Certificate
+**Technical & Vocational Training Organization (TVTO)**
+📅 Completed
+📊 Result: Certified
+**Highlights:**
+- IoT Systems and Sensor Integration
+- Python-Based Hardware Automation
+- Electrical Circuit Design & Microcontroller Prototyping
+
+---
+
+## 5. Social Media Specialist Business License
+**Guild & Business Licensing Union**
+📅 Completed
+📊 Result: Officially Licensed
+**Highlights:**
+- Digital Marketing Strategy & Audience Growth
+- Content Management Systems & Media Production
+- Brand Identity Development and Campaign Operations
+
+---
+
+## 6. Artificial Intelligence Certificate
+**Finland University**
+📅 Completed
+📊 Result: Certified
+**Highlights:**
+- Artificial Intelligence Principles & Neural Concepts
+- Machine Learning Foundations
+- Applied AI in Modern Digital Products
+
+---
+
+## 7. MBA — Business Management
+**Executive MBA Program**
+📅 Ongoing (In Progress)
+📊 Status: Graduate Study in Progress
+**Highlights:**
+- Strategic Business Management & Leadership
+- Market Analysis, Brand Scaling, and Financial Management
+- Commercial Media and Technology Venture Strategy

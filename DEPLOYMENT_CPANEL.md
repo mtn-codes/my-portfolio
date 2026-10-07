@@ -84,7 +84,7 @@ reason not to.
 
 ## Step 4 — Create the API key config file (outside `public_html/`)
 
-The Kimchi API key lives in `/home/<cpanel-username>/kimchi-config.php`
+The OpenRouter API key lives in `/home/<cpanel-username>/openrouter-config.php`
 — one directory above `public_html/`. The PHP proxy will `require` it,
 and because it's outside the document root, Apache can never serve it
 to a browser.
@@ -93,24 +93,26 @@ to a browser.
 
 1. In File Manager, navigate to `/home/<cpanel-username>/` (the
    *Up One Level* button from `public_html/`).
-2. Click *+ File* → name it `kimchi-config.php`.
+2. Click *+ File* → name it `openrouter-config.php`.
 3. Right-click the new file → *Edit* → paste this:
    ```php
    <?php
    return [
-       'kimchi_api_key' => 'sk-your-real-kimchi-key-here',
+       'openrouter_api_key' => 'sk-or-v1-your-real-key-here',
    ];
    ```
-4. Replace `sk-your-real-kimchi-key-here` with your actual key from
-   <https://kimchi.dev>.
+4. Replace `sk-or-v1-your-real-key-here` with your actual key from
+   <https://openrouter.ai/keys>.
 5. Save.
 
 **SSH method:**
 
 ```sh
-nano ~/kimchi-config.php
+nano ~/openrouter-config.php
 # paste the contents above, replace the placeholder, save
 ```
+
+*(Note: If you are using B.AI or Kimchi fallback, create `~/bai-config.php` or `~/kimchi-config.php` following the same pattern).*
 
 ## Step 5 — Set file permissions
 
@@ -120,10 +122,10 @@ for cPanel:
 
 | File / folder | Permission | Why |
 |---|---|---|
-| `~/kimchi-config.php` | `600` (or `chmod 600`) | Only your user can read it — the key must stay secret. |
+| `~/openrouter-config.php` | `600` (or `chmod 600`) | Only your user can read it — the key must stay secret. |
 | `~/public_html/.htaccess` | `644` | Apache needs to read it; nobody needs to write it. |
-| `~/public_html/api/kimchi.php` | `644` | Apache needs to read+execute it as PHP. |
-| `~/public_html/api/kimchi-config.example.php` | `644` | It's just a template; safe to be world-readable. |
+| `~/public_html/api/openrouter.php` | `644` | Apache needs to read+execute it as PHP. |
+| `~/public_html/api/openrouter-config.example.php` | `644` | It's just a template; safe to be world-readable. |
 | `~/public_html/index.html` and other static files | `644` | Standard for static web content. |
 | Folders | `755` | Standard for directories the web server needs to traverse. |
 
@@ -131,10 +133,10 @@ In File Manager, right-click each file → *Permissions* → enter the
 number above. Via SSH:
 
 ```sh
-chmod 600  ~/kimchi-config.php
+chmod 600  ~/openrouter-config.php
 chmod 644  ~/public_html/.htaccess
-chmod 644  ~/public_html/api/kimchi.php
-chmod 644  ~/public_html/api/kimchi-config.example.php
+chmod 644  ~/public_html/api/openrouter.php
+chmod 644  ~/public_html/api/openrouter-config.example.php
 find ~/public_html -type d -exec chmod 755 {} \;
 find ~/public_html -type f -exec chmod 644 {} \;
 ```

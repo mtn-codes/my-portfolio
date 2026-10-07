@@ -1,77 +1,93 @@
-// MobileAppBar — Material 3 top app bar styled like a modern Android chrome.
-// Hosts the menu trigger (profile avatar with status dot), a large title with
-// subtitle meta, and a pill-shaped trailing action cluster (notifications /
-// theme).
-//
-// Each trigger opens the MobileDrawer with a different `mode`:
-//   • avatar         → "menu"
-//   • notifications  → "alerts"
-//   • palette / theme → "theme"
-
 import { useLocation } from "react-router-dom";
 import { FaPalette, FaBell } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import profilePic from "/img/about_photo.jpg";
 import M3TopAppBar from "./components/M3TopAppBar";
+import { LANGUAGES } from "./components/MobileSettingsDialog";
 
-const TITLE_BY_PATH = {
-  "/": { title: "Home", subtitle: "Welcome back" },
-  "/skills-projects": { title: "Skills & Projects", subtitle: "Stack & builds" },
-  "/education-experience": { title: "Journey", subtitle: "Learning path" },
-  "/projects": { title: "Projects", subtitle: "All work" },
-  "/contact": { title: "Contact", subtitle: "Let's connect" },
-};
+export default function MobileAppBar({ onOpenDrawer, onOpenSetting }) {
+  const { pathname, hash } = useLocation();
+  const { t, i18n } = useTranslation();
 
-function deriveTitle(pathname) {
-  if (TITLE_BY_PATH[pathname]) return TITLE_BY_PATH[pathname];
-  if (pathname.startsWith("/projects/")) return { title: "Project", subtitle: "Case study" };
-  return { title: "Shahajalal", subtitle: "Android · Backend" };
-}
+  const currentLangCode = i18n.language ? i18n.language.split("-")[0] : "fa";
+  const currentLang = LANGUAGES.find((l) => l.code === currentLangCode) || LANGUAGES[0];
 
-export default function MobileAppBar({ onOpenDrawer }) {
-  const { pathname } = useLocation();
-  const { title, subtitle } = deriveTitle(pathname);
+  const getTitleAndSubtitle = () => {
+    if (pathname === "/") return { title: t("nav.home", "Home"), subtitle: t("mobile.welcome", "Welcome") };
+    if (pathname === "/skills-projects") {
+      if (hash === "#projects") {
+        return { title: t("nav.projects", "Projects"), subtitle: t("mobile.showcase", "Showcase") };
+      }
+      return { title: t("nav.skills", "Skills"), subtitle: t("mobile.dailyStack", "Daily stack") };
+    }
+    if (pathname === "/education-experience") return { title: t("mobile.journey", "Journey"), subtitle: t("education.badge", "Education & Experience") };
+    if (pathname === "/projects") return { title: t("nav.projects", "Projects"), subtitle: t("mobile.allWork", "All work") };
+    if (pathname === "/contact") return { title: t("contact.title", "Contact"), subtitle: t("hero.cta.connect", "Let's connect") };
+    if (pathname.startsWith("/projects/")) return { title: t("nav.projects", "Project"), subtitle: t("mobile.showcase", "Case study") };
+    return { title: t("hero.name", "Taha Naghdi"), subtitle: t("hero.tagline", "Filmmaker · Developer") };
+  };
+
+  const { title, subtitle } = getTitleAndSubtitle();
 
   const openMenu = () => onOpenDrawer?.("menu");
   const openAlerts = () => onOpenDrawer?.("alerts");
-  const openTheme = () => onOpenDrawer?.("theme");
+  const handleOpenTheme = () => {
+    if (onOpenSetting) {
+      onOpenSetting("theme");
+    } else {
+      onOpenDrawer?.("theme");
+    }
+  };
 
   return (
     <M3TopAppBar
       title={title}
       subtitle={subtitle}
-      titleClassName="text-[1.05rem] tracking-tight"
+      titleClassName="text-[1.05rem] tracking-tight font-black"
       leading={
         <button
           onClick={openMenu}
-          aria-label="Open menu"
-          className="m3-tap relative w-10 h-10 rounded-full overflow-hidden flex items-center justify-center m3-state-hover ring-2 ring-primary/20 active:scale-95 transition-transform"
+          aria-label={t("mobile.openMenu", "Open menu")}
+          className="m3-tap relative w-11 h-11 rounded-full overflow-hidden flex items-center justify-center m3-state-hover ring-2 ring-primary/20 active:scale-95 transition-transform flex-shrink-0"
         >
           <img
             src={profilePic}
-            alt="Profile"
-            className="w-full h-full object-cover"
+            alt={`${t("hero.name", "Taha Naghdi")} — ${t("about.info.roleValue", "Filmmaker & Developer")}`}
+            className="w-full h-full object-cover object-top"
             loading="eager"
             decoding="async"
           />
           {/* Tiny status dot — Android "active" indicator */}
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-success ring-2 ring-base-100" />
+          <span className="absolute bottom-0.5 right-0.5 rtl:right-auto rtl:left-0.5 w-2.5 h-2.5 rounded-full bg-success ring-2 ring-base-100" />
         </button>
       }
       trailing={
         <div className="flex items-center gap-0.5">
+          {/* Language selector button */}
+          <button
+            type="button"
+            onClick={() => onOpenSetting?.("language")}
+            aria-label="Select language"
+            className="m3-tap h-9 px-2.5 rounded-full flex items-center gap-1.5 text-base-content m3-state-hover active:scale-95 transition-transform bg-base-200/50 border border-base-300/40"
+          >
+            <span className="text-sm">{currentLang.flag}</span>
+            <span className="text-xs font-bold">{currentLang.label}</span>
+          </button>
+
           {/* Notifications pill */}
           <button
             onClick={openAlerts}
-            aria-label="Notifications"
+            aria-label={t("mobile.notifications", "Notifications")}
             className="m3-tap relative w-10 h-10 rounded-full flex items-center justify-center text-base-content m3-state-hover active:scale-95 transition-transform"
           >
             <FaBell className="text-base" />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-error" />
+            <span className="absolute top-2 right-2 rtl:right-auto rtl:left-2 w-1.5 h-1.5 rounded-full bg-error" />
           </button>
+
           {/* Theme / settings */}
           <button
-            onClick={openTheme}
-            aria-label="Theme & settings"
+            onClick={handleOpenTheme}
+            aria-label={t("mobile.themeSettings", "Theme & settings")}
             className="m3-tap w-10 h-10 rounded-full flex items-center justify-center text-base-content m3-state-hover active:scale-95 transition-transform"
           >
             <FaPalette className="text-base" />

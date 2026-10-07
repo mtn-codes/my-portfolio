@@ -10,9 +10,9 @@ export const EMAILJS_CONFIG = {
 };
 
 export const CONTACT_INFO = {
-  email: "mahmud.nubtk@gmail.com",
-  phone: "+880 18897-93146",
-  location: "Khulna, Bangladesh",
+  email: "tahanaghdi.dev@gmail.com",
+  phone: "+98 904 451 9594",
+  location: "Iran",
   subtitle:
-    "Whether you're a founder looking for an MVP, a business needing a digital overhaul, or a developer wanting to collaborate at Appriyo — my inbox is always open.",
+    "Whether you have a video production project, need AI automation & agents, require a modern web application, or want to build smart hardware gadgets — my inbox is always open.",
 };

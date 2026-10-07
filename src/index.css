@@ -5,24 +5,57 @@
 @plugin "daisyui" {
   themes: all;
 }
+
 @theme {
   /* Animation and Keyframe Definitions */
   --animation-float: float 6s ease-in-out infinite;
+
   --keyframes-float: {
     from: {
       transform: "translateY(0px)";
     }
+
     "50%": {
       transform: "translateY(-10px)";
     }
+
     to: {
       transform: "translateY(0px)";
     }
-  };
+  }
+
+  ;
+}
+
+:root {
+  --nav-h: 64px;
+  --bottomnav-h: 0px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --nav-h: 56px;
+    --bottomnav-h: 68px;
+  }
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h, 64px) + env(safe-area-inset-top, 0px) + 16px);
+}
+
+/* Desktop layout page shell: guarantees content begins below the fixed navbar */
+.desktop-page-shell {
+  padding-top: var(--nav-h, 64px);
+  min-height: calc(100vh - var(--nav-h, 64px));
+}
+
+/* Mobile-scoped layout shell: guarantees content begins below navbar and ends above bottom nav */
+.mobile-page-shell {
+  padding-top: calc(var(--nav-h, 56px) + env(safe-area-inset-top, 0px) + 12px);
+  padding-bottom: calc(var(--bottomnav-h, 68px) + env(safe-area-inset-bottom, 0px) + 32px);
+  min-height: calc(100dvh - var(--nav-h, 56px) - var(--bottomnav-h, 68px));
+  box-sizing: border-box;
 }
 
 /* Custom Animation Definitions */
@@ -31,10 +64,12 @@ html {
     transform: scale(1);
     filter: drop-shadow(0 0 0px #570df8aa);
   }
+
   50% {
     transform: scale(1.1);
     filter: drop-shadow(0 0 10px #570df8aa);
   }
+
   100% {
     transform: scale(1);
     filter: drop-shadow(0 0 0px #570df8aa);
@@ -46,9 +81,194 @@ html {
   animation: pulse-glow 1.5s ease-in-out infinite;
 }
 
-body {
-  font-family: var(--user-font, "Inter"), sans-serif;
+/* Kalameh Font Faces */
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-Thin.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-Thin.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-ExtraLight.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-ExtraLight.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-Light.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-Light.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-Regular.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-Regular.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-Medium.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-Medium.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-SemiBold.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-SemiBold.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-Bold.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-Bold.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-ExtraBold.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-ExtraBold.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kalameh';
+  src: url('/fonts/kalameh/KalamehWeb-Black.woff2') format('woff2'),
+    url('/fonts/kalameh/KalamehWeb-Black.woff') format('woff'),
+    url('/fonts/kalameh/Kalameh-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Chakad Font Faces (Black) */
+@font-face {
+  font-family: 'Chakad';
+  src: url('/fonts/chakad/Chakad-Black[@mimvid].otf') format('opentype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* IRANSansXV (Variable) */
+@font-face {
+  font-family: 'IRANSansXV';
+  src: url('/fonts/iransansxv/IRANSansX-VF[@mimvid].ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Kahroba */
+@font-face {
+  font-family: 'Kahroba';
+  src: url('/fonts/kahroba/Kahroba-B.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Kahroba';
+  src: url('/fonts/kahroba/Kahroba-BL.ttf') format('truetype');
+  font-weight: 800 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Mahoor */
+@font-face {
+  font-family: 'Mahoor';
+  src: url('/fonts/mahoor/Mahoor[CNTR,wght].ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Peyda */
+@font-face {
+  font-family: 'Peyda';
+  src: url('/fonts/peyda/Peyda-SemiBold[@fontbazi].ttf') format('truetype');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Peyda';
+  src: url('/fonts/peyda/Peyda-Bold[@fontbazi].ttf') format('truetype');
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Peyda';
+  src: url('/fonts/peyda/Peyda-Black[@fontbazi].ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* VIP Cartoon */
+@font-face {
+  font-family: 'VIP Cartoon';
+  src: url('/fonts/vip-cartoon/VIPCartoon-VIPCartoon[@mimvid].ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Yekan Bakh (Variable) */
+@font-face {
+  font-family: 'Yekan Bakh';
+  src: url('/fonts/yekan-bakh/YekanBakhFaNum-VF.woff2') format('woff2'),
+    url('/fonts/yekan-bakh/YekanBakh[@mimvid]-VF.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: var(--user-font, "Kalameh"), sans-serif;
+}
+
+/* Scoped readable body-text font override for dense paragraphs, labels, pills, and card text */
+.font-body-fa {
+  font-family: 'Vazirmatn', var(--user-font, sans-serif) !important;
+}
+
 .timeline {
   position: relative;
   max-width: 1200px;
@@ -132,23 +352,23 @@ body {
   .timeline::after {
     left: 31px;
   }
-  
+
   .timeline-item {
     width: 100%;
     padding-left: 70px;
     padding-right: 25px;
     text-align: left;
   }
-  
+
   .timeline-item:nth-child(even) {
     left: 0;
   }
-  
+
   .timeline-item:nth-child(odd)::after,
   .timeline-item:nth-child(even)::after {
     left: 15px;
   }
-  
+
   .timeline-item:nth-child(odd) .timeline-icon,
   .timeline-item:nth-child(even) .timeline-icon {
     left: 15px;

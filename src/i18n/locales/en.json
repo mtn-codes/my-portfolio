@@ -1,0 +1,764 @@
+{
+  "hero": {
+    "status": "Open to opportunities",
+    "typewriterWords": [
+      "Filmmaking & Content Production",
+      "AI Content & Digital Ideation",
+      "Programming & AI/App Development",
+      "Industrial Automation & Gadget Building"
+    ],
+    "greeting": "Hi, I'm",
+    "name": "Taha Naghdi",
+    "shortName": "Taha",
+    "tagline": "Filmmaker · Developer · Innovator",
+    "description": "Cinematographer, editor, and cinematic content creator specializing in lighting, motion graphics, AI-driven media, and digital strategy. As a full-stack developer fluent in 3 languages and modern frameworks, I build intelligent AI agents and web apps, alongside engineering industrial automation and innovative hardware gadgets.",
+    "badges": {
+      "film": {
+        "label": "Filmmaking",
+        "sub": "Cinema · Motion"
+      },
+      "ai": {
+        "label": "AI & Media",
+        "sub": "GenAI · Strategy"
+      },
+      "dev": {
+        "label": "Development",
+        "sub": "Full-Stack · AI Agents"
+      },
+      "automation": {
+        "label": "Automation",
+        "sub": "Robotics · Gadgets"
+      }
+    },
+    "cta": {
+      "viewProjects": "View Projects",
+      "connect": "Let's Connect"
+    },
+    "connectLabel": "Connect",
+    "chips": {
+      "creativeTech": {
+        "title": "Creative & Tech",
+        "sub": "Cinema · AI · Dev"
+      },
+      "role": {
+        "title": "Filmmaker & Dev",
+        "sub": "Directing & Code"
+      },
+      "focus": {
+        "title": "AI & Automation",
+        "sub": "Smart Systems"
+      }
+    },
+    "scroll": "Scroll"
+  },
+  "about": {
+    "eyebrow": "Who I Am",
+    "badge": "Creator & Engineer",
+    "title": "About",
+    "me": "Me",
+    "tagline": "Filmmaker · Developer · Problem Solver",
+    "shortBio": "Filmmaker, editor, and developer bridging cinematic storytelling with cutting-edge technology. From cinematic video production and motion graphics to developing intelligent AI agents, modern web applications, and industrial automation, my focus is delivering high-impact media and precise engineering solutions.",
+    "readFullVision": "Read Full Vision",
+    "modalTitle": "Creating with Purpose & Innovation",
+    "modalSubtitle": "The Full Vision",
+    "expandedBio": {
+      "p1": "I design visual media and software systems driven by high aesthetic standards, cinematic creativity, and rigorous engineering. My core background spans cinematography, advanced editing, cinematic lighting, and dynamic motion graphics, seamlessly integrated with modern generative AI production and digital content strategy.",
+      "p2": "In software engineering, I am fluent in 3 programming languages and leading web frameworks, building intelligent autonomous AI agents, AI-powered products, and responsive web applications. I focus on clean architecture, intuitive user experiences, and robust scalability.",
+      "p3": "In hardware and IoT, I architect and build practical automation systems for retail and industrial environments, creating tailored gadgets that optimize real-world operations.",
+      "p4": "My ultimate mission is fusing evocative visual storytelling, artificial intelligence, and software craftsmanship into innovative solutions that make a tangible difference."
+    },
+    "technicalArsenal": "Technical Arsenal",
+    "tech": {
+      "cinematography": "Cinematography",
+      "lighting": "Cinematic Lighting",
+      "motion": "Motion Graphics",
+      "aiContent": "AI Media Production",
+      "aiAgents": "AI Agents & LLMs",
+      "fullstack": "Full-Stack Dev",
+      "webApps": "Modern Web Apps",
+      "automation": "Industrial Automation",
+      "gadgets": "Smart Hardware & IoT"
+    },
+    "stats": {
+      "years": "Years Experience",
+      "projects": "Projects",
+      "innovations": "Innovations & Gadgets"
+    },
+    "info": {
+      "locationLabel": "Location",
+      "locationValue": "Iran",
+      "emailLabel": "Email",
+      "roleLabel": "Role",
+      "roleValue": "Filmmaker & Full-Stack Developer",
+      "resumeLabel": "Resume",
+      "resumeValue": "Download CV"
+    },
+    "coreExpertise": "Core Expertise"
+  },
+  "contact": {
+    "eyebrow": "Let's Talk",
+    "badge": "Available for Work",
+    "title": "Get In",
+    "touch": "Touch",
+    "tagline": "Let's Build Something Great",
+    "subtitle": "Whether you have a video production project, need AI automation & agents, require a modern web application, or want to build smart hardware gadgets — my inbox is always open.",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "locationLabel": "Location",
+    "locationValue": "Iran",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "e.g. Alex Smith",
+      "email": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Project inquiry / Collaboration",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project, timeline, and vision...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send. Please try again."
+    }
+  },
+  "footer": {
+    "role": "Filmmaker · Developer · Innovator",
+    "bio": "Cinematography, AI-driven media, full-stack web applications, and smart automation hardware.",
+    "hireMe": "Hire Me",
+    "telegram": "Telegram Channel",
+    "navigation": "Navigation",
+    "disciplines": "Disciplines",
+    "disciplinesItems": {
+      "film": "Cinematography & Motion",
+      "ai": "AI Agents & Media",
+      "dev": "Full-Stack Development",
+      "hardware": "Industrial Automation"
+    },
+    "contact": "Contact",
+    "tech": "Tech Arsenal",
+    "socials": "Socials",
+    "status": {
+      "openLabel": "Status",
+      "openValue": "Open to Work",
+      "workLabel": "Work",
+      "workValue": "Remote & On-site",
+      "replyLabel": "Reply",
+      "replyValue": "Within 24 hrs"
+    },
+    "tagline": "Filmmaker · Developer · Innovator",
+    "copyright": "All rights reserved.",
+    "backToTop": "Back to top"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "background": "Background",
+    "education": "Education",
+    "experience": "Experience",
+    "portfolio": "Portfolio",
+    "skills": "Skills",
+    "projects": "Projects",
+    "theme": "Theme",
+    "fontFamily": "Font Family",
+    "language": "Language",
+    "hireMe": "Hire Me",
+    "navigation": "Navigation",
+    "services": "Services"
+  },
+  "theme": {
+    "fontFamily": "Font Family",
+    "theme": "Theme"
+  },
+  "mobile": {
+    "welcome": "Welcome",
+    "filmmakerDev": "Filmmaker & Developer",
+    "available": "Available",
+    "stats": {
+      "years": "Years of Experience",
+      "projects": "Completed Projects",
+      "international": "International Projects"
+    },
+    "nowBuilding": "NOW BUILDING",
+    "nowMeta": "Active Project",
+    "nowTitle": "AI Agents & Automation Hub",
+    "nowSubtitle": "Developing smart multimedia tools & IoT integrations",
+    "progress": "Progress",
+    "showcase": "Showcase",
+    "featuredProjects": "Featured Projects",
+    "seeAll": "See all",
+    "dailyStack": "Daily stack",
+    "currentFocus": "Current Focus",
+    "quick": "Quick",
+    "actions": "Actions",
+    "cv": "CV",
+    "contact": "Contact",
+    "connect": "Connect",
+    "reachOut": "Reach out",
+    "linksCount": "links",
+    "opensInNewTab": "Opens in new tab",
+    "appearance": "Appearance",
+    "footerTagline": "Crafted with passion & precision",
+    "rightsReserved": "All rights reserved.",
+    "skills": "Skills",
+    "projects": "Projects",
+    "journey": "Journey",
+    "home": "Home",
+    "open": "Open",
+    "viewProject": "View project",
+    "backToProjects": "Back to projects",
+    "previous": "Previous",
+    "next": "Next",
+    "keyMetrics": "Key Metrics",
+    "techStack": "Tech Stack",
+    "story": "Story",
+    "features": "Features",
+    "problem": "Problem",
+    "objective": "Objective",
+    "architecture": "Architecture",
+    "challenges": "Challenges",
+    "code": "Code",
+    "demo": "Live Demo",
+    "watch": "Watch Video",
+    "allWork": "All Work",
+    "openMenu": "Open menu",
+    "notifications": "Notifications",
+    "noNewNotifications": "No new notifications",
+    "themeSettings": "Theme & settings",
+    "languagesCount": "Languages",
+    "gold": "Gold",
+    "featured": "Featured",
+    "production": "Production",
+    "verified": "Verified",
+    "modelAccuracy": "Model Accuracy",
+    "modelAccuracyDesc": "AI Vision & Media Models",
+    "cinematicVisuals": "Cinematic Visuals",
+    "cinematicVisualsDesc": "Commercial & Narrative Media",
+    "smartAutomation": "Smart Automation",
+    "smartAutomationDesc": "Retail & Hardware Projects",
+    "customBuilds": "Custom Builds",
+    "customBuildsDesc": "Web, AI & Gadgets",
+    "statusLive": "Live",
+    "statusProduction": "In production",
+    "statusHackathon": "Hackathon",
+    "statusDeployed": "Deployed",
+    "tabSkills": "Skills",
+    "tabProjects": "Projects",
+    "skillsEyebrow": "Technical Arsenal",
+    "skillsTitle": "Skills & Expertise",
+    "skillsSubtitle": "Film, AI, Automation, Web & Computer Science",
+    "projectsEyebrow": "Showcase",
+    "projectsTitle": "Portfolio Projects",
+    "projectsSubtitle": "Real-world builds & productions",
+    "notFoundTitle": "Page not found",
+    "notFoundSubtitle": "The link you followed may be broken, or the page may have been removed.",
+    "backToHome": "Back to Home"
+  },
+  "socials": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "telegram": "Telegram",
+    "email": "Email",
+    "phone": "Phone",
+    "facebookComingSoon": "Facebook (coming soon)"
+  },
+  "education": {
+    "eyebrow": "Academic Background",
+    "badge": "Education",
+    "title": "Academic",
+    "journey": "Journey",
+    "tagline": "Knowledge · Discipline · Excellence",
+    "statusOngoing": "Ongoing",
+    "statusCompleted": "Completed",
+    "items": [
+      {
+        "title": "BSc in Computer Engineering",
+        "institution": "Falagh University",
+        "status": "Ongoing",
+        "year": "2023 — Present",
+        "result": "Undergraduate",
+        "highlights": [
+          "Software Engineering",
+          "System & Web Architecture",
+          "Algorithms & Data Structures"
+        ]
+      },
+      {
+        "title": "CS50 Summer Course",
+        "institution": "Harvard CS50 (Online)",
+        "status": "Completed",
+        "year": "Completed",
+        "result": "Certified",
+        "highlights": [
+          "Computer Science Fundamentals",
+          "C & Python Programming",
+          "Algorithms & Memory"
+        ]
+      },
+      {
+        "title": "Cinematography Certificate",
+        "institution": "Ghermez Cinema Academy",
+        "status": "Completed",
+        "year": "Completed",
+        "result": "Certified",
+        "highlights": [
+          "Cinematic Lighting & Camera",
+          "Advanced Editing & Color",
+          "Visual Storytelling"
+        ]
+      },
+      {
+        "title": "IoT, Python & Electrical Circuit Design Certificate",
+        "institution": "Technical & Vocational Training Organization",
+        "status": "Completed",
+        "year": "Completed",
+        "result": "Certified",
+        "highlights": [
+          "IoT Systems",
+          "Python Programming",
+          "Circuit Design & Hardware"
+        ]
+      },
+      {
+        "title": "Social Media Specialist Business License",
+        "institution": "Guild & Business Licensing Union",
+        "status": "Licensed",
+        "year": "Licensed",
+        "result": "Licensed",
+        "highlights": [
+          "Digital Marketing Strategy",
+          "Content Management & Strategy",
+          "Brand Development"
+        ]
+      },
+      {
+        "title": "Artificial Intelligence Certificate",
+        "institution": "Finland University",
+        "status": "Completed",
+        "year": "Completed",
+        "result": "Certified",
+        "highlights": [
+          "Artificial Intelligence",
+          "Machine Learning Foundations",
+          "International Program"
+        ]
+      },
+      {
+        "title": "MBA — Business Management",
+        "institution": "Executive MBA Program",
+        "status": "Ongoing",
+        "year": "In Progress",
+        "result": "In Progress",
+        "highlights": [
+          "Strategic Management",
+          "Business Leadership",
+          "Market & Financial Analysis"
+        ]
+      }
+    ]
+  },
+  "work": {
+    "eyebrow": "Professional Journey",
+    "badge": "Experience",
+    "title": "Work &",
+    "projects": "Projects",
+    "tagline": "Builder · Founder · Engineer",
+    "keyContributions": "Key Contributions",
+    "items": [
+      {
+        "title": "Founder & Manager",
+        "company": "Tirazh Advertising Agency",
+        "location": "Nationwide, Iran",
+        "duration": "2020 — Present",
+        "type": "Agency / Full-time",
+        "status": "Active",
+        "description": "Leading an agency delivering end-to-end video advertising campaigns, specialized design & printing, and bespoke software & web development nationwide.",
+        "achievements": [
+          "Cinematic Video Advertising Campaigns",
+          "Design & Print Production",
+          "Software & Custom Web Development"
+        ]
+      },
+      {
+        "title": "Executive Manager",
+        "company": "CStudio Advertising Agency",
+        "location": "Iran · Contract",
+        "duration": "2022 — 2024",
+        "type": "Executive Management",
+        "status": "Completed",
+        "description": "Directed and executed cinematic videography, advanced editing, visual project design, website creation, and AI-driven content production.",
+        "achievements": [
+          "Cinematic Videography & Editing",
+          "Project Design & Execution",
+          "Website Design & AI Content Production"
+        ]
+      },
+      {
+        "title": "Industrial & Construction Collaborations",
+        "company": "Multi-Industry Clients",
+        "location": "Iran",
+        "duration": "2023 — Present",
+        "type": "Industrial Contract",
+        "status": "Ongoing",
+        "description": "Executing video production, branding, automation workflows, and cinematic documentary for major industrial factories and construction ventures.",
+        "achievements": [
+          "Saina Textile Factory",
+          "Simfam Aluminum Factory",
+          "Black Tiara Stone Factory",
+          "Favania Construction Project"
+        ]
+      },
+      {
+        "title": "Retail & Service Collaborations",
+        "company": "Retail & Commercial Clients",
+        "location": "Iran",
+        "duration": "2023 — Present",
+        "type": "Client Solutions",
+        "status": "Ongoing",
+        "description": "Delivering digital infrastructure, targeted advertising media, and elevated visual branding for leading retail and commercial businesses.",
+        "achievements": [
+          "Plaque 8 Hall Project",
+          "Ebrahimi Watch Project",
+          "Masirino Project",
+          "Enzo Furniture Project"
+        ]
+      },
+      {
+        "title": "Cultural Affairs Collaboration",
+        "company": "Ministry of Culture & Islamic Guidance (Ershad)",
+        "location": "Iran",
+        "duration": "2022 — Present",
+        "type": "Cultural Partnership",
+        "status": "Ongoing",
+        "description": "Producing cultural real-motion video productions, artistic event documentation, and promotional showcase series for cultural affairs.",
+        "achievements": [
+          "Cultural Real-Motion Productions",
+          "Cultural & Artistic Projects",
+          "Collection Introduction Videos"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "Technical Skills",
+    "badge": "Tech Stack",
+    "titlePrefix": "My",
+    "titleHighlight": "Expertise",
+    "subtitle": "Film · AI · Automation · Web · Computer Science",
+    "showing": "Showing {{count}} of {{total}} skills",
+    "showMore": "Show More Skills",
+    "showLess": "Show Less",
+    "byCategory": "By Category",
+    "categories": {
+      "all": "All",
+      "film": "Film & Video",
+      "aiContent": "AI & Content",
+      "automation": "Automation",
+      "webDesign": "Web Design",
+      "coreCs": "Core CS"
+    },
+    "problemSolving": {
+      "title": "Problem Solving",
+      "desc": "Strong analytical foundation in breaking down complex problems into efficient, scalable solutions — from algorithmic thinking to real-world system design.",
+      "tags": [
+        "Analytical Thinking",
+        "Problem Solving",
+        "System Design"
+      ]
+    },
+    "items": {
+      "cinematography": {
+        "name": "Cinematography & Camera",
+        "desc": "Professional camera movement, framing, multi-cam setups, and cinematic visual language.",
+        "tag": "Expert"
+      },
+      "videoEditing": {
+        "name": "Editing & Post-Production",
+        "desc": "Advanced non-linear editing, narrative pacing, rhythm, and montage in Premiere & DaVinci.",
+        "tag": "Expert"
+      },
+      "lighting": {
+        "name": "Cinematic Lighting",
+        "desc": "Three-point lighting, dramatic contrast ratios, mood crafting, and studio set illumination.",
+        "tag": "Advanced"
+      },
+      "motionGraphics": {
+        "name": "Motion Graphics & VFX",
+        "desc": "Dynamic motion design, 2D visual effects, typography, and animated branding in After Effects.",
+        "tag": "Advanced"
+      },
+      "colorGrading": {
+        "name": "Color Grading & LUTs",
+        "desc": "Color theory, tone mapping, skin tone precision, and creative grading in DaVinci Resolve.",
+        "tag": "Advanced"
+      },
+      "soundDesign": {
+        "name": "Sound Design & Mixing",
+        "desc": "Foley, dialogue cleanup, ambient layering, and atmospheric sound design for cinematic impact.",
+        "tag": "Intermediate"
+      },
+      "aiVideoGen": {
+        "name": "AI Video Generation",
+        "desc": "Cinematic AI video generation, consistent character rendering, and motion diffusion workflows.",
+        "tag": "Expert"
+      },
+      "promptEngineering": {
+        "name": "Prompt Engineering",
+        "desc": "Structuring high-precision prompts, context optimization, and model steering for creative output.",
+        "tag": "Expert"
+      },
+      "aiAgents": {
+        "name": "Autonomous AI Agents",
+        "desc": "Architecting autonomous agents with tool-calling, memory buffers, and multi-step reasoning.",
+        "tag": "Advanced"
+      },
+      "aiImageGen": {
+        "name": "AI Image & Concept Art",
+        "desc": "High-resolution concept art, style consistency, and commercial visual asset production.",
+        "tag": "Expert"
+      },
+      "contentStrategy": {
+        "name": "Content Strategy & Growth",
+        "desc": "Target audience analysis, viral hooks, retention structuring, and social growth roadmaps.",
+        "tag": "Advanced"
+      },
+      "aiVoiceCloning": {
+        "name": "AI Voice & Audio Synthesis",
+        "desc": "Realistic neural voice synthesis, dynamic dubbing, and AI speech enhancement.",
+        "tag": "Advanced"
+      },
+      "scriptwriting": {
+        "name": "Scriptwriting & Storyboard",
+        "desc": "Crafting structured narrative arcs, commercial scripts, and visual scene-by-scene boards.",
+        "tag": "Advanced"
+      },
+      "digitalBranding": {
+        "name": "Digital Branding & Identity",
+        "desc": "Multi-platform visual storytelling, brand positioning, and content calendar management.",
+        "tag": "Advanced"
+      },
+      "industrialAutomation": {
+        "name": "Industrial Automation & PLC",
+        "desc": "Designing automated control loops, relay logic, and industrial hardware workflows.",
+        "tag": "Advanced"
+      },
+      "smartGadgets": {
+        "name": "Smart Gadget Prototyping",
+        "desc": "Custom hardware prototyping, PCB layout conception, and embedded device casing.",
+        "tag": "Advanced"
+      },
+      "iotSensors": {
+        "name": "IoT & Telemetry Systems",
+        "desc": "Interfacing telemetry sensors, wireless relays, and edge computing for real-time control.",
+        "tag": "Advanced"
+      },
+      "pythonAutomation": {
+        "name": "Hardware Automation via Python",
+        "desc": "Automated test harnesses, serial bus communication, and sensor data logging pipelines.",
+        "tag": "Intermediate"
+      },
+      "microcontrollers": {
+        "name": "Microcontrollers (Arduino / ESP)",
+        "desc": "Firmware programming, Wi-Fi/BLE telemetry, and low-latency motor control.",
+        "tag": "Advanced"
+      },
+      "react": {
+        "name": "React.js & Modern Frontend",
+        "desc": "Component-driven architecture, custom hooks, reactive state, and high-performance SPA UI.",
+        "tag": "Expert"
+      },
+      "fullstackDev": {
+        "name": "Full-Stack Web Architecture",
+        "desc": "End-to-end web applications bridging clean client interfaces with robust server architectures.",
+        "tag": "Expert"
+      },
+      "tailwind": {
+        "name": "Tailwind CSS & Styling",
+        "desc": "Utility-first design systems, responsive typography, glassmorphism, and dark mode themes.",
+        "tag": "Expert"
+      },
+      "framerMotion": {
+        "name": "Framer Motion & Animations",
+        "desc": "Micro-interactions, layout transitions, scroll triggers, and fluid 60fps animations.",
+        "tag": "Advanced"
+      },
+      "nodejs": {
+        "name": "Node.js & REST APIs",
+        "desc": "Scalable backend routing, asynchronous request handling, and RESTful API endpoints.",
+        "tag": "Advanced"
+      },
+      "postgresql": {
+        "name": "PostgreSQL & Database Design",
+        "desc": "Relational schema modeling, normalized tables, complex queries, and indexing strategies.",
+        "tag": "Advanced"
+      },
+      "firebase": {
+        "name": "Firebase & Cloud Services",
+        "desc": "NoSQL document stores, realtime data sync, serverless functions, and cloud storage.",
+        "tag": "Advanced"
+      },
+      "security": {
+        "name": "Web Security & JWT / RBAC",
+        "desc": "Role-based access control (RBAC), token encryption, and hardened API security patterns.",
+        "tag": "Advanced"
+      },
+      "uiux": {
+        "name": "UI/UX Design & Wireframing",
+        "desc": "User-centric interface prototyping, wireframes, accessible color schemes, and visual flow.",
+        "tag": "Advanced"
+      },
+      "algorithms": {
+        "name": "Data Structures & Algorithms",
+        "desc": "Algorithmic thinking, complexity analysis (Big-O), graph theory, and dynamic programming.",
+        "tag": "Advanced"
+      },
+      "os": {
+        "name": "Operating Systems Fundamentals",
+        "desc": "Process scheduling, thread concurrency, memory management, and system architecture.",
+        "tag": "Intermediate"
+      },
+      "networks": {
+        "name": "Computer Networks & Protocols",
+        "desc": "TCP/IP stack, DNS resolution, HTTP/HTTPS lifecycle, WebSockets, and packet routing.",
+        "tag": "Intermediate"
+      },
+      "git": {
+        "name": "Git & Version Control",
+        "desc": "Branching workflows, trunk-based collaboration, semantic versioning, and merge hygiene.",
+        "tag": "Expert"
+      },
+      "linux": {
+        "name": "Linux Environment & CLI",
+        "desc": "POSIX shell scripting, server administration, process automation, and system diagnostics.",
+        "tag": "Advanced"
+      }
+    }
+  },
+  "projects": {
+    "eyebrow": "Selected Work",
+    "titlePrefix": "Featured",
+    "titleHighlight": "Projects",
+    "subtitle": "Production-grade · Real-world Impact",
+    "projectsCount": "Projects",
+    "tabs": {
+      "content": "Content Production",
+      "website": "Website Design & Programming"
+    },
+    "actions": {
+      "watch": "Watch",
+      "play": "Play",
+      "code": "Code",
+      "live": "Live",
+      "details": "Details",
+      "viewAllGithub": "View all on GitHub",
+      "viewAllYoutube": "View all on YouTube"
+    },
+    "items": {
+      "content-project-1": {
+        "name": "Cinematic Commercial: Brand Showcase",
+        "description": "High-impact cinematic commercial production featuring professional lighting, multi-cam directing, and dynamic color grading."
+      },
+      "content-project-2": {
+        "name": "AI-Generated Sci-Fi Visual Short",
+        "description": "Experimental generative AI cinematic short using consistent character diffusion, prompt engineering, and custom soundscapes."
+      },
+      "content-project-3": {
+        "name": "Industrial Automation Documentary",
+        "description": "Documentary film capturing smart factory machinery, sensor automation, and high-precision manufacturing workflows."
+      },
+      "content-project-4": {
+        "name": "Motion Branding & 3D Title Sequence",
+        "description": "Dynamic motion graphics, typographic animations, and 3D camera transitions built for digital advertising."
+      },
+      "content-project-5": {
+        "name": "Retail Brand Commercial & Video Campaign",
+        "description": "Commercial advertising video campaign designed for social media conversion, engagement hooks, and brand elevation."
+      },
+      "content-project-6": {
+        "name": "Autonomous AI Workflow Masterclass",
+        "description": "Comprehensive video guide covering autonomous AI agents, LLM tool integration, and practical developer workflows."
+      },
+      "content-project-7": {
+        "name": "Cinematic Color Grading Breakdown",
+        "description": "In-depth DaVinci Resolve breakdown demonstrating film look emulation, skin-tone isolation, and LUT application."
+      },
+      "content-project-8": {
+        "name": "Hardware IoT Gadget Build Timelapse",
+        "description": "Step-by-step documentation of designing, prototyping, and coding a custom smart telemetry device."
+      },
+      "content-project-9": {
+        "name": "Social Media Growth Strategy Series",
+        "description": "Data-driven video series breaking down content structuring, viral retention algorithms, and audience building."
+      },
+      "content-project-10": {
+        "name": "AI Voice Cloning & Multilingual Dubbing",
+        "description": "Showcase of neural voice cloning technology applied to automated multilingual video translation."
+      },
+      "content-project-11": {
+        "name": "Architectural Visual Showcase",
+        "description": "Cinematic architectural walkthrough utilizing precision gimbal moves, natural daylighting, and ambient foley."
+      },
+      "content-project-12": {
+        "name": "Creative Tech & Innovation Showreel",
+        "description": "Annual highlight reel showcasing cinematography, web projects, AI agents, and industrial automation innovations."
+      }
+    }
+  },
+  "projectDetails": {
+    "allProjects": "All Projects",
+    "projectNotFound": "Project not found.",
+    "liveProject": "Live Project",
+    "videoProduction": "Video Production",
+    "videoPlayer": "Official Video & Showcase",
+    "watchOnYoutube": "Watch on YouTube",
+    "viewSource": "View Source",
+    "liveDemo": "Live Demo",
+    "expand": "Expand",
+    "mediaGallery": "Media Gallery",
+    "itemsClickToExpand": "— {{count}} items · click to expand",
+    "originStory": "Origin Story",
+    "keyHighlights": "Key Highlights & Features",
+    "challengeApproach": "Challenge & Creative Approach",
+    "theChallenge": "The Challenge",
+    "theApproach": "The Approach",
+    "insightsMilestones": "Insights & Milestones",
+    "challenges": "Challenges",
+    "considerations": "Considerations",
+    "nextSteps": "Next Steps",
+    "summaryImpact": "Summary & Impact",
+    "viewFullCode": "View Full Code",
+    "tryLiveDemo": "Try Live Demo",
+    "impactMetrics": "Impact & Metrics",
+    "techStack": "Tech Stack",
+    "productionArsenal": "Production Arsenal",
+    "totalToolsSkills": "{{count}} total tools & skills",
+    "links": "Links",
+    "github": "GitHub",
+    "youtubeVideo": "YouTube Video",
+    "moreProjects": "More Projects",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "languages": {
+    "fa": "فارسی",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "assistant": {
+    "name": "Taha AI",
+    "shortName": "Taha",
+    "tagline": "Ask me anything about Taha Naghdi's work & skills",
+    "greeting": "Hi, I'm {{name}}'s assistant.",
+    "subtitle": "Ask me anything about his filmmaking, development, projects, or how to reach him.",
+    "suggested": "Suggested",
+    "clearAria": "Clear conversation",
+    "closeAria": "Close chat",
+    "inputPlaceholder": "Ask anything about Taha…",
+    "inputActivePlaceholder": "Send a message…",
+    "suggestions": {
+      "filmmaking": "His filmmaking projects?",
+      "codeAi": "What does he build with AI?",
+      "contact": "How can I contact him?",
+      "background": "What is his background?"
+    }
+  }
+}

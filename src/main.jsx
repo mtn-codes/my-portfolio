@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./i18n/index.js";
 import { ThemeProvider } from './context/ThemeContext';
 import router from "./routes/router.jsx";
 

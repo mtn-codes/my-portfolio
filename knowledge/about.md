@@ -1,42 +1,35 @@
-# About Md Shahajalal Mahmud
+# About Taha Naghdi
 
-Md Shahajalal Mahmud is a mobile-focused fullstack software engineer based in Khulna, Bangladesh, specializing in Kotlin/Jetpack Compose Android development and PostgreSQL-backed backend systems. He is the Founder and Lead Engineer of **Appriyo**, a software product company where he architects, builds, deploys, and maintains production-grade software systems end-to-end as a solo technical founder.
+Taha Naghdi (طاها نقدی) is a 20-year-old filmmaker, content producer, and full-stack software engineer based in Iran, working at the convergence of cinematic visual art and modern software engineering. He is the Founder and Manager of **Tirazh Advertising Agency**, providing video advertising, branding design and print, and bespoke software and web development nationwide.
 
-He is a third-year Computer Science & Engineering undergraduate at Northern University of Business & Technology Khulna (NUBTK), expected to graduate in 2027, with a CGPA of 3.90/4.00.
+He is 20 years old, currently pursuing a BSc in Computer Engineering at Falagh University alongside an Executive MBA in Business Management.
 
-## Core Identity
+## Core Identity & Priority Roles
 
-- **Primary roles:** Android Engineer, Backend Engineer, Fullstack Software Engineer, Founding Engineer
-- **Core specialization:** Kotlin & Jetpack Compose, Android architecture, offline-first mobile systems, multi-tenant SaaS architecture, secure REST API design, PostgreSQL backend systems, clean/maintainable architecture
-- **Current status:** Founder & Lead Engineer at Appriyo; CSE undergraduate; building production-grade SaaS systems; transitioning toward deep software engineering specialization
+Taha operates across four defined specialties in priority order:
+
+1. **Filmmaking & Content Production:** Director of photography, cinematic videography, high-end film editing, cinematic lighting, and dynamic motion graphics.
+2. **AI Content & Digital Ideation:** Generative AI media production, creative prompt engineering, digital content strategy, and innovative visual ideation.
+3. **Programming & AI/App Development:** Full-stack development, modern web applications, AI agent engineering, intelligent product prototyping, and multi-language development.
+4. **Industrial Automation & Gadget Building:** Industrial and commercial automation, IoT circuits, microcontroller systems, and rapid smart gadget prototyping.
 
 ## Professional Summary
 
-Mobile-focused fullstack software engineer specializing in Kotlin, Android architecture, scalable backend systems, and production-grade SaaS applications. Experienced in designing and rebuilding real-world systems under production constraints, with a strong focus on maintainability, scalability, debugging, and engineering fundamentals. Currently focused on mastering native Android engineering, backend architecture with Spring Boot + PostgreSQL, and building scalable software systems capable of supporting real businesses and real users.
+Multidisciplinary creative technologist with proven experience spanning cinematic video commercials, nationwide advertising campaigns, industrial documentaries, and production-grade software applications. Taha bridges the gap between artistic storytelling and technical rigor—combining DaVinci Resolve color grading and cinematic lighting setups with React, Node.js, Python, and AI agent architectures.
 
-## Engineering Philosophy
+## Creative & Engineering Philosophy
 
-> "Systems beat features."
+> "Artistic vision powered by engineering precision."
 
-Software should not only work — it should remain maintainable, scalable, debuggable, reliable, secure, and understandable under pressure. Long-term engineering quality matters more than rapid feature shipping.
+Whether directing a commercial film or architecting an AI agent, Taha emphasizes structural integrity, narrative impact, and sustainable maintainability. High-quality visual storytelling demands meticulous lighting and pacing; robust software demands solid fundamentals and clean architecture.
 
 ## AI Development Philosophy
 
-Uses AI as an engineering assistant, not a replacement for critical thinking. Development approach:
-- Understand systems deeply before implementing
-- Manually implement important logic
-- Debug independently
-- Review AI-generated code critically
-- Prioritize engineering understanding over development speed
+Taha treats Artificial Intelligence as a multiplier for human creativity and operational efficiency:
+- Leverage AI generative media to augment human creative ideation without sacrificing cinematic craftsmanship.
+- Build practical AI agents that automate real-world business workflows.
+- Maintain rigorous technical control, deep algorithmic understanding, and independent verification over AI outputs.
 
-## Long-Term Goal
+## Long-Term Vision
 
-Become a mobile-focused fullstack software engineer capable of building scalable real-world systems, designing maintainable architectures, debugging complex production issues, developing reliable mobile + backend applications, and competing for high-paying international software engineering roles before graduation.
-
-## Random Facts
-
-- Shipped software to real users, watched it break, and rebuilt it better — twice
-- Believes offline-first architecture is underrated in a cloud-obsessed industry
-- Considers RBAC (role-based access control) done right to be an art form
-- Runs multi-tenant systems where one bad query can affect every tenant — this keeps his engineering standards high
-- Powered by strong tea and compiler errors
+To build boundary-pushing multimedia experiences and scalable digital tools that elevate visual branding, industrial automation, and software intelligence in Iran and internationally.

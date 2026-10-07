@@ -6,6 +6,7 @@
 import { motion } from "framer-motion";
 import { Bot, RotateCcw, X } from "lucide-react";
 
+import { useTranslation } from "react-i18next";
 import { ASSISTANT_PROFILE } from "../config/chatbot.config";
 
 /**
@@ -15,6 +16,8 @@ import { ASSISTANT_PROFILE } from "../config/chatbot.config";
  * @param {boolean} props.canClear
  */
 export function ChatHeader({ onClose, onClear, canClear }) {
+  const { t } = useTranslation();
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -8 }}
@@ -38,12 +41,12 @@ export function ChatHeader({ onClose, onClear, canClear }) {
         <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-success ring-2 ring-base-100" />
       </div>
 
-      <div className="min-w-0 flex-1 leading-tight">
+      <div className="min-w-0 flex-1 leading-tight text-left rtl:text-right">
         <h2 className="text-sm font-semibold text-base-content truncate">
-          {ASSISTANT_PROFILE.name}
+          {t("assistant.name", ASSISTANT_PROFILE.name)}
         </h2>
         <p className="text-xs text-base-content/60 truncate">
-          {ASSISTANT_PROFILE.tagline}
+          {t("assistant.tagline", ASSISTANT_PROFILE.tagline)}
         </p>
       </div>
 

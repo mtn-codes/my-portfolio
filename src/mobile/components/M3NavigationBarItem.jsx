@@ -13,51 +13,58 @@ export function M3NavigationBarItem({ to, icon, label, end = false }) {
       aria-label={label}
       className={({ isActive }) =>
         `m3-tap relative flex-1 flex flex-col items-center justify-center
-         min-h-[56px] py-1.5 px-1 gap-0.5
-         transition-colors duration-150
-         ${isActive ? "text-primary" : "text-base-content/65"}`
+         min-h-[58px] py-1 px-1.5 select-none
+         transition-colors duration-200
+         ${isActive ? "text-primary" : "text-base-content/65 hover:text-base-content"}`
       }
     >
       {({ isActive }) => (
-        <>
-          {/* Selected indicator pill (Material 3 spec: 64x32 behind icon) */}
-          <motion.span
-            initial={false}
-            animate={{
-              opacity: isActive ? 1 : 0,
-              width: isActive ? 64 : 32,
-              height: isActive ? 32 : 32,
-            }}
-            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-            className="absolute top-1.5 rounded-full bg-primary/15 pointer-events-none"
-            style={{ left: "50%", x: "-50%" }}
-          />
+        <motion.div
+          whileTap={{ scale: 0.94 }}
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: "spring", stiffness: 440, damping: 25 }}
+          className="relative w-full flex flex-col items-center justify-center"
+        >
+          {/* Icon container with centered active pill */}
+          <div className="relative w-14 h-8 flex items-center justify-center">
+            {/* Soft tinted background bloom */}
+            <motion.span
+              initial={false}
+              animate={{
+                opacity: isActive ? 1 : 0,
+                scale: isActive ? 1 : 0.7,
+              }}
+              transition={{ type: "spring", stiffness: 420, damping: 28 }}
+              className="absolute inset-0 rounded-full bg-primary/18 shadow-sm pointer-events-none"
+            />
 
-          {/* Icon */}
-          <motion.span
-            initial={false}
-            animate={{
-              y: isActive ? -1 : 0,
-            }}
-            transition={{ type: "spring", stiffness: 420, damping: 28 }}
-            className="relative z-10 w-6 h-6 flex items-center justify-center text-[22px]"
-          >
-            {icon}
-          </motion.span>
+            {/* Icon */}
+            <motion.span
+              initial={false}
+              animate={{
+                y: isActive ? -0.5 : 0,
+                scale: isActive ? 1.05 : 1,
+              }}
+              transition={{ type: "spring", stiffness: 440, damping: 25 }}
+              className="relative z-10 w-6 h-6 flex items-center justify-center text-[21px]"
+            >
+              {icon}
+            </motion.span>
+          </div>
 
-          {/* Label */}
+          {/* Label with balanced spacing */}
           <motion.span
             initial={false}
             animate={{
-              fontSize: isActive ? "11px" : "11px",
-              fontWeight: isActive ? 600 : 500,
+              fontWeight: isActive ? 800 : 500,
+              opacity: isActive ? 1 : 0.75,
             }}
-            transition={{ duration: 0.15 }}
-            className="relative z-10 leading-none tracking-wide"
+            transition={{ duration: 0.18 }}
+            className="relative z-10 text-[11px] leading-tight tracking-normal mt-1 text-center whitespace-nowrap px-0.5 truncate max-w-full"
           >
             {label}
           </motion.span>
-        </>
+        </motion.div>
       )}
     </NavLink>
   );

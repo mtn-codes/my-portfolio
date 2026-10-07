@@ -44,7 +44,7 @@ export function M3Sheet({ open, onClose, title, children, fullHeight = false }) 
             className={`
               fixed inset-x-0 bottom-0 z-50
               bg-base-100 rounded-t-[28px]
-              ${fullHeight ? "top-12" : "max-h-[85vh]"}
+              ${fullHeight ? "top-12" : "max-h-[85vh] max-h-[85dvh]"}
               flex flex-col m3-elev-3
             `}
           >
@@ -53,7 +53,7 @@ export function M3Sheet({ open, onClose, title, children, fullHeight = false }) 
               <span className="block w-9 h-1 rounded-full bg-base-content/25" />
             </div>
             {title && (
-              <div className="px-5 pb-3">
+              <div className="px-5 pb-3 text-left rtl:text-right">
                 <h2 className="m3-title-large text-base-content">{title}</h2>
               </div>
             )}

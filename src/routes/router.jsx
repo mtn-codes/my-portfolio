@@ -16,6 +16,8 @@ import DesktopProjectDetails from "../components/ProjectDetails";
 import DesktopNotFound from "../pages/NotFound";
 import DesktopContact from "../sections/Contact";
 
+import ScrollToTop from "../shared/components/ScrollToTop";
+
 // Mobile bundles are lazy-loaded so desktop users don't pay for them.
 const MobileLayout = lazy(() => import("../mobile/MobileLayout"));
 const MobileHome = lazy(() => import("../mobile/pages/MobileHome"));
@@ -35,9 +37,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <Suspense fallback={<MobileLoading />}>
-        <ExperienceSwitch mobile={MobileLayout} desktop={DesktopLayout} />
-      </Suspense>
+      <>
+        <ScrollToTop />
+        <Suspense fallback={<MobileLoading />}>
+          <ExperienceSwitch mobile={MobileLayout} desktop={DesktopLayout} />
+        </Suspense>
+      </>
     ),
     children: [
       { index: true, element: withMobile(MobileHome, DesktopHome) },
@@ -49,7 +54,14 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: withMobile(MobileNotFound, DesktopNotFound),
+    element: (
+      <>
+        <ScrollToTop />
+        <Suspense fallback={<MobileLoading />}>
+          <ExperienceSwitch mobile={MobileNotFound} desktop={DesktopNotFound} />
+        </Suspense>
+      </>
+    ),
   },
 ]);
 

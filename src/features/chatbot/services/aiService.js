@@ -1,16 +1,16 @@
 // src/features/chatbot/services/aiService.js
 //
-// Kimchi AI integration (https://kimchi.dev).
+// B.AI (GLM-5.3-Flash) integration (https://chat.b.ai).
 //
-// Kimchi exposes an OpenAI-compatible `/chat/completions` endpoint but does
+// B.AI exposes an OpenAI-compatible `/chat/completions` endpoint but does
 // NOT send CORS headers for browser origins, so we cannot `fetch` it
 // directly from the client. We go through a same-origin proxy:
 //
 //   • Dev:    Vite dev-server proxy (configured in vite.config.js)
-//   • Prod:   Netlify serverless function  (netlify/functions/kimchi.js)
+//   • Prod:   Netlify serverless function  (netlify/functions/bai.js)
 //
-// Both expose the route at `/api/kimchi/*`. The client only ever talks to
-// `/api/kimchi/chat/completions`, so the proxy is transparent.
+// Both expose the route at `/api/bai/*`. The client only ever talks to
+// `/api/bai/chat/completions`, so the proxy is transparent.
 //
 // We talk to it with `fetch` so we don't add any runtime dependency —
 // the entire SDK surface is one POST request.
@@ -94,7 +94,7 @@ export function humanizeError(err) {
     case AI_ERROR_CODES.RATE_LIMIT:
       return "Hit a rate limit just now. Wait a few seconds and try again.";
     case AI_ERROR_CODES.QUOTA_EXCEEDED:
-      return "Your Kimchi credits are exhausted for now. Please try again later.";
+      return "Your B.AI credits are exhausted for now. Please try again later.";
     case AI_ERROR_CODES.MODEL_NOT_FOUND:
       return "The configured model is unavailable. Please try again later.";
     case AI_ERROR_CODES.TIMEOUT:
@@ -115,7 +115,7 @@ export function humanizeError(err) {
 // ─── Friendly error mapping ──────────────────────────────────────────────────
 
 /**
- * Translate a fetch / Kimchi error into a typed `AiServiceError`.
+ * Translate a fetch / B.AI error into a typed `AiServiceError`.
  *
  * @param {unknown} err
  * @returns {AiServiceError}
@@ -142,7 +142,7 @@ function normalizeError(err) {
   if (status === 404 || /model.*not.*found/i.test(message)) {
     return new AiServiceError("Model not found.", AI_ERROR_CODES.MODEL_NOT_FOUND, /** @type {Error} */ (err));
   }
-  if (status === 402 || /credits|payment|insufficient/i.test(message)) {
+  if (status === 402 || /credits|payment|insufficient|deposit|quota/i.test(message) || /access_denied/i.test(message)) {
     return new AiServiceError("Credits exhausted.", AI_ERROR_CODES.QUOTA_EXCEEDED, /** @type {Error} */ (err));
   }
   if (status === 429) {
@@ -155,8 +155,8 @@ function normalizeError(err) {
     return new AiServiceError("Invalid request.", AI_ERROR_CODES.INVALID_RESPONSE, /** @type {Error} */ (err));
   }
   // 5xx from the proxy covers both:
-  //   • 500 — proxy itself misconfigured (e.g. KIMCHI_API_KEY missing)
-  //   • 502/503/504 — Kimchi upstream degraded or unreachable
+  //   • 500 — proxy itself misconfigured (e.g. BAI_API_KEY missing)
+  //   • 502/503/504 — B.AI upstream degraded or unreachable
   // Surface all of them as a single "service unavailable" state so users
   // see one consistent retry-able message instead of provider-specific
   // jargon.
@@ -181,10 +181,11 @@ let activeController = null;
  * Build the full system instruction: persona + per-turn knowledge chunks.
  *
  * @param {string} [systemInstructionAdditions]
+ * @param {string} [siteLanguage]
  * @returns {string}
  */
-function buildFullSystemInstruction(systemInstructionAdditions = "") {
-  const baseInstruction = buildSystemPrompt();
+function buildFullSystemInstruction(systemInstructionAdditions = "", siteLanguage = "fa") {
+  const baseInstruction = buildSystemPrompt(siteLanguage);
   return systemInstructionAdditions
     ? `${baseInstruction}\n\n${systemInstructionAdditions}`
     : baseInstruction;
@@ -193,7 +194,7 @@ function buildFullSystemInstruction(systemInstructionAdditions = "") {
 /**
  * Map a transcript `Message` to an OpenAI-style chat-completion message.
  *
- * Kimchi uses the OpenAI chat-completion shape: `{ role, content }`.
+ * B.AI uses the OpenAI chat-completion shape: `{ role, content }`.
  * We skip empty / pending / error rows so the rebuild never feeds garbage
  * to the model.
  *
@@ -253,10 +254,10 @@ export async function initializeChat() {
 /**
  * Send a user message and obtain the assistant reply.
  *
- * The Kimchi integration is single-shot (non-streaming) to mirror the
- * working Dart reference. The optional `onChunk` callback is preserved
+ * The B.AI integration is single-shot (non-streaming) to mirror the
+ * working reference. The optional `onChunk` callback is preserved
  * for API compatibility with the prior OpenRouter integration — for
- * Kimchi it fires once with the full assembled content so the UI gets
+ * B.AI it fires once with the full assembled content so the UI gets
  * the same incremental-feedback experience.
  *
  * The function calls `buildContext(userMessage)` to retrieve relevant
@@ -274,7 +275,7 @@ export async function sendMessage(text, opts = {}) {
   if (!trimmed) {
     throw new AiServiceError("Empty message.", AI_ERROR_CODES.INVALID_RESPONSE);
   }
-  const { onChunk, signal } = opts;
+  const { onChunk, signal, siteLanguage } = opts;
 
   // Pull current transcript from the persistence layer so the rebuilt
   // history matches what the user sees.
@@ -316,7 +317,7 @@ export async function sendMessage(text, opts = {}) {
     // Build the request payload.
     /** @type {{ role: "system" | "user" | "assistant", content: string }[]} */
     const messages = [
-      { role: "system", content: buildFullSystemInstruction(context.systemAdditions) },
+      { role: "system", content: buildFullSystemInstruction(context.systemAdditions, siteLanguage) },
       ...history,
       { role: "user", content: trimmed },
     ];
@@ -327,6 +328,7 @@ export async function sendMessage(text, opts = {}) {
       temperature: AI_MODEL.temperature,
       top_p: AI_MODEL.topP,
       max_tokens: AI_MODEL.maxOutputTokens,
+      reasoning: { max_tokens: 0 },
     });
 
     // Retry loop for transient failures only.
@@ -340,20 +342,16 @@ export async function sendMessage(text, opts = {}) {
           signal: controller.signal,
         });
 
+        const contentType = response.headers.get("content-type") || "";
+        const rawText = await response.text();
+
         if (!response.ok) {
-          // Read the body once for error context, then throw a typed error
-          // that carries the status for normalizeError().
           /** @type {any} */
           let errorPayload = null;
           try {
-            const text = await response.text();
-            try {
-              errorPayload = JSON.parse(text);
-            } catch {
-              errorPayload = { message: text };
-            }
+            errorPayload = JSON.parse(rawText);
           } catch {
-            /* ignore body-read errors */
+            errorPayload = { message: rawText };
           }
           /** @type {any} */
           const err = new Error(
@@ -366,25 +364,52 @@ export async function sendMessage(text, opts = {}) {
           throw err;
         }
 
-        /** @type {any} */
-        const decoded = await response.json();
-        const choices = Array.isArray(decoded?.choices) ? decoded.choices : null;
+        if (
+          contentType.includes("text/html") ||
+          rawText.trim().startsWith("<!DOCTYPE") ||
+          rawText.trim().startsWith("<!doctype") ||
+          rawText.trim().startsWith("<html")
+        ) {
+          console.error(
+            "[aiService] Received HTML response instead of JSON. Ensure the serverless function is deployed on Netlify and not intercepted by SPA fallback."
+          );
+          throw new AiServiceError(
+            "API proxy returned HTML instead of JSON.",
+            AI_ERROR_CODES.SERVICE_UNAVAILABLE
+          );
+        }
 
+        /** @type {any} */
+        let decoded;
+        try {
+          decoded = JSON.parse(rawText);
+        } catch (jsonErr) {
+          throw new AiServiceError(
+            "Failed to parse API response as JSON.",
+            AI_ERROR_CODES.INVALID_RESPONSE,
+            jsonErr
+          );
+        }
+
+        const choices = Array.isArray(decoded?.choices) ? decoded.choices : null;
         if (!choices || choices.length === 0) {
           throw new AiServiceError(
-            "Empty response from Kimchi.",
+            "Empty response from assistant.",
             AI_ERROR_CODES.INVALID_RESPONSE
           );
         }
 
+        const msg = choices[0]?.message;
         const content =
-          (choices[0]?.message && typeof choices[0].message.content === "string"
-            ? choices[0].message.content
-            : "");
+          typeof msg?.content === "string" && msg.content.trim().length > 0
+            ? msg.content
+            : typeof msg?.reasoning === "string" && msg.reasoning.trim().length > 0
+              ? msg.reasoning
+              : "";
 
         if (!content || !content.trim()) {
           throw new AiServiceError(
-            "Empty response from Kimchi.",
+            "Empty response from assistant.",
             AI_ERROR_CODES.INVALID_RESPONSE
           );
         }
@@ -403,7 +428,7 @@ export async function sendMessage(text, opts = {}) {
           content: assistantText,
           latencyMs: Date.now() - startedAt,
           meta: {
-            provider: "kimchi",
+            provider: AI_MODEL.provider,
             model: AI_MODEL.model,
             retrievedChunks: context.retrievedChunks.length,
             sources: Array.from(
@@ -456,7 +481,7 @@ function readTranscript() {
 }
 
 /**
- * Clear any in-memory cached state for the conversation. The Kimchi
+ * Clear any in-memory cached state for the conversation. The B.AI
  * integration is stateless (every request carries the full transcript in
  * `messages`), so this is a no-op today — kept for API stability with the
  * previous OpenRouter-era hook contract.

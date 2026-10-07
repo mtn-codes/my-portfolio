@@ -14,9 +14,10 @@
 
 RewriteEngine On
 
-# API proxy: route every /api/kimchi[/...] request to the PHP file
-# with the original path preserved as PATH_INFO. The optional trailing
-# group `(/.*)?$` makes the bare /api/kimchi health check match.
+# API proxy: route /api/openrouter, /api/bai, and /api/kimchi requests to their PHP files
+# with the original path preserved as PATH_INFO.
+RewriteRule ^api/openrouter(/.*)?$ /api/openrouter.php [L,QSA]
+RewriteRule ^api/bai(/.*)?$ /api/bai.php [L,QSA]
 RewriteRule ^api/kimchi(/.*)?$ /api/kimchi.php [L,QSA]
 
 # SPA fallback: any request that is not a real file/directory, has no
