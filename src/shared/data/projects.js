@@ -1785,23 +1785,23 @@ export const contentProjects = [
     },
   },
   {
-    slug: "dr-ebrahimi-aesthetic-story",
+    slug: "ebrahimi-watch-mothers-day",
     category: "content",
     video: "/img/projects/video/ebrahimi.mp4",
     aspectRatio: "16:9",
     duration: "00:50",
     name: {
-      fa: "کلینیک دکتر ابراهیمی — تیزر داستانی زیبایی و سلامت",
-      en: "Dr. Ebrahimi Clinic — Cinematic Narrative & Consultation Teaser",
-      ar: "عيادة الدكتور إبراهيمي — إعلان درامي سينمائي للجمال والاستشارات الطبية",
+      fa: "ساعت ابراهیمی — تیزر روز مادر ساعت ابراهیمی",
+      en: "Ebrahimi Watch Gallery — Mother's Day Commercial Teaser",
+      ar: "ساعات إبراهيمي — إعلان تشويقي بمناسبة يوم الأم",
     },
     description: {
-      fa: "تیزر داستانی سینمایی به سفارش کلینیک زیبایی دکتر ابراهیمی؛ گفتگوی صمیمانه دو دوست پیرامون دغدغه‌های جوانسازی و اعتماد به مهارت پزشک در فضایی گرم و دلنشین.",
-      en: "A warm, story-driven commercial produced for Dr. Ebrahimi Clinic; exploring aesthetic choices, natural rejuvenation, and medical trust through an authentic café dialogue.",
-      ar: "إعلان درامي سينمائي تم إنتاجه لصالح عيادة الدكتور إبراهيمي يوثق حديثاً ودياً في مقهى حول العناية بالجمال وثقة المرضى في الرعاية الطبية المتخصصة.",
+      fa: "تیزر داستانی سینمایی به سفارش گالری ساعت ابراهیمی به مناسبت روز مادر؛ گفتگوی صمیمانه دو دوست پیرامون انتخاب هدیه‌ای ماندگار و ارزشمند برای مادر در فضایی گرم و دلنشین.",
+      en: "A warm, story-driven commercial produced for Ebrahimi Watch Gallery on Mother's Day; exploring the search for a timeless, meaningful gift through an authentic café dialogue.",
+      ar: "إعلان درامي سينمائي تم إنتاجه لصالح ساعات إبراهيمي بمناسبة يوم الأم؛ يوثق حديثاً ودياً في مقهى حول اختيار هدية قيمة وخالدة للأم.",
     },
     skills: ["Narrative Directing", "Cinematography", "DaVinci Resolve", "Sound Mixing", "Lighting"],
-    extras: ["Café Ambiance", "Natural Acting", "Medical Aesthetic", "Color Grading"],
+    extras: ["Café Ambiance", "Natural Acting", "Mother's Day Campaign", "Color Grading"],
     image: "/img/projects/video/thumbnails/ebrahimi.jpg",
     media: [
       "/img/projects/video/thumbnails/ebrahimi.jpg",
@@ -1810,9 +1810,9 @@ export const contentProjects = [
     ],
     youtube: "https://www.youtube.com/@tahanaghdi",
     story: {
-      fa: "روایت صمیمی دو خانم در یک کافه زیبا و دنج با لوسترهای سنتی و نور ملایم؛ گفتگو درباره تردیدها و استرس‌های پیش از خدمات زیبایی و در نهایت حس اطمینان و نتیجه طبیعی حاصل از تجربه و هنر پزشکی دکتر ابراهیمی.",
-      en: "An intimate café conversation between two friends over coffee. They explore the anxieties of clinical treatments and the comforting relief of finding an ethical, skilled doctor in Dr. Ebrahimi.",
-      ar: "حوار دافئ بين صديقتين في مقهى هادئ يتناول المخاوف والتردد قبل الإجراءات التجميلية، وصولاً إلى الاطمئنان التام والنتائج الطبيعية المبهرة مع الدكتور إبراهيمي.",
+      fa: "روایت صمیمی دو خانم در یک کافه زیبا و دنج با لوسترهای سنتی و نور ملایم؛ گفتگو درباره دغدغه انتخاب بهترین هدیه برای روز مادر و رسیدن به ارزش ماندگار و اصالت یک ساعت مچی از گالری ساعت ابراهیمی به عنوان نمادی از زمان و عشق پایدار.",
+      en: "An intimate café conversation between two friends over coffee. They discuss finding the most memorable gift for Mother's Day, arriving at an elegant timepiece from Ebrahimi Watch Gallery as a symbol of cherished time and love.",
+      ar: "حوار دافئ بين صديقتين في مقهى هادئ حول حيرة اختيار أفضل هدية بمناسبة يوم الأم، والوصول إلى فكرة إهداء ساعة فاخرة وأصيلة من ساعات إبراهيمي كرمز للوقت والمحبة الخالدة.",
     },
     features: [
       {
@@ -1837,29 +1837,29 @@ export const contentProjects = [
       },
     ],
     documentation: {
-      fa: "فیلم‌نامه دیالوگ‌های کافه، دکوپاژ صحنه و طراحی میزانسن دونفره.",
-      en: "Café screenplay dialogue, scene decoupage, and two-shot blocking diagrams.",
-      ar: "سيناريو حوار المقهى، التخطيط الإخراجي وتوزيع زوايا الكاميرا.",
+      fa: "فیلم‌نامه دیالوگ‌های کافه، دکوپاژ صحنه و طراحی میزانسن دونفره کمپین روز مادر.",
+      en: "Café screenplay dialogue, scene decoupage, and Mother's Day campaign blocking diagrams.",
+      ar: "سيناريو حوار المقهى، التخطيط الإخراجي وتوزيع زوايا الكاميرا لحملة يوم الأم.",
     },
     readme: {
-      fa: "تنظیمات دمای نوری کهربایی، شبیه‌سازی فیلم نگاتیو و مسترینگ صدا.",
+      fa: "تنظیمات دمای نوری کهربایی، شبیه‌سازی فیلم نگاتیو و مسترینگ صدای دیالوگ‌ها.",
       en: "Amber color temperature calibration, film emulation, and voice mastering.",
       ar: "معايرة حرارة الإضاءة الكهرمانية ومحاكاة ألوان السينما ومكساج الصوت.",
     },
     problem: {
-      fa: "ترس مراجعین از نتایج مصنوعی و کلینیک‌های غیرتخصصی در خدمات زیبایی.",
-      en: "Widespread patient anxiety regarding unnatural aesthetic results and untrustworthy clinics.",
-      ar: "قلق المرضى من النتائج المصطنعة أو الوقوع في أيدي غير المختصين.",
+      fa: "کلیشه‌ای شدن تبلیغات مناسبتی روز مادر و نیاز به داستانی صمیمانه و متمایز برای برند ساعت ابراهیمی.",
+      en: "Repetitive clichés in Mother's Day marketing and the need for an authentic, emotional story for Ebrahimi Watch Gallery.",
+      ar: "تكرار الأفكار النمطية في إعلانات يوم الأم والحاجة إلى قصة عاطفية مميزة لماركة ساعات إبراهيمي.",
     },
     objective: {
-      fa: "ایجاد آرامش روانی و بازنمایی رویکرد طبیعی و اخلاقی دکتر ابراهیمی در طبابت زیبایی.",
-      en: "Provide peace of mind and showcase Dr. Ebrahimi's natural, patient-first aesthetic philosophy.",
-      ar: "بث الطمأنينة وإبراز النهج الطبي الدقيق والنتائج الطبيعية للدكتور إبراهيمي.",
+      fa: "خلق ارتباط احساسی با مخاطبان و معرفی ساعت مچی اصیل به عنوان هدیه‌ای ماندگار و شایسته برای روز مادر.",
+      en: "Build emotional resonance with the audience, establishing luxury watches as the premier timeless Mother's Day gift.",
+      ar: "بناء تواصل عاطفي مع الجمهور وترسيخ الساعات الفاخرة كأفضل هدية خالدة بمناسبة يوم الأم.",
     },
     scope: {
-      fa: "پخش در کانال‌های تبلیغاتی سلامت، وب‌سایت کلینیک و نمایش در اتاق انتظار مراجعین.",
-      en: "Healthcare digital portals, clinic waiting room displays, and social media campaigns.",
-      ar: "المنصات الطبية، شاشات غرف الانتظار بالعيادة وحملات وسائل التواصل.",
+      fa: "کمپین ویدیویی شبکه‌های اجتماعی، اینستاگرام، وب‌سایت گالری و نمایشگرهای فروشگاهی ساعت ابراهیمی.",
+      en: "Social media video campaigns, Instagram, official gallery channels, and in-store displays.",
+      ar: "حملات الفيديو الرقمية، إنستغرام، موقع الغاليري وشاشات العرض داخل فروع ساعات إبراهيمي.",
     },
     architecture: {
       fa: "نگارش سناریوی مکالمه کافه ← انتخاب لوکیشن و بازیگران ← نورپردازی ملایم با رفلکتور ← تصویربرداری دو دوربینه ← تدوین دیالوگ‌محور ← اصلاح رنگ کهربایی.",
@@ -1873,7 +1873,7 @@ export const contentProjects = [
         ar: "التحكم بالضوضاء المحيطة بالمقهى وموازنة الضوء الطبيعي مع مصابيح الديكور",
       },
       {
-        fa: "رسیدن به اجرایی کاملاً طبیعی از بازیگران شبیه به یک گفتگوی مستند",
+        fa: "رسیدن به اجرایی کاملاً طبیعی از بازیگران شبیه به یک گفتگوی مستند و صمیمی",
         en: "Guiding actors to deliver a candid conversational tone that feels documentary-level real",
         ar: "توجيه الممثلات لأداء عفوي يشبه الحديث التلقائي دون تكلف",
       },
@@ -1892,15 +1892,15 @@ export const contentProjects = [
     },
     future: [
       {
-        fa: "تولید ویدیوهای مستند از فرآیند درمان در اتاق معاینه کلینیک",
-        en: "Developing follow-up in-clinic patient procedure documentaries",
-        ar: "إنتاج فيديوهات وثائقية داخل غرف الفحص لمتابعة تجارب المرضى",
+        fa: "تولید تیزرهای فصلی و کمپین‌های اختصاصی برای کالکشن‌های جدید ساعت ابراهیمی",
+        en: "Developing seasonal campaign teasers for new flagship collections at Ebrahimi Watch Gallery",
+        ar: "إنتاج إعلانات موسمية وحملات مخصصة للمجموعات الجديدة في ساعات إبراهيمي",
       },
     ],
     conclusion: {
-      fa: "بازخورد فوق‌العاده بیماران و افزایش درخواست‌های نوبت‌دهی مشاوره جوانسازی پوست.",
-      en: "Garnered outstanding patient reception and a clear surge in rejuvenation consultation bookings.",
-      ar: "حقق صدى إيجابياً كبيراً بين المراجعين وزيادة ملحوظة في حجوزات الكشف والاستشارة.",
+      fa: "بازخورد فوق‌العاده مخاطبان در کمپین روز مادر و رشد چشمگیر تعاملات و مراجعات حضوری به گالری ساعت ابراهیمی.",
+      en: "Outstanding audience reception during the Mother's Day campaign with a notable surge in gallery visits and inquiries.",
+      ar: "أصداء إيجابية واسعة خلال حملة يوم الأم مع ارتفاع ملحوظ في التفاعل وزيارات فروع ساعات إبراهيمي.",
     },
     metrics: [
       { fa: "فرمت سینمایی ۱۶:۹ با فریم ریت ۲۴", en: "Cinematic 16:9 at 24fps Standard", ar: "تنسيق سينمائي 16:9 بمعدل 24 إطاراً" },

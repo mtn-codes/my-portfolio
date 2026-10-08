@@ -144,39 +144,28 @@ function ProjectsSnapCarousel({ items, onOpenMedia }) {
               className="snap-center shrink-0 w-[86%] text-left rtl:text-right"
             >
               <M3Card elevation={2} className="m3-shape-xl overflow-hidden p-0 h-full flex flex-col justify-between">
-                {p.media?.[0] ? (
-                  <div className="relative h-44 bg-base-200 overflow-hidden">
-                    <img
-                      src={p.media[0]}
-                      alt={typeof p.name === "string" ? p.name : ""}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    {p.videoUrl && (
-                      <a
-                        href={p.videoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="m3-tap absolute inset-0 flex items-center justify-center bg-black/25 hover:bg-black/40 transition-colors"
-                        aria-label="Play video"
-                      >
-                        <span className="w-12 h-12 rounded-full bg-primary text-primary-content flex items-center justify-center text-lg shadow-lg">
-                          <FaPlay className="ltr:ml-0.5 rtl:mr-0.5" />
-                        </span>
-                      </a>
-                    )}
-                  </div>
-                ) : (
-                  <div className="relative h-36 bg-base-200 flex items-center justify-center p-4">
-                    <img
-                      src={p.image}
-                      alt=""
-                      className="h-20 w-20 object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
+                <div className="relative h-44 bg-base-200 overflow-hidden shrink-0">
+                  <img
+                    src={p.media?.[0] || p.image}
+                    alt={typeof p.name === "string" ? p.name : ""}
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  {p.videoUrl && (
+                    <a
+                      href={p.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="m3-tap absolute inset-0 flex items-center justify-center bg-black/25 hover:bg-black/40 transition-colors"
+                      aria-label="Play video"
+                    >
+                      <span className="w-12 h-12 rounded-full bg-primary text-primary-content flex items-center justify-center text-lg shadow-lg">
+                        <FaPlay className="ltr:ml-0.5 rtl:mr-0.5" />
+                      </span>
+                    </a>
+                  )}
+                </div>
 
                 <div className="p-4 flex-1 flex flex-col justify-between">
                   <div>

@@ -265,7 +265,7 @@ function ProjectCard({ project, index, realCount = 1, isActive = false }) {
                   src={mediaSrc}
                   alt={typeof project.name === "string" ? project.name : ""}
                   style={{ scale: imgScale }}
-                  className="w-full h-full object-cover transition-transform duration-500"
+                  className="w-full h-full object-cover object-center transition-transform duration-500"
                   loading="lazy"
                 />
               )}
