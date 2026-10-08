@@ -8,15 +8,16 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import ExperienceSwitch from "../shared/components/ExperienceSwitch";
 import MobileLoading from "../mobile/MobileLoading";
-import DesktopLayout from "../layouts/Layout";
-import DesktopHome from "../pages/Home";
-import DesktopSkillsProjects from "../pages/SkillsProjects";
-import DesktopEducationExperience from "../pages/EducationExperience";
-import DesktopProjectDetails from "../components/ProjectDetails";
-import DesktopNotFound from "../pages/NotFound";
-import DesktopContact from "../sections/Contact";
-
 import ScrollToTop from "../shared/components/ScrollToTop";
+
+// Desktop components lazy-loaded so mobile visitors don't download desktop bundles
+const DesktopLayout = lazy(() => import("../layouts/Layout"));
+const DesktopHome = lazy(() => import("../pages/Home"));
+const DesktopSkillsProjects = lazy(() => import("../pages/SkillsProjects"));
+const DesktopEducationExperience = lazy(() => import("../pages/EducationExperience"));
+const DesktopProjectDetails = lazy(() => import("../components/ProjectDetails"));
+const DesktopNotFound = lazy(() => import("../pages/NotFound"));
+const DesktopContact = lazy(() => import("../sections/Contact"));
 
 // Mobile bundles are lazy-loaded so desktop users don't pay for them.
 const MobileLayout = lazy(() => import("../mobile/MobileLayout"));
