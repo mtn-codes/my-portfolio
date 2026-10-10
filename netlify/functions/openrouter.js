@@ -44,8 +44,14 @@ export default async function (req, context) {
   const targetPath = subpath === "" ? "/chat/completions" : (subpath.startsWith("/") ? subpath : `/${subpath}`);
   const targetUrl = `${OPENROUTER_BASE}${targetPath}`;
 
+  let rawApiKey = process.env.OPENROUTER_API_KEY || "";
+  // Robust extraction: in case the user pasted quotes, "Bearer ", or an entire .env block into Netlify
+  const keyMatch = rawApiKey.match(/sk-or-v1-[a-zA-Z0-9_-]+/);
+  const apiKey = keyMatch
+    ? keyMatch[0]
+    : rawApiKey.trim().replace(/^Bearer\s+/i, "").replace(/["']/g, "").trim();
+
   if (method === "GET") {
-    const apiKey = process.env.OPENROUTER_API_KEY;
     return new Response(
       JSON.stringify({
         ok: true,
@@ -53,6 +59,8 @@ export default async function (req, context) {
         path: targetPath,
         apiKeyConfigured: Boolean(apiKey && apiKey.length > 0),
         apiKeyLength: apiKey ? apiKey.length : 0,
+        rawEnvLength: rawApiKey.length,
+        hasSkPrefix: apiKey.startsWith("sk-or-v1-"),
         runtime: "netlify-functions-v2",
       }),
       {
@@ -75,7 +83,6 @@ export default async function (req, context) {
     });
   }
 
-  const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
     return new Response(
       JSON.stringify({
