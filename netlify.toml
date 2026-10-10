@@ -18,8 +18,51 @@
   publish   = "dist"
   functions = "netlify/functions"
 
-# Single-page-app fallback. Mirrors the rule in `public/_redirects`;
-# declared here as a safety net in case `_redirects` is ever removed.
+[functions]
+  node_bundler = "esbuild"
+
+# ─── API Proxies to Netlify Serverless Functions ─────────────────────────────
+# Crucial: These must be declared BEFORE the SPA catch-all rule and have force=true
+# so requests to /api/* are routed directly to the functions rather than being
+# swallowed by the SPA fallback (which returns index.html).
+
+[[redirects]]
+  from   = "/api/openrouter"
+  to     = "/.netlify/functions/openrouter"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/api/openrouter/*"
+  to     = "/.netlify/functions/openrouter"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/api/bai"
+  to     = "/.netlify/functions/bai"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/api/bai/*"
+  to     = "/.netlify/functions/bai"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/api/kimchi"
+  to     = "/.netlify/functions/kimchi"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/api/kimchi/*"
+  to     = "/.netlify/functions/kimchi"
+  status = 200
+  force  = true
+
+# Single-page-app fallback. Any route not matching an asset or function goes to index.html
 [[redirects]]
   from   = "/*"
   to     = "/index.html"

@@ -15,8 +15,8 @@
 // the actual work is sync today. Errors are swallowed and downgraded
 // to an empty context so a broken knowledge file never crashes the chat.
 
-import { getKnowledgeBase, getFileCatalog } from "./knowledgeLoader";
-import { rank } from "./retriever";
+import { getKnowledgeBase, getFileCatalog } from "./knowledgeLoader.js";
+import { rank } from "./retriever.js";
 
 /**
  * @typedef {Object} RetrievedChunk

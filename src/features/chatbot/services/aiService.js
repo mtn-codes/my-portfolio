@@ -33,6 +33,7 @@
 import { AI_MODEL, CHAT_SURFACE } from "../config/chatbot.config";
 import { buildSystemPrompt } from "./systemPrompt";
 import { buildContext } from "./contextProvider";
+import { evaluateSpecialPhrase } from "./specialPhraseHandler";
 
 // ─── Errors ──────────────────────────────────────────────────────────────────
 
@@ -88,7 +89,7 @@ export function humanizeError(err) {
   const code = /** @type {{ code?: string }} */ (err).code;
   switch (code) {
     case AI_ERROR_CODES.MISSING_API_KEY:
-      return "The assistant isn't configured yet. Please try again shortly.";
+      return "The assistant isn't configured yet on Netlify. Please set OPENROUTER_API_KEY in Netlify: Site settings → Environment variables.";
     case AI_ERROR_CODES.INVALID_API_KEY:
       return "The assistant rejected the request. Please try again shortly.";
     case AI_ERROR_CODES.RATE_LIMIT:
@@ -133,6 +134,9 @@ function normalizeError(err) {
     return new AiServiceError("Request was cancelled.", AI_ERROR_CODES.CANCELLED, /** @type {Error} */ (err));
   }
 
+  if (/not configured|missing.*api.*key|OPENROUTER_API_KEY/i.test(message)) {
+    return new AiServiceError("API key not configured.", AI_ERROR_CODES.MISSING_API_KEY, /** @type {Error} */ (err));
+  }
   if (status === 401 || /api[_-]?key.*invalid/i.test(message) || /unauthenticated/i.test(message) || /no api key/i.test(message)) {
     return new AiServiceError("Invalid API key.", AI_ERROR_CODES.INVALID_API_KEY, /** @type {Error} */ (err));
   }
@@ -276,6 +280,26 @@ export async function sendMessage(text, opts = {}) {
     throw new AiServiceError("Empty message.", AI_ERROR_CODES.INVALID_RESPONSE);
   }
   const { onChunk, signal, siteLanguage } = opts;
+
+  // Intercept designated Persian slang expressions deterministically
+  const specialCheck = evaluateSpecialPhrase(trimmed);
+  if (specialCheck.matched && specialCheck.reply) {
+    const specialReply = specialCheck.reply;
+    if (typeof onChunk === "function") {
+      onChunk(specialReply);
+    }
+    return {
+      id: `asst-${Date.now()}`,
+      content: specialReply,
+      latencyMs: 10,
+      meta: {
+        provider: "internal-handler",
+        model: "special-rule",
+        retrievedChunks: 0,
+        sources: [],
+      },
+    };
+  }
 
   // Pull current transcript from the persistence layer so the rebuilt
   // history matches what the user sees.

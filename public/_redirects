@@ -14,13 +14,16 @@
 # 404 / index.html in place of the function response.
 
 # Same-origin proxy for the OpenRouter LLM API (Active).
-/api/openrouter/*  /.netlify/functions/openrouter/:splat  200
+/api/openrouter    /.netlify/functions/openrouter  200!
+/api/openrouter/*  /.netlify/functions/openrouter  200!
 
 # Same-origin proxy for the B.AI LLM API (Fallback).
-/api/bai/*  /.netlify/functions/bai/:splat  200
+/api/bai           /.netlify/functions/bai  200!
+/api/bai/*         /.netlify/functions/bai  200!
 
 # Same-origin proxy for the Kimchi LLM API (Inert fallback).
-/api/kimchi/*  /.netlify/functions/kimchi/:splat  200
+/api/kimchi        /.netlify/functions/kimchi  200!
+/api/kimchi/*      /.netlify/functions/kimchi  200!
 
 # Single-page-app fallback. Any request that is not a real static asset
 # resolves to index.html so client-side routes (e.g. /projects/:id) work.

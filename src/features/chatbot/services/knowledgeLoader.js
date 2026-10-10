@@ -17,7 +17,7 @@
 // code (e.g. a HMR hook, or a "Refresh knowledge" admin button) can
 // invalidate the cache without re-importing the module.
 
-import retriever from "./retriever";
+import retriever from "./retriever.js";
 
 // ─── Static import of every knowledge source ──────────────────────────────────
 //
