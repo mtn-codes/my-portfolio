@@ -100,6 +100,22 @@ export default async function (req, context) {
     );
   }
 
+  if (!apiKey.startsWith("sk-or-v1-")) {
+    return new Response(
+      JSON.stringify({
+        error: "کلید OPENROUTER_API_KEY در نتلیفای نامعتبر است (کلید باید با sk-or-v1- شروع شود، اما در حال حاضر با " + apiKey.slice(0, 8) + "... ثبت شده است). لطفاً کلید صحیح را از openrouter.ai دریافت کرده و در پنل نتلیفای وارد کنید.",
+        hint: "Go to Netlify: Site configuration → Environment variables → update OPENROUTER_API_KEY with your key starting with sk-or-v1-",
+      }),
+      {
+        status: 401,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders,
+        },
+      }
+    );
+  }
+
   let requestBody = "{}";
   if (isWebStandard) {
     try {

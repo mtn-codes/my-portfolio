@@ -91,7 +91,7 @@ export function humanizeError(err) {
     case AI_ERROR_CODES.MISSING_API_KEY:
       return "The assistant isn't configured yet on Netlify. Please set OPENROUTER_API_KEY in Netlify: Site settings → Environment variables.";
     case AI_ERROR_CODES.INVALID_API_KEY:
-      return "The assistant rejected the request. Please try again shortly.";
+      return "کلید API در پنل Netlify نامعتبر است. لطفاً کلید OpenRouter (که با sk-or-v1- شروع می‌شود) را در تنظیمات Netlify (Environment variables) وارد کنید.";
     case AI_ERROR_CODES.RATE_LIMIT:
       return "Hit a rate limit just now. Wait a few seconds and try again.";
     case AI_ERROR_CODES.QUOTA_EXCEEDED:
