@@ -61,6 +61,7 @@ export default async function (req, context) {
         apiKeyLength: apiKey ? apiKey.length : 0,
         rawEnvLength: rawApiKey.length,
         hasSkPrefix: apiKey.startsWith("sk-or-v1-"),
+        keyPrefix: apiKey ? apiKey.slice(0, 8) + "..." : "none",
         runtime: "netlify-functions-v2",
       }),
       {
